@@ -1,0 +1,18 @@
+ kernel
+
+ Timestamp is 66cf6669 (Wed Aug 28 14:03:21 2024)
+
+ Preferred load address is 0000000000100000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00000020H .text                   CODE
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0001:00000000       _start                     0000000000101000     kmain.c.o
+ 0001:00000010       _kmain                     0000000000101010     kmain.c.o
+
+ entry point at         0001:00000000
+
+ Static symbols
+
