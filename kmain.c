@@ -1,3 +1,5 @@
+
+
 __asm__(
     ".global _start\n"
     "_start:\n"
@@ -5,10 +7,17 @@ __asm__(
     "call _kmain"
 );
 
+#include "serial.c"
+
 void kmain(){
-    __asm__(
-        "mov $0xbeefbeef,%eax\n"
-        "mov $0xf00d1234,%ebx\n"
-        "hlt"
-    );
+    serial_init();
+    serial_putc('H');
+    serial_putc('e');
+    serial_putc('l');
+    serial_putc('l');
+    serial_putc('o');
+    serial_putc('\n');
+    while(1){
+        __asm__("hlt");
+    }
 }
