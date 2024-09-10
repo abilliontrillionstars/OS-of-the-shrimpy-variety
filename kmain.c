@@ -1,15 +1,19 @@
+#include "serial.c"
 
-
-__asm__(
+__asm__
+(
     ".global _start\n"
     "_start:\n"
     "mov $0x10000,%esp\n"
+    "push %ebx\n"
     "call _kmain"
 );
 
-#include "serial.c"
+static struct MultibootInfo bootInfo;
 
-void kmain(){
+void kmain(struct MultibootInfo* mbi)
+{
+    kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
     serial_init();
     serial_putc('H');
     serial_putc('e');
