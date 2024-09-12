@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "serial.h"
 
 static int escCharBuf;
 enum inputState
@@ -38,24 +39,16 @@ void console_putc(char ch)
     switch(currentState)
     {
         case NORMAL_CHARS:
-        {
             // this is where I'd put my actual putc!! IF I HAD ONE!!!
-            if(ch=='\e')
-            {
-                currentState = GOT_ESC;
-                return;
-            }
-        }
+            serial_putc(ch);
+            if(ch=='\e') { currentState = GOT_ESC; return; }
         case GOT_ESC:
         {
-            if(ch=='[')
-                currentState = GOT_LBRACKET;
-            else
-                currentState = NORMAL_CHARS; 
+            if(ch=='[') currentState = GOT_LBRACKET;
+            else currentState = NORMAL_CHARS; 
             break; 
         }
         case GOT_LBRACKET:
-        {
             switch (ch)
             {
                 case '3': { currentState = GOT_3; break; }
@@ -64,7 +57,6 @@ void console_putc(char ch)
                 case '1': { currentState = GOT_1; break; }
                 default: { currentState = NORMAL_CHARS; break; }
             }
-        }
         case GOT_3:
         case GOT_4:
         case GOT_9:

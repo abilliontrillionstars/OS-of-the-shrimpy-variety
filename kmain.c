@@ -1,6 +1,7 @@
 #include "serial.h"
 #include "console.h"
 #include "utils.h"
+#include "kprintf.h"
 
 __asm__
 (
@@ -17,12 +18,9 @@ void kmain(struct MultibootInfo* mbi)
 {
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
     serial_init();
-    serial_putc('H');
-    serial_putc('e');
-    serial_putc('l');
-    serial_putc('l');
-    serial_putc('o');
-    serial_putc('\n');
+    
+    kprintf("\nWe the People of the United States\n");
+
     while(1){
         __asm__("hlt");
     }
