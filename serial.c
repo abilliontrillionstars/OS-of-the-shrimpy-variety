@@ -7,6 +7,6 @@ void serial_init() {}
 
 void serial_putc(char ch)
 {
-    if SERIAL_OK
+    if(SERIAL_OK)
         outb(SERIAL_PORT, ch);
 }

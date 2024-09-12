@@ -3,6 +3,8 @@ import subprocess
 import os
 import sys
 
+print(sys.platform)
+
 inifile=configparser.ConfigParser(interpolation=None)
 inifile.read("config.ini")
 conf=inifile["config"]
@@ -53,14 +55,13 @@ for filename in os.listdir("."):
         objectfiles.append(obj)
 run( [link] + linkflags + objectfiles )
 
-run( [
+run([
     python, "fool.pyz", "hd.img",
     "create","64",
     "cp","kernel.exe","KERNEL.EXE"
 ])
 
-run( [ qemu,
-
+run([ qemu,
     #virtual hard drive
     "-drive","format=raw,media=disk,file=hd.img,id=disk0",
 

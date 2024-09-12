@@ -1,3 +1,4 @@
+#include "utils.h"
 
 static int escCharBuf;
 enum inputState
@@ -17,6 +18,8 @@ enum inputState
 };
 enum inputState currentState = NORMAL_CHARS;
 
+/*
+
 static u16 fgColor;
 static u16 bgColor;
 static u16 dimColors[8] = 
@@ -28,6 +31,7 @@ static u16 brightColors[8] =
     0, 0, 0, 0, 0, 0, 0, 0 // same here
 };
 
+*/
 
 void console_putc(char ch)
 {
@@ -49,7 +53,6 @@ void console_putc(char ch)
             else
                 currentState = NORMAL_CHARS; 
             break; 
-            
         }
         case GOT_LBRACKET:
         {
@@ -90,5 +93,6 @@ void console_putc(char ch)
         case GOT_1:
         case GOT_1x:
         case GOT_1xx:
+            break;
     }
 }

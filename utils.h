@@ -1,5 +1,4 @@
 #pragma once
-#pragma balls
 
 typedef unsigned char u8;
 typedef unsigned short u16;

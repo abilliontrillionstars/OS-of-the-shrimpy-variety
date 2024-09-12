@@ -17,5 +17,5 @@ u8 inb(u16 port)
 void kmemcpy(void* start, void* dest, unsigned length)
 {
     for(int i=0; i<length; i++)
-        
+        break;
 }

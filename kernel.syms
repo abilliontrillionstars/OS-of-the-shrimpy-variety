@@ -1,18 +1,30 @@
  kernel
 
- Timestamp is 66cf6669 (Wed Aug 28 14:03:21 2024)
+ Timestamp is 66e2ffda (Thu Sep 12 10:51:06 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00000020H .text                   CODE
+ 0001:00000000 00000265H .text                   CODE
+ 0002:00000000 00000054H .rdata                  DATA
+ 0003:00000000 00000000H .data                   DATA
+ 0003:00000000 0000005cH .bss                    DATA
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
  0001:00000000       _start                     0000000000101000     kmain.c.o
  0001:00000010       _kmain                     0000000000101010     kmain.c.o
+ 0001:00000090       _serial_init               0000000000101090     serial.c.o
+ 0001:000000a0       _serial_putc               00000000001010a0     serial.c.o
+ 0001:000000d0       _outb                      00000000001010d0     utils.c.o
+ 0001:000000f0       _inb                       00000000001010f0     utils.c.o
+ 0001:00000110       _kmemcpy                   0000000000101110     utils.c.o
+ 0001:00000140       _console_putc              0000000000101140     console.c.o
+ 0003:00000054       _currentState              0000000000103054     console.c.o
 
  entry point at         0001:00000000
 
  Static symbols
 
+ 0003:00000000       _bootInfo                  0000000000103000     kmain.c.o
+ 0003:00000058       _escCharBuf                0000000000103058     console.c.o

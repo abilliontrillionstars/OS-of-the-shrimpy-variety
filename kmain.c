@@ -1,4 +1,6 @@
-#include "serial.c"
+#include "serial.h"
+#include "console.h"
+#include "utils.h"
 
 __asm__
 (
