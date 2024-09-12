@@ -1,6 +1,6 @@
  kernel
 
- Timestamp is 66e3068a (Thu Sep 12 11:19:38 2024)
+ Timestamp is 66e3126d (Thu Sep 12 12:10:21 2024)
 
  Preferred load address is 0000000000100000
 
@@ -32,7 +32,7 @@
  0001:00002f50       _ksnprintf                 0000000000103f50     kprintf.c.o
  0002:000002fc       ??_C@_08CKLMDEPE@No?5float?$AA@ 00000000001042fc     kprintf.c.o
  0002:00000305       ??_C@_04MLLLIHIP@null?$AA@ 0000000000104305     kprintf.c.o
- 0002:0000030a       ??_C@_0BE@GDNIFMAM@?6NYARGLE?5BLARGLE?$CB?$CB?6?$AA@ 000000000010430a     kmain.c.o
+ 0002:0000030a       ??_C@_0CF@CBAFKELJ@?6We?5the?5People?5of?5the?5United?5Sta@ 000000000010430a     kmain.c.o
  0003:00000148       _currentState              0000000000105148     console.c.o
  0003:00000150       __fltused                  0000000000105150     kprintf.c.o
 

@@ -18,10 +18,6 @@ void kmain(struct MultibootInfo* mbi)
 {
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
     serial_init();
-    
     kprintf("\nWe the People of the United States\n");
-
-    while(1){
-        __asm__("hlt");
-    }
+    while(1) { __asm__("hlt"); }
 }
