@@ -1,7 +1,31 @@
 #include "utils.h"
 #include "serial.h"
 
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
+
 static int escCharBuf;
+static volatile u8* framebuffer;
+static unsigned pitch;
+static unsigned width;
+static unsigned height;
+static u16 foregroundColor = 0xffff;
+static u16 backgroundColor = 0x0000;
+
+/*
+static u16 fgColor;
+static u16 bgColor;
+static u16 dimColors[8] = 
+{
+    0, 0, 0, 0, 0, 0, 0, 0 
+    // fill in with color numbers fro the slides
+};
+static u16 brightColors[8] = 
+{
+    0, 0, 0, 0, 0, 0, 0, 0 
+    // same here
+};
+*/
 enum inputState
 {
     NORMAL_CHARS, //initial state
@@ -19,20 +43,13 @@ enum inputState
 };
 enum inputState currentState = NORMAL_CHARS;
 
-/*
-
-static u16 fgColor;
-static u16 bgColor;
-static u16 dimColors[8] = 
+void console_init(struct MultibootInfo* mbi)
 {
-    0, 0, 0, 0, 0, 0, 0, 0 // fill in with color numbers fro the slides
-};
-static u16 brightColors[8] = 
-{
-    0, 0, 0, 0, 0, 0, 0, 0 // same here
-};
-
-*/
+    framebuffer = (volatile u8*) (mbi->fb.addr);
+    //...initialize other variables...
+    width = SCREEN_WIDTH;
+    height = SCREEN_HEIGHT;
+}
 
 void console_putc(char ch)
 {
@@ -87,4 +104,14 @@ void console_putc(char ch)
         case GOT_1xx:
             break;
     }
+}
+
+void clear_screen()
+{
+    
+}
+
+void set_pixel(unsigned x, unsigned y, u16 color){
+    u16* p = 0;
+    *p = color;
 }

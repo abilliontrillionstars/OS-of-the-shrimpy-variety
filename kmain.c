@@ -18,6 +18,7 @@ void kmain(struct MultibootInfo* mbi)
 {
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
     serial_init();
+    console_init(mbi);
     kprintf("\nWe the People of the United States\n");
     while(1) { __asm__("hlt"); }
 }
