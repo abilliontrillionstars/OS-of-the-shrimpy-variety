@@ -7,7 +7,7 @@ typedef unsigned int u32;
 void outb(u16 port, u8 value);
 u8 inb(u16 port);
 
-void kmemcpy(void* start, void* dest, unsigned length);
+void kmemcpy(const void* start, void* dest, unsigned length);
 
 #pragma pack(push,1)
 

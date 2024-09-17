@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "console.h"
 #include "serial.h"
 
 #define SCREEN_HEIGHT 600
@@ -6,10 +7,10 @@
 
 static int escCharBuf;
 static volatile u8* framebuffer;
-static unsigned pitch;
+//static unsigned pitch;
 static unsigned width;
 static unsigned height;
-static u16 foregroundColor = 0xffff;
+//static u16 foregroundColor = 0xffff;
 static u16 backgroundColor = 0x0000;
 
 /*
@@ -107,8 +108,9 @@ void console_putc(char ch)
 }
 
 void clear_screen()
-{
-    
+{    
+    for(int i=0; i<width*height; i++)
+        framebuffer[1] = backgroundColor;
 }
 
 void set_pixel(unsigned x, unsigned y, u16 color){
