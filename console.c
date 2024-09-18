@@ -2,7 +2,7 @@
 #include "console.h"
 #include "serial.h"
 
-#include "kprintf.h"
+#include "font-default.h"
 /*
 static u16 fgColor;
 static u16 bgColor;
@@ -114,3 +114,18 @@ void set_pixel(unsigned x, unsigned y, u16 color)
     *p = upper;
     *(p+1) = lower;
 }
+
+void draw_character(unsigned char ch, int x, int y)
+{
+    int r,c;
+    unsigned idx = (unsigned)ch; //can't use char as array index
+    for(r=0; r<CHAR_HEIGHT; ++r)
+        for(c=0; c<CHAR_WIDTH; ++c)
+            if((font_data[idx][r]>>c)&1)
+                //for some reason they drew backwards? whatever
+                set_pixel(x-c +CHAR_WIDTH, y+r, foregroundColor);
+            else
+                set_pixel(x-c +CHAR_WIDTH, y+r, backgroundColor);        
+}
+
+
