@@ -3,10 +3,6 @@
 #include "serial.h"
 
 #include "kprintf.h"
-
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 800
-
 /*
 static u16 fgColor;
 static u16 bgColor;
@@ -101,8 +97,7 @@ void console_putc(char ch)
 void clear_screen()
 {
     u8 upper = (u8)(backgroundColor>>8);
-    u8 lower = (u8)(backgroundColor<<8);
-    kprintf("\nclearing the screen!\n");
+    u8 lower = (u8)((backgroundColor<<8)>>8);
     for(int i=0; i<pitch*height; i=i+2)
     {
         framebuffer[i] = lower;  
@@ -112,6 +107,10 @@ void clear_screen()
 
 void set_pixel(unsigned x, unsigned y, u16 color)
 {
-    u16* p = framebuffer + (pitch*y) + x;
-    *p = color;
+    u8 upper = (u8)(color>>8);
+    u8 lower = (u8)((color<<8)>>8);
+
+    volatile u8* p = framebuffer+(pitch*y)+(x*2);
+    *p = upper;
+    *(p+1) = lower;
 }
