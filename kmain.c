@@ -3,8 +3,7 @@
 #include "utils.h"
 #include "kprintf.h"
 
-__asm__
-(
+__asm__(
     ".global _start\n"
     "_start:\n"
     "mov $0x10000,%esp\n"
@@ -19,6 +18,12 @@ void kmain(struct MultibootInfo* mbi)
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
     serial_init();
     console_init(mbi);
-    kprintf("\nWe the People of the United States\n");
-    while(1) { __asm__("hlt"); }
+
+    clear_screen();
+    kprintf("Everyone's programmed differently.\n");
+    for(int x=0; x<200; x++)
+        for(int y=0; y<150; y++)
+            set_pixel(x, y, foregroundColor);
+
+    while(1) __asm__("hlt");
 }

@@ -14,8 +14,8 @@ u8 inb(u16 port)
 }
 
 
-void kmemcpy(const void* start, void* dest, unsigned length)
+void kmemcpy(void* dest, const void* start, unsigned length)
 {
     for(int i=0; i<length; i++)
-        *((char*)dest+i) = *((char*)start+i);
+        ((char*)dest)[i] = ((char*)start)[i];
 }

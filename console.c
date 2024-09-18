@@ -2,16 +2,10 @@
 #include "console.h"
 #include "serial.h"
 
+#include "kprintf.h"
+
 #define SCREEN_HEIGHT 600
 #define SCREEN_WIDTH 800
-
-static int escCharBuf;
-static volatile u8* framebuffer;
-//static unsigned pitch;
-static unsigned width;
-static unsigned height;
-//static u16 foregroundColor = 0xffff;
-static u16 backgroundColor = 0x0000;
 
 /*
 static u16 fgColor;
@@ -46,10 +40,11 @@ enum inputState currentState = NORMAL_CHARS;
 
 void console_init(struct MultibootInfo* mbi)
 {
-    framebuffer = (volatile u8*) (mbi->fb.addr);
+    framebuffer = (volatile u8*) mbi->fb.addr;
     //...initialize other variables...
     width = SCREEN_WIDTH;
     height = SCREEN_HEIGHT;
+    pitch = mbi->fb.pitch;
 }
 
 void console_putc(char ch)
@@ -61,11 +56,9 @@ void console_putc(char ch)
             serial_putc(ch);
             if(ch=='\e') { currentState = GOT_ESC; return; }
         case GOT_ESC:
-        {
             if(ch=='[') currentState = GOT_LBRACKET;
             else currentState = NORMAL_CHARS; 
-            break; 
-        }
+            break;
         case GOT_LBRACKET:
             switch (ch)
             {
@@ -90,11 +83,9 @@ void console_putc(char ch)
                 case '6':
                 case '7':
                 // and here!
-                {
                     escCharBuf = ch;
                     currentState++;
                     break;
-                }
                 default: { currentState = NORMAL_CHARS; break; }
             }
         case GOT_3x:
@@ -108,12 +99,19 @@ void console_putc(char ch)
 }
 
 void clear_screen()
-{    
-    for(int i=0; i<width*height; i++)
-        framebuffer[1] = backgroundColor;
+{
+    u8 upper = (u8)(backgroundColor>>8);
+    u8 lower = (u8)(backgroundColor<<8);
+    kprintf("\nclearing the screen!\n");
+    for(int i=0; i<pitch*height; i=i+2)
+    {
+        framebuffer[i] = lower;  
+        framebuffer[i+1] = upper;
+    }
 }
 
-void set_pixel(unsigned x, unsigned y, u16 color){
-    u16* p = 0;
+void set_pixel(unsigned x, unsigned y, u16 color)
+{
+    u16* p = framebuffer + (pitch*y) + x;
     *p = color;
 }
