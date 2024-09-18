@@ -123,9 +123,9 @@ void draw_character(unsigned char ch, int x, int y)
         for(c=0; c<CHAR_WIDTH; ++c)
             if((font_data[idx][r]>>c)&1)
                 //for some reason they drew backwards? whatever
-                set_pixel(x-c +CHAR_WIDTH, y+r, foregroundColor);
+                set_pixel(x-c +CHAR_WIDTH-1, y+r, foregroundColor);
             else
-                set_pixel(x-c +CHAR_WIDTH, y+r, backgroundColor);        
+                set_pixel(x-c +CHAR_WIDTH-1, y+r, backgroundColor);        
 }
 
 

@@ -28,6 +28,7 @@ void kmain(struct MultibootInfo* mbi)
     const char* string = "We the People of the United States";
     for(int i=0; string[i]; i++)
         draw_character(string[i], 100+(i*CHAR_WIDTH), 200);
+    kprintf("\nDONE\n");
 
     //and stop there
     while(1) __asm__("hlt");

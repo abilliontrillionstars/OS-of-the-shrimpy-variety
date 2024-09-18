@@ -4,7 +4,9 @@ import asyncio
 import sys
 import asyncio.subprocess
 import time
-
+import bmputils
+import tempfile
+import os
 
 TIMEOUT = 30
 
@@ -35,10 +37,9 @@ async def getLine(timeLeft):
         if c == "\n":
             return line
 
-
 async def terminate():
     if P and P.returncode == None:
-        P.stdin.write(b"\n\n`cquit\n")
+        P.stdin.write(b"`cquit\n")
         await asyncio.wait_for(P.wait(), 1)
         if P.returncode == None:
             P.terminate()
@@ -47,9 +48,40 @@ async def terminate():
                 P.kill()
                 await asyncio.wait_for(P.wait())
 
+async def qprompt():
+    lookingFor = "\n(qemu)"
+    tmp = [""] * len(lookingFor)
+    while True:
+        c = await P.stdout.read(1)
+        c=c.decode(errors="replace")
+        tmp.pop(0)
+        tmp.append(c)
+        if "".join(tmp) == lookingFor:
+            return
+
+
+
+async def screencap(filename):
+    tf = tempfile.NamedTemporaryFile(delete=False)
+    tf.close()
+    NAME = tf.name.replace("/","//")
+
+    # ~ NAME = "debug"
+    try:
+        P.stdin.write(b"`c")
+        await qprompt()
+        P.stdin.write(f"screendump {NAME}\n".encode())
+        await qprompt()
+        P.stdin.write(b"`c")
+        w,h,pix = bmputils.loadppm(tf.name)
+        bmputils.savebmp(filename,w,h,pix,True)
+    finally:
+        os.unlink(tf.name)
 
 async def main():
     global P
+
+    bmputils.unzip("expected.bmp.zip")
 
     deadline = time.time() + TIMEOUT
     timeLeft = TIMEOUT
@@ -81,10 +113,18 @@ async def main():
             sys.exit(1)
 
         line = line.strip()
-        if line == "We the People of the United States":
+        if line == "DONE":
+            print("Got 'DONE' message")
+            await screencap("actual.bmp")
             await terminate()
-            print("\n\nOK!!!\n\n")
-            sys.exit(0)
+            ok = bmputils.compare("expected.bmp","actual.bmp","diff.bmp")
+            if ok:
+                print("\n\nOK!!!\n\n")
+                sys.exit(0)
+            else:
+                print("Mismatch between expected.bmp and actual.bmp; See diff.bmp for differences")
+                sys.exit(1)
+
 
 
 asyncio.run(main())
