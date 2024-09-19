@@ -62,17 +62,23 @@ void console_putc(char ch)
             switch(ch)
             {
                 case '\t': 
-                    cursorColumn = cursorColumn+(8-cursorColumn%8);
-                    if(cursorColumn == 80) { cursorColumn = 0; cursorRow++; }
+                    int toTab = 8-(cursorColumn%8);
+                    for(int i=0; i<toTab; i++)
+                        kprintf("%c", ' ');
                     break;
-                case '\e': break; //nothing for now
+                case '\e': 
+                    break; //nothing for now
                 case '\f':
                     cursorColumn = 0;
                     cursorRow = 0;
                     clear_screen();
                     break;
                 case '\n':
-                    cursorRow++;
+                    int toLine = 80-cursorColumn;
+                    for(int i=0; i<toLine; i++)
+                        kprintf("%c", ' ');
+                    
+                    //fall through to \r
                 case '\r':
                     cursorColumn = 0;
                     break;
@@ -92,13 +98,8 @@ void console_putc(char ch)
                     cursorColumn++; 
                     if(cursorColumn == 80) 
                     {
-                        if(cursorRow == 30) 
-                        { 
-                            //cursorRow--;
-                            scroll();
-                        }
-                        else 
-                            cursorRow++; 
+                        if(cursorRow == 30) scroll();
+                        else cursorRow++; 
                         cursorColumn = 0;
                     }
                     break;
@@ -164,8 +165,8 @@ void set_pixel(unsigned x, unsigned y, u16 color)
     u8 lower = (u8)((color<<8)>>8);
 
     volatile u8* p = framebuffer+(pitch*y)+(x*2);
-    *p = upper;
-    *(p+1) = lower;
+    *p = lower;
+    *(p+1) = upper;
 }
 
 void draw_character(unsigned char ch, int x, int y)
@@ -183,7 +184,8 @@ void draw_character(unsigned char ch, int x, int y)
 
 void scroll()
 {
-    kmemcpy((void*)framebuffer, (void*)framebuffer+(pitch*CHAR_HEIGHT), CHAR_HEIGHT*pitch*79);
+    kmemcpy((void*)framebuffer, (void*)framebuffer+(pitch*CHAR_HEIGHT), CHAR_HEIGHT*pitch);
+    //kprintf("\rcolor is: %d\n", backgroundColor);
     for(int i=0; i<80; i++)
         draw_character(' ',i*CHAR_WIDTH , 79*CHAR_HEIGHT);
 }

@@ -81,7 +81,9 @@ async def screencap(filename):
 async def main():
     global P
 
-    bmputils.unzip("expected.bmp.zip")
+    bmputils.unzip("expected-both.bmp.zip")
+    bmputils.unzip("expected-scroll.bmp.zip")
+    bmputils.unzip("expected-color.bmp.zip")
 
     deadline = time.time() + TIMEOUT
     timeLeft = TIMEOUT
@@ -117,13 +119,21 @@ async def main():
             print("Got 'DONE' message")
             await screencap("actual.bmp")
             await terminate()
-            ok = bmputils.compare("expected.bmp","actual.bmp","diff.bmp")
+            ok = bmputils.compare("expected-both.bmp","actual.bmp","diff-both.bmp")
             if ok:
-                print("\n\nOK!!!\n\n")
+                print("\n\nOK both!  +200%!!\n\n")
                 sys.exit(0)
-            else:
-                print("Mismatch between expected.bmp and actual.bmp; See diff.bmp for differences")
-                sys.exit(1)
+            ok = bmputils.compare("expected-scroll.bmp","actual.bmp","diff-scroll.bmp")
+            if ok:
+                print("\n\nOK scroll!  100%!!\n\n")
+                sys.exit(0)
+            ok = bmputils.compare("expected-color.bmp","actual.bmp","diff-color.bmp")
+            if ok:
+                print("\n\nOK color!  100%!!\n\n")
+                sys.exit(0)
+
+            print("Mismatch: Differences are in diff-both.bmp, diff-scroll.bmp, diff-color.bmp")
+            sys.exit(1)
 
 
 
