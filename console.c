@@ -1,6 +1,7 @@
 #include "utils.h"
 #include "console.h"
 #include "serial.h"
+#include "kprintf.h"
 
 #include "font-default.h"
 
@@ -56,7 +57,6 @@ void console_putc(char ch)
 {
     switch(currentState)
     {
-
         case NORMAL_CHARS:
             serial_putc(ch);
             switch(ch)
@@ -90,9 +90,19 @@ void console_putc(char ch)
                 default:
                     draw_character(ch, cursorColumn*CHAR_WIDTH, cursorRow*CHAR_HEIGHT);
                     cursorColumn++; 
-                    if(cursorColumn == 80) { cursorColumn = 0; cursorRow++; }
+                    if(cursorColumn == 80) 
+                    {
+                        if(cursorRow == 30) 
+                        { 
+                            //cursorRow--;
+                            scroll();
+                        }
+                        else 
+                            cursorRow++; 
+                        cursorColumn = 0;
+                    }
+                    break;
             }
-            
             if(ch=='\e') { currentState = GOT_ESC; return; }
         case GOT_ESC:
             if(ch=='[') currentState = GOT_LBRACKET;
@@ -171,4 +181,10 @@ void draw_character(unsigned char ch, int x, int y)
                 set_pixel(x-c +CHAR_WIDTH-1, y+r, backgroundColor);        
 }
 
+void scroll()
+{
+    kmemcpy((void*)framebuffer, (void*)framebuffer+(pitch*CHAR_HEIGHT), CHAR_HEIGHT*pitch*79);
+    for(int i=0; i<80; i++)
+        draw_character(' ',i*CHAR_WIDTH , 79*CHAR_HEIGHT);
+}
 

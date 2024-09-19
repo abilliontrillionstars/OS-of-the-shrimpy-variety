@@ -22,3 +22,5 @@ void console_putc(char ch);
 void clear_screen();
 void set_pixel(unsigned x, unsigned y, u16 color);
 void draw_character(unsigned char ch, int x, int y);
+
+void scroll();
