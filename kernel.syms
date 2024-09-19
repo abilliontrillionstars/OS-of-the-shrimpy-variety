@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 66eb778c (Wed Sep 18 20:59:56 2024)
+ Timestamp is 66eba3c0 (Thu Sep 19 00:08:32 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00003583H .text                   CODE
+ 0001:00000000 000035c3H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000000fcH .data                   DATA
  0003:000000fc 000000a4H .bss                    DATA
@@ -21,22 +21,22 @@
  0001:00000120       _kmemcpy                   0000000000101120     utils.c.o
  0001:00000170       _console_init              0000000000101170     console.c.o
  0001:000001c0       _console_putc              00000000001011c0     console.c.o
- 0001:00000470       _draw_character            0000000000101470     console.c.o
- 0001:00000560       _clear_screen              0000000000101560     console.c.o
- 0001:000005e0       _set_pixel                 00000000001015e0     console.c.o
- 0001:00000640       _va_end                    0000000000101640     kprintf.c.o
- 0001:00000650       _stbsp_set_separators      0000000000101650     kprintf.c.o
- 0001:00000670       _stbsp_vsprintfcb          0000000000101670     kprintf.c.o
- 0001:00002ec0       _stbsp_sprintf             0000000000103ec0     kprintf.c.o
- 0001:00002f50       _stbsp_vsnprintf           0000000000103f50     kprintf.c.o
- 0001:00003180       _stbsp_snprintf            0000000000104180     kprintf.c.o
- 0001:000031f0       _stbsp_vsprintf            00000000001041f0     kprintf.c.o
- 0001:00003240       _kprintf                   0000000000104240     kprintf.c.o
- 0001:000032f0       _ksprintf                  00000000001042f0     kprintf.c.o
- 0001:00003350       _ksnprintf                 0000000000104350     kprintf.c.o
- 0001:000033c0       _highlevel_handler         00000000001043c0     interrupt.c.o
- 0001:000033d0       _interrupt_init            00000000001043d0     interrupt.c.o
- 0001:000033e0       _sweet                     00000000001043e0     testsuite.c.o
+ 0001:000004b0       _draw_character            00000000001014b0     console.c.o
+ 0001:000005a0       _clear_screen              00000000001015a0     console.c.o
+ 0001:00000620       _set_pixel                 0000000000101620     console.c.o
+ 0001:00000680       _va_end                    0000000000101680     kprintf.c.o
+ 0001:00000690       _stbsp_set_separators      0000000000101690     kprintf.c.o
+ 0001:000006b0       _stbsp_vsprintfcb          00000000001016b0     kprintf.c.o
+ 0001:00002f00       _stbsp_sprintf             0000000000103f00     kprintf.c.o
+ 0001:00002f90       _stbsp_vsnprintf           0000000000103f90     kprintf.c.o
+ 0001:000031c0       _stbsp_snprintf            00000000001041c0     kprintf.c.o
+ 0001:00003230       _stbsp_vsprintf            0000000000104230     kprintf.c.o
+ 0001:00003280       _kprintf                   0000000000104280     kprintf.c.o
+ 0001:00003330       _ksprintf                  0000000000104330     kprintf.c.o
+ 0001:00003390       _ksnprintf                 0000000000104390     kprintf.c.o
+ 0001:00003400       _highlevel_handler         0000000000104400     interrupt.c.o
+ 0001:00003410       _interrupt_init            0000000000104410     interrupt.c.o
+ 0001:00003420       _sweet                     0000000000104420     testsuite.c.o
  0002:000052fc       ??_C@_01BGIBIIDJ@?$HP?$AA@ 000000000010a2fc     testsuite.c.o
  0002:000052fe       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010a2fe     kprintf.c.o
  0002:00005307       ??_C@_04MLLLIHIP@null?$AA@ 000000000010a307     kprintf.c.o
@@ -63,17 +63,17 @@
 
  Static symbols
 
- 0001:000029b0       _real_va_arg               00000000001039b0     kprintf.c.o
- 0001:000029e0       _stbsp__strlen_limited     00000000001039e0     kprintf.c.o
- 0001:00002b00       _mod64                     0000000000103b00     kprintf.c.o
- 0001:00002bf0       _div64                     0000000000103bf0     kprintf.c.o
- 0001:00002d10       _mod                       0000000000103d10     kprintf.c.o
- 0001:00002da0       _div                       0000000000103da0     kprintf.c.o
- 0001:00002e40       _stbsp__lead_sign          0000000000103e40     kprintf.c.o
- 0001:00002f30       _real_va_start             0000000000103f30     kprintf.c.o
- 0001:00003050       _stbsp__count_clamp_callback 0000000000104050     kprintf.c.o
- 0001:00003080       _stbsp__clamp_callback     0000000000104080     kprintf.c.o
- 0001:000032a0       _callback                  00000000001042a0     kprintf.c.o
+ 0001:000029f0       _real_va_arg               00000000001039f0     kprintf.c.o
+ 0001:00002a20       _stbsp__strlen_limited     0000000000103a20     kprintf.c.o
+ 0001:00002b40       _mod64                     0000000000103b40     kprintf.c.o
+ 0001:00002c30       _div64                     0000000000103c30     kprintf.c.o
+ 0001:00002d50       _mod                       0000000000103d50     kprintf.c.o
+ 0001:00002de0       _div                       0000000000103de0     kprintf.c.o
+ 0001:00002e80       _stbsp__lead_sign          0000000000103e80     kprintf.c.o
+ 0001:00002f70       _real_va_start             0000000000103f70     kprintf.c.o
+ 0001:00003090       _stbsp__count_clamp_callback 0000000000104090     kprintf.c.o
+ 0001:000030c0       _stbsp__clamp_callback     00000000001040c0     kprintf.c.o
+ 0001:000032e0       _callback                  00000000001042e0     kprintf.c.o
  0002:00000054       _font_data                 0000000000105054     console.c.o
  0003:00000000       _foregroundColor           000000000010b000     console.c.o
  0003:00000004       _stbsp__period             000000000010b004     kprintf.c.o

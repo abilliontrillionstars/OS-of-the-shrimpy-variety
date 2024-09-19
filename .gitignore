@@ -1,4 +1,5 @@
 
 where.py
 *.o
+*.c.o
 *.exe

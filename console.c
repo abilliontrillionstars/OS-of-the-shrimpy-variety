@@ -56,15 +56,15 @@ void console_putc(char ch)
 {
     switch(currentState)
     {
+
         case NORMAL_CHARS:
             serial_putc(ch);
             switch(ch)
             {
                 case '\t': 
-                    if (!(cursorColumn%8))
-                        cursorColumn = cursorColumn+(8-cursorColumn%8);
-                    else
-                        cursorColumn = cursorColumn+8;
+                    cursorColumn = cursorColumn+(8-cursorColumn%8);
+                    if(cursorColumn == 80) { cursorColumn = 0; cursorRow++; }
+                    break;
                 case '\e': break; //nothing for now
                 case '\f':
                     cursorColumn = 0;
@@ -77,7 +77,14 @@ void console_putc(char ch)
                     cursorColumn = 0;
                     break;
                 case '\x7f':
-                    cursorColumn--;
+                    if(cursorColumn)
+                        cursorColumn--;
+                    else 
+                        if(cursorRow)
+                        {
+                            cursorRow--;
+                            cursorColumn = 79;
+                        }
                     draw_character(' ', cursorColumn*CHAR_WIDTH, cursorRow*CHAR_HEIGHT);
                     break;
                 default:
