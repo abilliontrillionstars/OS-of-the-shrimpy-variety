@@ -25,10 +25,10 @@ void kmain(struct MultibootInfo* mbi)
 
     //now do the things
     clear_screen();
-    //kprintf("Everyone's programmed differently.\n");
-    //kprintf("this will be overwritten! @\x7f \rthat\e\e\e");
+    kprintf("Everyone's programmed differently.\n");
+    kprintf("this will be overwritten! @\x7f \rthat\e\e\e");
 
-    sweet();
+    //sweet();
     const char* string = "\nDONE\n";
     for(int i=0; string[i]; i++)
         serial_putc(string[i]);
