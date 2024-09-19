@@ -4,6 +4,8 @@
 #include "kprintf.h"
 #include "font-default.h"
 
+void sweet();
+
 __asm__(
     ".global _start\n"
     "_start:\n"
@@ -23,12 +25,13 @@ void kmain(struct MultibootInfo* mbi)
 
     //now do the things
     clear_screen();
-    kprintf("Everyone's programmed differently.\n");
+    //kprintf("Everyone's programmed differently.\n");
+    //kprintf("this will be overwritten! @\x7f \rthat\e\e\e");
 
-    const char* string = "We the People of the United States";
+    sweet();
+    const char* string = "\nDONE\n";
     for(int i=0; string[i]; i++)
-        draw_character(string[i], 100+(i*CHAR_WIDTH), 200);
-    kprintf("\nDONE\n");
+        serial_putc(string[i]);
 
     //and stop there
     while(1) __asm__("hlt");

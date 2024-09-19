@@ -3,6 +3,8 @@
 #include "serial.h"
 
 #include "font-default.h"
+
+
 /*
 static u16 fgColor;
 static u16 bgColor;
@@ -17,6 +19,10 @@ static u16 brightColors[8] =
     // same here
 };
 */
+
+static unsigned cursorRow;
+static unsigned cursorColumn;
+
 enum inputState
 {
     NORMAL_CHARS, //initial state
@@ -41,6 +47,9 @@ void console_init(struct MultibootInfo* mbi)
     width = SCREEN_WIDTH;
     height = SCREEN_HEIGHT;
     pitch = mbi->fb.pitch;
+
+    cursorRow = 0;
+    cursorColumn = 0;
 }
 
 void console_putc(char ch)
@@ -48,8 +57,35 @@ void console_putc(char ch)
     switch(currentState)
     {
         case NORMAL_CHARS:
-            // this is where I'd put my actual putc!! IF I HAD ONE!!!
             serial_putc(ch);
+            switch(ch)
+            {
+                case '\t': 
+                    if (!(cursorColumn%8))
+                        cursorColumn = cursorColumn+(8-cursorColumn%8);
+                    else
+                        cursorColumn = cursorColumn+8;
+                case '\e': break; //nothing for now
+                case '\f':
+                    cursorColumn = 0;
+                    cursorRow = 0;
+                    clear_screen();
+                    break;
+                case '\n':
+                    cursorRow++;
+                case '\r':
+                    cursorColumn = 0;
+                    break;
+                case '\x7f':
+                    cursorColumn--;
+                    draw_character(' ', cursorColumn*CHAR_WIDTH, cursorRow*CHAR_HEIGHT);
+                    break;
+                default:
+                    draw_character(ch, cursorColumn*CHAR_WIDTH, cursorRow*CHAR_HEIGHT);
+                    cursorColumn++; 
+                    if(cursorColumn == 80) { cursorColumn = 0; cursorRow++; }
+            }
+            
             if(ch=='\e') { currentState = GOT_ESC; return; }
         case GOT_ESC:
             if(ch=='[') currentState = GOT_LBRACKET;
