@@ -77,20 +77,18 @@ void console_putc(char ch)
                     int toLine = 80-cursorColumn;
                     for(int i=0; i<toLine; i++)
                         kprintf("%c", ' ');
-                    
-                    //fall through to \r
+
+                    break;    
                 case '\r':
                     cursorColumn = 0;
                     break;
                 case '\x7f':
-                    if(cursorColumn)
-                        cursorColumn--;
-                    else 
-                        if(cursorRow)
-                        {
-                            cursorRow--;
-                            cursorColumn = 79;
-                        }
+                    if(cursorColumn) cursorColumn--;
+                    else if(cursorRow)
+                    {
+                        cursorRow--;
+                        cursorColumn = 79;
+                    }
                     draw_character(' ', cursorColumn*CHAR_WIDTH, cursorRow*CHAR_HEIGHT);
                     break;
                 default:
@@ -98,8 +96,12 @@ void console_putc(char ch)
                     cursorColumn++; 
                     if(cursorColumn == 80) 
                     {
-                        if(cursorRow == 30) scroll();
-                        else cursorRow++; 
+                        cursorRow++; 
+                        if(cursorRow == 30) 
+                        {
+                            scroll(); 
+                            cursorRow--;
+                        }
                         cursorColumn = 0;
                     }
                     break;
@@ -184,9 +186,9 @@ void draw_character(unsigned char ch, int x, int y)
 
 void scroll()
 {
-    kmemcpy((void*)framebuffer, (void*)framebuffer+(pitch*CHAR_HEIGHT), CHAR_HEIGHT*pitch);
+    kmemcpy((void*)framebuffer, (void*)framebuffer+(pitch*CHAR_HEIGHT), CHAR_HEIGHT*pitch*30);
     //kprintf("\rcolor is: %d\n", backgroundColor);
     for(int i=0; i<80; i++)
-        draw_character(' ',i*CHAR_WIDTH , 79*CHAR_HEIGHT);
+        draw_character(' ',i*CHAR_WIDTH , 30*CHAR_HEIGHT);
 }
 
