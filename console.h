@@ -14,7 +14,7 @@ static unsigned pitch;
 static unsigned width;
 static unsigned height;
 static u16 foregroundColor = 0b1010110101010101;
-static u16 backgroundColor = 0b011111;
+static u16 backgroundColor = 0b010101;
 
 
 void console_init(struct MultibootInfo* mbi);
