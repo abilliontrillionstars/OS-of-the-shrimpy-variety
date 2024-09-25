@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "kprintf.h"
 #include "font-default.h"
+#include "memory.h"
 
 void sweet_scroll();
 
@@ -20,8 +21,9 @@ void kmain(struct MultibootInfo* mbi)
 {
     //set up the things
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
-    serial_init();
     console_init(mbi);
+    memory_init(mbi);
+    serial_init();
 
     // now do the things
     clear_screen();
