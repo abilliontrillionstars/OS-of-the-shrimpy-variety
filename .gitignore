@@ -7,3 +7,6 @@ where.py
 *.bmp
 *.zip
 *.pyz
+hd.img
+kernel.exe
+kernel.syms

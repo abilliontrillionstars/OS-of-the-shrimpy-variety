@@ -23,28 +23,12 @@ void memory_init(struct MultibootInfo* info)
     }
 }
 
-static void initHeader(Header* h, unsigned order)
-{
-    h->used = 0;
-    h->order = order;
-    h->prev = (u32) NULL;
-    h->next = (u32) NULL; 
-}
-
-Header* getBuddy(Header* h)
-{
-    u32 delta = ((char*)h - heap);
-    //flip the bit at position h->order
-    delta = delta ^ 1<<h->order;
-    return (Header*)(delta+heap);
-}
-
 void* kmalloc(u32 size)
 {
-    size = size+4;
+    size = size+sizeof(Header*);
     unsigned o = 6; //min is 64KB
 
-    //bring order up to the actual order that we need for the given size
+    //bring order up to the power of 2 that we need for the given size
     while((1<<o) < size) o++; 
     int i = o;
     //scan through freeList (which is an array of Header LINKED LISTS) 
@@ -55,7 +39,7 @@ void* kmalloc(u32 size)
     while(i>o)
     {
         //this is where we split our memory blocks
-        bisect(i);
+        bisect(o, i);
         i--;
     }
     //now we have an entry in freeList of our desired order,
@@ -68,26 +52,66 @@ void* kmalloc(u32 size)
 
 void kfree(void* ptr)
 {
+    Header* h = (Header*)ptr;
     // IMPORTANT
-    //h->used = 0;
+    h->used = 0;
+
+
+
+    addToFreeList(h);
 }
 
-void bisect(unsigned index) 
+// header-helper functions (why is it always hamburger help her why is it never hamburger help me)
+static void initHeader(Header* h, unsigned order)
+{
+    h->used = 0;
+    h->order = order;
+    h->prev = (u32) h;
+    h->next = (u32) h; 
+}
+Header* getBuddy(Header* h)
+{
+    u32 delta = ((char*)h - heap);
+    //flip the bit at position h->order
+    delta = delta ^ 1<<h->order;
+
+    return (Header*)(delta+heap);
+}
+
+
+
+
+
+void bisect(unsigned order, unsigned index) 
 {
     // take block off of freelist[i]
+
     // split it in half
+    
     // add two to freelist[i-1]
+    
     Header* h = removeFromFreeList(index);
     h->order--;
-    Header * h2 = (Header*)((char*)h + (1>>(h->order)));
+    Header * h2 = (Header*)((char*)h + (1<<(h->order)));
     initHeader(h2, h->order);
 }
+void coalesce(Header* h) 
+{
+    Header* b = getBuddy(h);
+    // do linked list stuff
 
-void coalesce(unsigned index) {}
+
+    addToFreeList(h);
+    addToFreeList(b);
+}
 
 
-void addToFreeList(unsigned order, unsigned index) {}
-Header* removeFromFreeList(unsigned index)
+void addToFreeList(Header* h) 
+{
+
+}
+Header* removeFromFreeList(unsigned order)
 {
     return (Header*) NULL;
 }
+

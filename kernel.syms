@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 66fd6360 (Wed Oct  2 11:14:40 2024)
+ Timestamp is 66fdb1f0 (Wed Oct  2 16:49:52 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00003e83H .text                   CODE
+ 0001:00000000 00003ec3H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 00000194H .data                   DATA
  0003:00000194 00000100H .bss                    DATA
@@ -45,18 +45,18 @@
  0001:00003610       _sweet_color               0000000000104610     testsuite.c.o
  0001:000036e0       _sweet_both                00000000001046e0     testsuite.c.o
  0001:00003800       _memory_init               0000000000104800     memory.c.o
- 0001:000038f0       _getBuddy                  00000000001048f0     memory.c.o
- 0001:00003930       _kmalloc                   0000000000104930     memory.c.o
- 0001:00003a20       _bisect                    0000000000104a20     memory.c.o
- 0001:00003a80       _removeFromFreeList        0000000000104a80     memory.c.o
- 0001:00003a90       _kfree                     0000000000104a90     memory.c.o
- 0001:00003ae0       _coalesce                  0000000000104ae0     memory.c.o
- 0001:00003af0       _addToFreeList             0000000000104af0     memory.c.o
- 0001:00003b00       _pci_scan_for_device       0000000000104b00     pci.c.o
- 0001:00003c00       _pci_read                  0000000000104c00     pci.c.o
- 0001:00003c60       _pci_read_addr             0000000000104c60     pci.c.o
- 0001:00003cb0       _pci_write_addr            0000000000104cb0     pci.c.o
- 0001:00003d00       _disk_init                 0000000000104d00     disk.c.o
+ 0001:000038f0       _kmalloc                   00000000001048f0     memory.c.o
+ 0001:000039e0       _bisect                    00000000001049e0     memory.c.o
+ 0001:00003a40       _removeFromFreeList        0000000000104a40     memory.c.o
+ 0001:00003a50       _kfree                     0000000000104a50     memory.c.o
+ 0001:00003a80       _addToFreeList             0000000000104a80     memory.c.o
+ 0001:00003a90       _getBuddy                  0000000000104a90     memory.c.o
+ 0001:00003b00       _coalesce                  0000000000104b00     memory.c.o
+ 0001:00003b40       _pci_scan_for_device       0000000000104b40     pci.c.o
+ 0001:00003c40       _pci_read                  0000000000104c40     pci.c.o
+ 0001:00003ca0       _pci_read_addr             0000000000104ca0     pci.c.o
+ 0001:00003cf0       _pci_write_addr            0000000000104cf0     pci.c.o
+ 0001:00003d40       _disk_init                 0000000000104d40     disk.c.o
  0002:000052fc       ??_C@_0CB@FGPELLHG@Saruman?3The_Many_Colored?$HO?$HO?$HO?$HO?$HO?$HO?$HO?$HO@ 000000000010a2fc     testsuite.c.o
  0002:0000531d       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010a31d     kprintf.c.o
  0002:00005326       ??_C@_0N@EALGMGIE@?$BL?$FL37m?$BL?$FL44m?$CFs?$AA@ 000000000010a326     testsuite.c.o
@@ -98,10 +98,10 @@
  0001:00003210       _stbsp__count_clamp_callback 0000000000104210     kprintf.c.o
  0001:00003240       _stbsp__clamp_callback     0000000000104240     kprintf.c.o
  0001:00003460       _callback                  0000000000104460     kprintf.c.o
- 0001:00003aa0       _initHeader                0000000000104aa0     memory.c.o
- 0001:00003d80       _getNativeResources        0000000000104d80     disk.c.o
- 0001:00003df0       _enable_busmaster          0000000000104df0     disk.c.o
- 0001:00003e60       _getLegacyResources        0000000000104e60     disk.c.o
+ 0001:00003ad0       _initHeader                0000000000104ad0     memory.c.o
+ 0001:00003dc0       _getNativeResources        0000000000104dc0     disk.c.o
+ 0001:00003e30       _enable_busmaster          0000000000104e30     disk.c.o
+ 0001:00003ea0       _getLegacyResources        0000000000104ea0     disk.c.o
  0002:00000054       _font_data                 0000000000105054     console.c.o
  0003:00000000       _backgroundColor           000000000010d000     console.c.o
  0003:00000002       _foregroundColor           000000000010d002     console.c.o
