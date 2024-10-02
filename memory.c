@@ -3,6 +3,10 @@
 #include "memory.h"
 #include "kprintf.h"
 
+static char* heap = (char*) 0x10000;
+#define HEAP_ORDER 19
+Header* freeList[HEAP_ORDER+1];
+
 void memory_init(struct MultibootInfo* info) 
 {
     //number of regions
@@ -23,8 +27,8 @@ static void initHeader(Header* h, unsigned order)
 {
     h->used = 0;
     h->order = order;
-    h->prev = NULL;
-    h->next = NULL; 
+    h->prev = (u32) NULL;
+    h->next = (u32) NULL; 
 }
 
 Header* getBuddy(Header* h)
@@ -39,11 +43,12 @@ void* kmalloc(u32 size)
 {
     size = size+4;
     unsigned o = 6; //min is 64KB
-    int i = o;
-    
+
     //bring order up to the actual order that we need for the given size
-    while((i<<o) < size) o++; 
-    //scan through freeList (which is a Header array) until we find the right order
+    while((1<<o) < size) o++; 
+    int i = o;
+    //scan through freeList (which is an array of Header LINKED LISTS) 
+    //until we find the right order
     while(i <= HEAP_ORDER && !freeList[i]) i++;
     if(i > HEAP_ORDER) return NULL;
 
@@ -56,10 +61,33 @@ void* kmalloc(u32 size)
     //now we have an entry in freeList of our desired order,
 
     //TODO <--
-    //Header* h = removeFromFreeList(o);
-    //h->used = 0;
+    Header* h = removeFromFreeList(i);
+    h->used = 1;
     return ((char*)h + sizeof(Header));
 }
 
-void bisect(unsigned index) {}
+void kfree(void* ptr)
+{
+    // IMPORTANT
+    //h->used = 0;
+}
+
+void bisect(unsigned index) 
+{
+    // take block off of freelist[i]
+    // split it in half
+    // add two to freelist[i-1]
+    Header* h = removeFromFreeList(index);
+    h->order--;
+    Header * h2 = (Header*)((char*)h + (1>>(h->order)));
+    initHeader(h2, h->order);
+}
+
 void coalesce(unsigned index) {}
+
+
+void addToFreeList(unsigned order, unsigned index) {}
+Header* removeFromFreeList(unsigned index)
+{
+    return (Header*) NULL;
+}

@@ -10,3 +10,4 @@ void serial_putc(char ch)
     if(SERIAL_OK)
         outb(SERIAL_PORT, ch);
 }
+

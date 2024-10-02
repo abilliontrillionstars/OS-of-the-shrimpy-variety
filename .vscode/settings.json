@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "utils.h": "c",
-        "serial.h": "c"
+        "serial.h": "c",
+        "memory.h": "c",
+        "console.h": "c",
+        "pci.h": "c",
+        "disk.h": "c"
     }
 }

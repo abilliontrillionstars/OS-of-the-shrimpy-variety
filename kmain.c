@@ -5,8 +5,6 @@
 #include "font-default.h"
 #include "memory.h"
 
-void sweet_scroll();
-
 __asm__(
     ".global _start\n"
     "_start:\n"
@@ -27,10 +25,8 @@ void kmain(struct MultibootInfo* mbi)
 
     // now do the things
     clear_screen();
-    //kprintf("Everyone's programmed differently.\n");
-    //kprintf("this will be overwritten! @\x7f \rthat\e\e\e\n\n");
-
-    sweet_scroll();
+    kprintf("Everyone's programmed differently.\n");
+    kprintf("this will be overwritten! @\x7f \rthat\e\e\e\n\n");
     
     const char* string = "\nDONE\n";
     for(int i=0; string[i]; i++)

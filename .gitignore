@@ -1,7 +1,9 @@
 
 where.py
+
 *.o
 *.c.o
 *.exe
 *.bmp
 *.zip
+*.pyz

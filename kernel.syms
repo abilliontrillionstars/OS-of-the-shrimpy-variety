@@ -1,79 +1,107 @@
  kernel
 
- Timestamp is 66ecd0a3 (Thu Sep 19 21:32:19 2024)
+ Timestamp is 66fd6360 (Wed Oct  2 11:14:40 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00003756H .text                   CODE
+ 0001:00000000 00003e83H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
- 0003:00000000 00000190H .data                   DATA
- 0003:00000190 000000a0H .bss                    DATA
+ 0003:00000000 00000194H .data                   DATA
+ 0003:00000194 00000100H .bss                    DATA
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
  0001:00000000       _start                     0000000000101000     kmain.c.o
  0001:00000010       _kmain                     0000000000101010     kmain.c.o
- 0001:000000a0       _serial_init               00000000001010a0     serial.c.o
- 0001:000000b0       _serial_putc               00000000001010b0     serial.c.o
- 0001:000000e0       _outb                      00000000001010e0     utils.c.o
- 0001:00000100       _inb                       0000000000101100     utils.c.o
- 0001:00000120       _kmemcpy                   0000000000101120     utils.c.o
- 0001:00000170       _console_init              0000000000101170     console.c.o
- 0001:000001c0       _console_putc              00000000001011c0     console.c.o
- 0001:00000510       _draw_character            0000000000101510     console.c.o
- 0001:00000600       _clear_screen              0000000000101600     console.c.o
- 0001:00000680       _set_pixel                 0000000000101680     console.c.o
- 0001:000006e0       _scroll                    00000000001016e0     console.c.o
- 0001:00000760       _va_end                    0000000000101760     kprintf.c.o
- 0001:00000770       _stbsp_set_separators      0000000000101770     kprintf.c.o
- 0001:00000790       _stbsp_vsprintfcb          0000000000101790     kprintf.c.o
- 0001:00002fe0       _stbsp_sprintf             0000000000103fe0     kprintf.c.o
- 0001:00003070       _stbsp_vsnprintf           0000000000104070     kprintf.c.o
- 0001:000032a0       _stbsp_snprintf            00000000001042a0     kprintf.c.o
- 0001:00003310       _stbsp_vsprintf            0000000000104310     kprintf.c.o
- 0001:00003360       _kprintf                   0000000000104360     kprintf.c.o
- 0001:00003410       _ksprintf                  0000000000104410     kprintf.c.o
- 0001:00003470       _ksnprintf                 0000000000104470     kprintf.c.o
- 0001:000034e0       _highlevel_handler         00000000001044e0     interrupt.c.o
- 0001:000034f0       _interrupt_init            00000000001044f0     interrupt.c.o
- 0001:00003500       _sweet_scroll              0000000000104500     testsuite.c.o
- 0001:00003570       _sweet_color               0000000000104570     testsuite.c.o
- 0001:00003640       _sweet_both                0000000000104640     testsuite.c.o
+ 0001:000000c0       _serial_init               00000000001010c0     serial.c.o
+ 0001:000000d0       _serial_putc               00000000001010d0     serial.c.o
+ 0001:00000100       _outb                      0000000000101100     utils.c.o
+ 0001:00000120       _inb                       0000000000101120     utils.c.o
+ 0001:00000140       _kmemcpy                   0000000000101140     utils.c.o
+ 0001:00000190       _inw                       0000000000101190     utils.c.o
+ 0001:000001b0       _outw                      00000000001011b0     utils.c.o
+ 0001:000001d0       _inl                       00000000001011d0     utils.c.o
+ 0001:000001f0       _outl                      00000000001011f0     utils.c.o
+ 0001:00000210       _console_init              0000000000101210     console.c.o
+ 0001:00000260       _console_putc              0000000000101260     console.c.o
+ 0001:000005b0       _draw_character            00000000001015b0     console.c.o
+ 0001:000006a0       _clear_screen              00000000001016a0     console.c.o
+ 0001:00000720       _set_pixel                 0000000000101720     console.c.o
+ 0001:00000780       _scroll                    0000000000101780     console.c.o
+ 0001:00000800       _va_end                    0000000000101800     kprintf.c.o
+ 0001:00000810       _stbsp_set_separators      0000000000101810     kprintf.c.o
+ 0001:00000830       _stbsp_vsprintfcb          0000000000101830     kprintf.c.o
+ 0001:00003080       _stbsp_sprintf             0000000000104080     kprintf.c.o
+ 0001:00003110       _stbsp_vsnprintf           0000000000104110     kprintf.c.o
+ 0001:00003340       _stbsp_snprintf            0000000000104340     kprintf.c.o
+ 0001:000033b0       _stbsp_vsprintf            00000000001043b0     kprintf.c.o
+ 0001:00003400       _kprintf                   0000000000104400     kprintf.c.o
+ 0001:000034b0       _ksprintf                  00000000001044b0     kprintf.c.o
+ 0001:00003510       _ksnprintf                 0000000000104510     kprintf.c.o
+ 0001:00003580       _highlevel_handler         0000000000104580     interrupt.c.o
+ 0001:00003590       _interrupt_init            0000000000104590     interrupt.c.o
+ 0001:000035a0       _sweet_scroll              00000000001045a0     testsuite.c.o
+ 0001:00003610       _sweet_color               0000000000104610     testsuite.c.o
+ 0001:000036e0       _sweet_both                00000000001046e0     testsuite.c.o
+ 0001:00003800       _memory_init               0000000000104800     memory.c.o
+ 0001:000038f0       _getBuddy                  00000000001048f0     memory.c.o
+ 0001:00003930       _kmalloc                   0000000000104930     memory.c.o
+ 0001:00003a20       _bisect                    0000000000104a20     memory.c.o
+ 0001:00003a80       _removeFromFreeList        0000000000104a80     memory.c.o
+ 0001:00003a90       _kfree                     0000000000104a90     memory.c.o
+ 0001:00003ae0       _coalesce                  0000000000104ae0     memory.c.o
+ 0001:00003af0       _addToFreeList             0000000000104af0     memory.c.o
+ 0001:00003b00       _pci_scan_for_device       0000000000104b00     pci.c.o
+ 0001:00003c00       _pci_read                  0000000000104c00     pci.c.o
+ 0001:00003c60       _pci_read_addr             0000000000104c60     pci.c.o
+ 0001:00003cb0       _pci_write_addr            0000000000104cb0     pci.c.o
+ 0001:00003d00       _disk_init                 0000000000104d00     disk.c.o
  0002:000052fc       ??_C@_0CB@FGPELLHG@Saruman?3The_Many_Colored?$HO?$HO?$HO?$HO?$HO?$HO?$HO?$HO@ 000000000010a2fc     testsuite.c.o
  0002:0000531d       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010a31d     kprintf.c.o
  0002:00005326       ??_C@_0N@EALGMGIE@?$BL?$FL37m?$BL?$FL44m?$CFs?$AA@ 000000000010a326     testsuite.c.o
  0002:00005330       ??_C@_02DKCKIIND@?$CFs?$AA@ 000000000010a330     testsuite.c.o
  0002:00005333       ??_C@_04MLLLIHIP@null?$AA@ 000000000010a333     kprintf.c.o
- 0002:00005338       ??_C@_0N@OOINPJOD@?$BL?$FL?$CFdm?$BL?$FL?$CFdm?$CFc?$AA@ 000000000010a338     testsuite.c.o
- 0002:00005342       ??_C@_02HAOIJKIC@?$CFc?$AA@ 000000000010a342     console.c.o
- 0002:00005345       ??_C@_0LF@EGOCENNO@And?5for?5the?5support?5of?5this?5Decl@ 000000000010a345     testsuite.c.o
- 0002:000053fa       ??_C@_0PNI@JOHOOPOJ@?$AMIN?5CONGRESS?0?5July?54?0?51776?4?6?6The@ 000000000010a3fa     testsuite.c.o
- 0002:000062bc       ??_C@_0BBG@GGILKLNE@and?5to?5do?5all?5other?5Acts?5and?5Thi@ 000000000010b2bc     testsuite.c.o
- 0002:000063d2       ??_C@_0BH@OODNFPIC@?$AN?$CFd?5?$CFd?5?$CFd?5?$CFd?5?$CFd?$CFc?$CFd?4?4?4?$AA@ 000000000010b3d2     testsuite.c.o
- 0002:000063e9       ??_C@_0PKJ@MOBOGEGH@?$AMIN?5CONGRESS?0?5July?54?0?51776?4?6?6The@ 000000000010b3e9     testsuite.c.o
- 0002:00007392       ??_C@_06HPPMHAIC@?6DONE?6?$AA@ 000000000010c392     kmain.c.o
- 0002:00007399       ??_C@_0HML@DNNPFEHB@?$AMIn?5every?5stage?5of?5these?5Oppress@ 000000000010c399     testsuite.c.o
+ 0002:00005338       ??_C@_08NKCLJDKG@Reserved?$AA@ 000000000010a338     memory.c.o
+ 0002:00005341       ??_C@_0N@OOINPJOD@?$BL?$FL?$CFdm?$BL?$FL?$CFdm?$CFc?$AA@ 000000000010a341     testsuite.c.o
+ 0002:0000534b       ??_C@_02HAOIJKIC@?$CFc?$AA@ 000000000010a34b     console.c.o
+ 0002:0000534e       ??_C@_03ILDADBHF@RAM?$AA@  000000000010a34e     memory.c.o
+ 0002:00005352       ??_C@_0LF@EGOCENNO@And?5for?5the?5support?5of?5this?5Decl@ 000000000010a352     testsuite.c.o
+ 0002:00005407       ??_C@_0PNI@JOHOOPOJ@?$AMIN?5CONGRESS?0?5July?54?0?51776?4?6?6The@ 000000000010a407     testsuite.c.o
+ 0002:000062c9       ??_C@_0BBG@GGILKLNE@and?5to?5do?5all?5other?5Acts?5and?5Thi@ 000000000010b2c9     testsuite.c.o
+ 0002:000063df       ??_C@_0BH@OODNFPIC@?$AN?$CFd?5?$CFd?5?$CFd?5?$CFd?5?$CFd?$CFc?$CFd?4?4?4?$AA@ 000000000010b3df     testsuite.c.o
+ 0002:000063f6       ??_C@_0PKJ@MOBOGEGH@?$AMIN?5CONGRESS?0?5July?54?0?51776?4?6?6The@ 000000000010b3f6     testsuite.c.o
+ 0002:0000739f       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c39f     memory.c.o
+ 0002:000073d3       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c3d3     memory.c.o
+ 0002:000073e4       ??_C@_06HPPMHAIC@?6DONE?6?$AA@ 000000000010c3e4     kmain.c.o
+ 0002:000073eb       ??_C@_0CE@JMDHCBGK@Everyone?8s?5programmed?5differentl@ 000000000010c3eb     kmain.c.o
+ 0002:0000740f       ??_C@_0HML@DNNPFEHB@?$AMIn?5every?5stage?5of?5these?5Oppress@ 000000000010c40f     testsuite.c.o
+ 0002:00007bda       ??_C@_0CI@OBCEBDD@this?5will?5be?5overwritten?$CB?5?$EA?$HP?5?$ANth@ 000000000010cbda     kmain.c.o
  0003:000000fc       _decl3                     000000000010d0fc     testsuite.c.o
  0003:00000100       _phrase                    000000000010d100     testsuite.c.o
- 0003:0000020c       _currentState              000000000010d20c     console.c.o
- 0003:0000022c       __fltused                  000000000010d22c     kprintf.c.o
+ 0003:00000210       _currentState              000000000010d210     console.c.o
+ 0003:00000230       __fltused                  000000000010d230     kprintf.c.o
+ 0003:00000234       _freeList                  000000000010d234     memory.c.o
 
  entry point at         0001:00000000
 
  Static symbols
 
- 0001:00002ad0       _real_va_arg               0000000000103ad0     kprintf.c.o
- 0001:00002b00       _stbsp__strlen_limited     0000000000103b00     kprintf.c.o
- 0001:00002c20       _mod64                     0000000000103c20     kprintf.c.o
- 0001:00002d10       _div64                     0000000000103d10     kprintf.c.o
- 0001:00002e30       _mod                       0000000000103e30     kprintf.c.o
- 0001:00002ec0       _div                       0000000000103ec0     kprintf.c.o
- 0001:00002f60       _stbsp__lead_sign          0000000000103f60     kprintf.c.o
- 0001:00003050       _real_va_start             0000000000104050     kprintf.c.o
- 0001:00003170       _stbsp__count_clamp_callback 0000000000104170     kprintf.c.o
- 0001:000031a0       _stbsp__clamp_callback     00000000001041a0     kprintf.c.o
- 0001:000033c0       _callback                  00000000001043c0     kprintf.c.o
+ 0001:00002b70       _real_va_arg               0000000000103b70     kprintf.c.o
+ 0001:00002ba0       _stbsp__strlen_limited     0000000000103ba0     kprintf.c.o
+ 0001:00002cc0       _mod64                     0000000000103cc0     kprintf.c.o
+ 0001:00002db0       _div64                     0000000000103db0     kprintf.c.o
+ 0001:00002ed0       _mod                       0000000000103ed0     kprintf.c.o
+ 0001:00002f60       _div                       0000000000103f60     kprintf.c.o
+ 0001:00003000       _stbsp__lead_sign          0000000000104000     kprintf.c.o
+ 0001:000030f0       _real_va_start             00000000001040f0     kprintf.c.o
+ 0001:00003210       _stbsp__count_clamp_callback 0000000000104210     kprintf.c.o
+ 0001:00003240       _stbsp__clamp_callback     0000000000104240     kprintf.c.o
+ 0001:00003460       _callback                  0000000000104460     kprintf.c.o
+ 0001:00003aa0       _initHeader                0000000000104aa0     memory.c.o
+ 0001:00003d80       _getNativeResources        0000000000104d80     disk.c.o
+ 0001:00003df0       _enable_busmaster          0000000000104df0     disk.c.o
+ 0001:00003e60       _getLegacyResources        0000000000104e60     disk.c.o
  0002:00000054       _font_data                 0000000000105054     console.c.o
  0003:00000000       _backgroundColor           000000000010d000     console.c.o
  0003:00000002       _foregroundColor           000000000010d002     console.c.o
@@ -88,11 +116,16 @@
  0003:00000148       _fg                        000000000010d148     testsuite.c.o
  0003:00000188       _decl4                     000000000010d188     testsuite.c.o
  0003:0000018c       _decl5                     000000000010d18c     testsuite.c.o
- 0003:00000190       _bootInfo                  000000000010d190     kmain.c.o
- 0003:00000210       _framebuffer               000000000010d210     console.c.o
- 0003:00000214       _width                     000000000010d214     console.c.o
- 0003:00000218       _height                    000000000010d218     console.c.o
- 0003:0000021c       _pitch                     000000000010d21c     console.c.o
- 0003:00000220       _cursorRow                 000000000010d220     console.c.o
- 0003:00000224       _cursorColumn              000000000010d224     console.c.o
- 0003:00000228       _escCharBuf                000000000010d228     console.c.o
+ 0003:00000190       _heap                      000000000010d190     memory.c.o
+ 0003:00000194       _bootInfo                  000000000010d194     kmain.c.o
+ 0003:00000214       _framebuffer               000000000010d214     console.c.o
+ 0003:00000218       _width                     000000000010d218     console.c.o
+ 0003:0000021c       _height                    000000000010d21c     console.c.o
+ 0003:00000220       _pitch                     000000000010d220     console.c.o
+ 0003:00000224       _cursorRow                 000000000010d224     console.c.o
+ 0003:00000228       _cursorColumn              000000000010d228     console.c.o
+ 0003:0000022c       _escCharBuf                000000000010d22c     console.c.o
+ 0003:00000284       _portBase                  000000000010d284     disk.c.o
+ 0003:00000288       _statusBase                000000000010d288     disk.c.o
+ 0003:0000028c       _interruptNumber           000000000010d28c     disk.c.o
+ 0003:00000290       _dmaBase                   000000000010d290     disk.c.o
