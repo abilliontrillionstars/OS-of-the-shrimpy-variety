@@ -4,8 +4,6 @@
 #include "kprintf.h"
 
 #include "font-default.h"
-
-
 /*
 static u16 fgColor;
 static u16 bgColor;
@@ -51,6 +49,7 @@ void console_init(struct MultibootInfo* mbi)
 
     cursorRow = 0;
     cursorColumn = 0;
+    clear_screen();
 }
 
 void console_putc(char ch)

@@ -5,6 +5,7 @@
         "memory.h": "c",
         "console.h": "c",
         "pci.h": "c",
-        "disk.h": "c"
+        "disk.h": "c",
+        "font-default.h": "c"
     }
 }
