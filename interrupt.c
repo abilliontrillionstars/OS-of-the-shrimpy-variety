@@ -1,56 +1,15 @@
 #include "utils.h"
 #include "interrupt.h"
 #include "kprintf.h"
+#include "console.h"
 #define NUM_INTERRUPTS 49
-typedef void (*InterruptHandler)(struct InterruptContext* ctx);
+#define MAX_HANDLERS 4
 
 extern void* lowlevel_addresses[];
 //global variable
 static struct GDTEntry gdt[3]; 
 static struct IDTEntry idt[NUM_INTERRUPTS];
-
-
-void highlevel_handler(struct InterruptContext* ctx)
-{ 
-    switch(ctx->interruptNumber)
-    {
-        case 0:
-            kprintf("Divide by zero"); break;
-        case 6:
-            kprintf("Undefined opcode"); break;
-        case 13:
-            kprintf("General fault"); break; // general fault! o7
-        default:
-            kprintf("waugh-errno-%d", ctx->errorcode); break;
-    }
-    while(1) asm("hlt");
-}
-
-asm ( // this is a declaration of the midlevel handler in asm
-    ".global _midlevel_handler\n"
-    "_midlevel_handler:\n"
-    "   push %ebp\n"
-    "   push %edi\n"
-    "   push %esi\n"
-    "   push %edx\n"
-    "   push %ecx\n"
-    "   push %ebx\n"
-    "   push %eax\n"
-    "   push %esp\n"        //address of stack top = addr of eax
-    "   cld\n"      //clear direction flag; C expects this
-    "   call _highlevel_handler\n"
-    "   addl $4, %esp\n"    //discard parameter for C
-    "   pop %eax\n"
-    "   pop %ebx\n"
-    "   pop %ecx\n"
-    "   pop %edx\n"
-    "   pop %esi\n"
-    "   pop %edi\n"
-    "   pop %ebp\n"
-    "   add $8,%esp\n"
-    "   iret\n"
-);
-
+static InterruptHandler handlers[NUM_INTERRUPTS][MAX_HANDLERS];
 
 void interrupt_init()
 {
@@ -58,7 +17,6 @@ void interrupt_init()
     lidt.size = sizeof(idt);
     lidt.addr = idt;
     asm volatile("lidt (%%eax)" : : "a"(&lidt));
-
     for (int i=0; i<NUM_INTERRUPTS; i++)
     {
         u32 a = (u32)(lowlevel_addresses[i]);
@@ -68,7 +26,22 @@ void interrupt_init()
         idt[i].zero = 0;
         idt[i].flags = 0x8e;
     }
+
+    // register the handlers for our interrupts
+    for(int i=32;i<40;++i)
+        register_interrupt_handler(i,ackPic1);
+    for(int i=40;i<48;++i)
+        register_interrupt_handler(i,ackPic2);
+
+    register_interrupt_handler(0, divideByZero);
+    register_interrupt_handler(6, illegalOpcode);
+    register_interrupt_handler(13, generalFault);
+
+    //register_interrupt_handler(32, timer0Handler);
+    //register_interrupt_handler(32, rtcHandler);
 }
+void interrupt_enable() { asm volatile ("sti"); }
+
 
 void gdt_init()
 {
@@ -126,3 +99,81 @@ void gdt_init()
          : "memory"
     );
 }
+void timer_init()
+{
+    unsigned rate = 5;
+    outb(0x70, 0xa);
+    unsigned tmp = inb(0x71);
+    outb(0x70, 0xa);
+    outb(0x70, rate|(tmp&0xf0));
+    
+    outb(0x70, 11);
+    tmp = inb(0x71);
+    outb(0x70, 11);
+    outb(0x70, tmp|0x40);
+}
+
+
+void highlevel_handler(struct InterruptContext* ctx)
+{ 
+    int handled=0;
+    unsigned interruptNumber = ctx->interruptNumber;
+    for(int i=0;i<MAX_HANDLERS;++i)
+        if(handlers[interruptNumber][i])
+        {
+            handlers[interruptNumber][i](ctx);
+            handled=1;
+        }
+    if(!handled) kprintf("Warning: Unhandled interrupt: %d\n",interruptNumber);
+}
+
+asm ( // this is a declaration of the midlevel handler in asm
+    ".global _midlevel_handler\n"
+    "_midlevel_handler:\n"
+    "   push %ebp\n" "   push %edi\n" "   push %esi\n"
+    "   push %edx\n" "   push %ecx\n" "   push %ebx\n"
+    "   push %eax\n" "   push %esp\n" // address of stack top = addr of eax
+    "   cld\n"      //clear direction flag; C expects this
+    "   call _highlevel_handler\n"
+    "   addl $4, %esp\n"    //discard parameter for C
+    "   pop %eax\n" "   pop %ebx\n" "   pop %ecx\n"
+    "   pop %edx\n" "   pop %esi\n" "   pop %edi\n"
+    "   pop %ebp\n" "   add $8,%esp\n" "   iret\n"
+);
+
+__asm__(
+    ".global _panic\n" "_panic:\n"
+    "mov (%esp),%eax\n"     //eip -> eax
+    "mov 4(%esp),%edx\n"    //string parameter
+    "push %edx\n" "push %eax\n"
+    "call _panic2\n"
+);
+
+void panic2(void* eip, const char* msg)
+{
+    kprintf("Kernel panic: At eip=%p: %s\n", eip, msg);
+    while(1) __asm__("hlt");
+}
+void register_interrupt_handler(unsigned interrupt, InterruptHandler func)
+{
+    if(interrupt >= NUM_INTERRUPTS)
+        panic("Bad interrupt number\n");
+
+    for(int i=0;i<MAX_HANDLERS;++i)
+        if(!handlers[interrupt][i])
+        {
+            handlers[interrupt][i] = func;
+            return;
+        }
+    panic("Too many handlers!\n");
+}
+
+void ackPic1(struct InterruptContext* ctx)  { outb(0x20, 32); }
+void ackPic2(struct InterruptContext* ctx)  { outb(0x20, 32); outb(0xa0, 32); }
+
+void divideByZero(struct InterruptContext* ctx)  { kprintf("Divide by zero\n"); }
+void illegalOpcode(struct InterruptContext* ctx)  { kprintf("Undefinded opcode\n"); }
+void generalFault(struct InterruptContext* ctx)  { kprintf("General fault\n"); }
+
+void timer0Handler(struct InterruptContext* ctx)  { console_invert_pixel(400,300); }
+void rtcHandler(struct InterruptContext* ctx)  { outb(0x70, 0xc); inb(0x71); }

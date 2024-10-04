@@ -22,6 +22,8 @@ struct InterruptContext
     //cpu pushed these if there was a ring transition
     u32 esp, ss;
 };
+typedef void (*InterruptHandler)(struct InterruptContext* ctx);
+
 
 #pragma pack(push,1)
 struct GDTEntry{
@@ -53,5 +55,22 @@ struct LIDT
 #pragma pack(pop)
 
 
-void gdt_init();
 void interrupt_init();
+void interrupt_enable();
+void gdt_init();
+void timer_init();
+
+void highlevel_handler(struct InterruptContext* ctx);
+void register_interrupt_handler(unsigned interrupt, InterruptHandler func);
+
+void panic(const char* msg);
+void panic2(void* eip, const char* msg);
+void ackPic1(struct InterruptContext* ctx);
+void ackPic2(struct InterruptContext* ctx);
+
+void divideByZero(struct InterruptContext* ctx);
+void illegalOpcode(struct InterruptContext* ctx);
+void generalFault(struct InterruptContext* ctx);
+
+void timer0Handler(struct InterruptContext* ctx);
+void rtcHandler(struct InterruptContext* ctx);

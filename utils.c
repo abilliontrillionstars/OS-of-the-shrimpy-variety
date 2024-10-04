@@ -51,3 +51,6 @@ void outl(u16 port, u32 value){
         : "a"(value), "d"(port) //two inputs
     );
 }
+
+
+void halt()  { asm("hlt"); }

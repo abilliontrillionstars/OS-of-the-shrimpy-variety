@@ -159,7 +159,6 @@ void clear_screen()
         framebuffer[i+1] = upper;
     }
 }
-
 void set_pixel(unsigned x, unsigned y, u16 color)
 {
     u8 upper = (u8)(color>>8);
@@ -168,6 +167,11 @@ void set_pixel(unsigned x, unsigned y, u16 color)
     volatile u8* p = framebuffer+(pitch*y)+(x*2);
     *p = lower;
     *(p+1) = upper;
+}
+void console_invert_pixel(unsigned x, unsigned y)
+{
+    volatile u16* p = (volatile u16*)(framebuffer + (y*pitch + x*2));
+    *p ^= 0xffff;
 }
 
 void draw_character(unsigned char ch, int x, int y)
