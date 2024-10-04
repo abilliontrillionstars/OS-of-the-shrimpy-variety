@@ -4,8 +4,6 @@ import asyncio
 import sys
 import asyncio.subprocess
 import time
-import bmputils
-import tempfile
 import os
 
 TIMEOUT = 30
@@ -78,63 +76,105 @@ async def screencap(filename):
     finally:
         os.unlink(tf.name)
 
+
+async def testIt(expected,TEST):
+    global P
+
+    P = await asyncio.create_subprocess_exec(
+                sys.executable, "make.py",
+                stdin=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                limit=65536
+    )
+    try:
+        data = ""
+        deadline = time.time() + TIMEOUT
+
+        while True:
+
+            timeLeft = deadline - time.time()
+            try:
+                c = await asyncio.wait_for(P.stdout.read(1), timeLeft)
+            except TimeoutError:
+                return False,"Time exceeded"
+
+            c = c.decode(errors="ignore")
+            sys.stdout.write(c)
+            sys.stdout.flush()
+            data = data + c
+            data = data[-500:]
+
+            found = [
+                0,
+                1 if expected[1] in data else 0,
+                1 if expected[2] in data else 0,
+                1 if expected[3] in data else 0
+            ]
+
+            total = sum(found)
+            if total == 0:
+                #none of them found; try again
+                continue
+
+            if total == 1:
+                #exactly one found; make sure it's the right one
+                if found[TEST]:
+                    return True,f"{expected[TEST]} OK!"
+                else:
+                    tmp = f"Expected {expected[TEST]} but got "
+                    for i in range(4):
+                        if found[i]:
+                            tmp += expected[i]+" "
+                    return False,tmp
+
+            if total >  1:
+                tmp = f"Expected {expected[TEST]} but got "
+                for i in range(4):
+                    if found[i]:
+                        tmp += expected[i]+" "
+                return False,tmp
+    finally:
+        await terminate()
+
+
+
 async def main():
     global P
 
-    bmputils.unzip("expected-both.bmp.zip")
-    bmputils.unzip("expected-scroll.bmp.zip")
-    bmputils.unzip("expected-color.bmp.zip")
 
-    deadline = time.time() + TIMEOUT
-    timeLeft = TIMEOUT
+    expected=[
+        "xx",
+        "Divide by zero",
+        "Undefined opcode",
+        "General fault"
+    ]
 
-    P = await asyncio.create_subprocess_exec(
-        sys.executable, "make.py",
-        stdin=asyncio.subprocess.PIPE,
-        stdout=asyncio.subprocess.PIPE,
-        limit=65536
-    )
+    with open("testsuite.c","r") as fp:
+        testsuite = fp.read()
 
-    while True:
-        line = await getLine(timeLeft)
-        if line == None:
-            await terminate()
-            print("\n\nTime exceeded")
-            sys.exit(1)
+    try:
+        for TEST in [1,2,3]:
 
-        if len(line) == 0:
-            print("Program exited?")
-            await terminate()
-            sys.exit(1)
+            print("\n\nTesting",expected[TEST],"...\n\n")
 
-        timeLeft = deadline - time.time()
+            idx = testsuite.find("///MAGIC GOES HERE")
+            assert idx != -1
 
-        if timeLeft <= 0:
-            await terminate()
-            print("\n\nTime exceeded")
-            sys.exit(1)
+            data = testsuite[:idx]+f"TEST={TEST};"+testsuite[idx:]
 
-        line = line.strip()
-        if line == "DONE":
-            print("Got 'DONE' message")
-            await screencap("actual.bmp")
-            await terminate()
-            ok = bmputils.compare("expected-both.bmp","actual.bmp","diff-both.bmp")
-            if ok:
-                print("\n\nOK both!  +200%!!\n\n")
-                sys.exit(0)
-            ok = bmputils.compare("expected-scroll.bmp","actual.bmp","diff-scroll.bmp")
-            if ok:
-                print("\n\nOK scroll!  100%!!\n\n")
-                sys.exit(0)
-            ok = bmputils.compare("expected-color.bmp","actual.bmp","diff-color.bmp")
-            if ok:
-                print("\n\nOK color!  100%!!\n\n")
-                sys.exit(0)
+            with open("testsuite.c","w") as fp:
+                fp.write(data)
 
-            print("Mismatch: Differences are in diff-both.bmp, diff-scroll.bmp, diff-color.bmp")
-            sys.exit(1)
+            ok,message = await testIt(expected,TEST)
+            if not ok:
+                print("\n\n")
+                print(message)
+                return
 
+        print("\n\nAll OK!")
 
+    finally:
+        with open("testsuite.c","w") as fp:
+            fp.write(testsuite)
 
 asyncio.run(main())
