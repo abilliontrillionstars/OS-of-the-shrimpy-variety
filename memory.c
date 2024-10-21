@@ -48,7 +48,7 @@ void* kmalloc(u32 size)
 
     while(i>order)
     {
-        splitBlock(i);
+        bisect(i);
         i--;
     }
 
@@ -121,7 +121,7 @@ Header* removeFromFreeList(unsigned order)
     return (Header*) NULL;
 }
 
-static Header* getNext(Header* h)
+Header* getNext(Header* h)
 {
     unsigned delta = (h->next) << 6;
     Header* h2 = (Header*)(heap+delta);

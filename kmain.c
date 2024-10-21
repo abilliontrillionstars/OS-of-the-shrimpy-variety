@@ -34,7 +34,6 @@ void kmain(struct MultibootInfo* mbi)
     interrupt_enable();
     // now do the things
     //kprintf("Everyone's programmed differently.\n");
-    //kprintf("this will be overwritten! @\x7f \rthat");
     //sweet();
 
     const char* string = "\nDONE\n";

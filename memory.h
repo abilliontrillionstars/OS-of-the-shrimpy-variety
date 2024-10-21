@@ -10,6 +10,7 @@ void* kmalloc(u32 size);
 void kfree(void* ptr);
 
 //many a helper function!
+void initHeader(Header* h, unsigned order);
 Header* getBuddy(Header* h);
 void bisect(unsigned order);
 
@@ -18,10 +19,10 @@ void addToFreeList(Header* h);
 // that is, "buy" a chunk *from* the available real estate
 Header* removeFromFreeList(unsigned order);
 
-static Header* getNext(Header* h);
-static void setNext(Header* h, Header* next);
-static Header* getPrev(Header* h);
-static void setPrev(Header* h, Header* prev);
+Header* getNext(Header* h);
+void setNext(Header* h, Header* next);
+Header* getPrev(Header* h);
+void setPrev(Header* h, Header* prev);
 
 void removeFirstNode(unsigned i);
 void removeNode(Header* h);
