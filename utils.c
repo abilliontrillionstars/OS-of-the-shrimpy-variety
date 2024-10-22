@@ -1,11 +1,7 @@
 #include "utils.h"
 
 
-void outb(u16 port, u8 value)
-{
-    __asm__ volatile("outb %%al,%%dx" : : "a"(value), "d"(port) );
-}
-
+void outb(u16 port, u8 value) { __asm__ volatile("outb %%al,%%dx" : : "a"(value), "d"(port)); }
 u8 inb(u16 port)
 {
     u32 tmp;
@@ -13,14 +9,14 @@ u8 inb(u16 port)
     return (u8)tmp;
 }
 
-
 void kmemcpy(void* dest, const void* start, unsigned length)
 {
     for(int i=0; i<length; i++)
         ((char*)dest)[i] = ((char*)start)[i];
 }
 
-u16 inw(u16 port){
+u16 inw(u16 port)
+{
     u32 tmp;
     asm volatile ("inw %%dx,%%ax"
         : "=a"(tmp) //one output
