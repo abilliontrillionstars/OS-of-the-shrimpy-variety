@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 6716df11 (Mon Oct 21 19:09:05 2024)
+ Timestamp is 6716ebc2 (Mon Oct 21 20:03:14 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00004896H .text                   CODE
+ 0001:00000000 00004966H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001c4H .data                   DATA
  0003:000001c4 000005b0H .bss                    DATA
@@ -72,61 +72,61 @@
  0001:000009f0       _midlevel_handler          00000000001019f0     interrupt.c.o
  0001:00000a0c       _panic                     0000000000101a0c     interrupt.c.o
  0001:00000a20       _interrupt_init            0000000000101a20     interrupt.c.o
- 0001:00000b70       _register_interrupt_handler 0000000000101b70     interrupt.c.o
- 0001:00000c10       _ackPic1                   0000000000101c10     interrupt.c.o
- 0001:00000c40       _ackPic2                   0000000000101c40     interrupt.c.o
- 0001:00000c80       _divideByZero              0000000000101c80     interrupt.c.o
- 0001:00000ca0       _illegalOpcode             0000000000101ca0     interrupt.c.o
- 0001:00000cc0       _generalFault              0000000000101cc0     interrupt.c.o
- 0001:00000ce0       _interrupt_enable          0000000000101ce0     interrupt.c.o
- 0001:00000cf0       _gdt_init                  0000000000101cf0     interrupt.c.o
- 0001:00000dc0       _timer_init                0000000000101dc0     interrupt.c.o
- 0001:00000e80       _highlevel_handler         0000000000101e80     interrupt.c.o
- 0001:00000f20       _panic2                    0000000000101f20     interrupt.c.o
- 0001:00000f50       _timer0Handler             0000000000101f50     interrupt.c.o
- 0001:00000f80       _rtcHandler                0000000000101f80     interrupt.c.o
- 0001:00000fb0       _start                     0000000000101fb0     kmain.c.o
- 0001:00000fc0       _kmain                     0000000000101fc0     kmain.c.o
- 0001:00001060       _va_end                    0000000000102060     kprintf.c.o
- 0001:00001070       _stbsp_set_separators      0000000000102070     kprintf.c.o
- 0001:00001090       _stbsp_vsprintfcb          0000000000102090     kprintf.c.o
- 0001:000038e0       _stbsp_sprintf             00000000001048e0     kprintf.c.o
- 0001:00003970       _stbsp_vsnprintf           0000000000104970     kprintf.c.o
- 0001:00003ba0       _stbsp_snprintf            0000000000104ba0     kprintf.c.o
- 0001:00003c10       _stbsp_vsprintf            0000000000104c10     kprintf.c.o
- 0001:00003c60       _kprintf                   0000000000104c60     kprintf.c.o
- 0001:00003d10       _ksprintf                  0000000000104d10     kprintf.c.o
- 0001:00003d70       _ksnprintf                 0000000000104d70     kprintf.c.o
- 0001:00003de0       _memory_init               0000000000104de0     memory.c.o
- 0001:00003f10       _initHeader                0000000000104f10     memory.c.o
- 0001:00003f60       _kmalloc                   0000000000104f60     memory.c.o
- 0001:00004070       _bisect                    0000000000105070     memory.c.o
- 0001:000040f0       _removeFirstNode           00000000001050f0     memory.c.o
- 0001:00004150       _kfree                     0000000000105150     memory.c.o
- 0001:00004210       _prependNode               0000000000105210     memory.c.o
- 0001:00004290       _getBuddy                  0000000000105290     memory.c.o
- 0001:000042e0       _removeNode                00000000001052e0     memory.c.o
- 0001:00004370       _setPrev                   0000000000105370     memory.c.o
- 0001:000043c0       _setNext                   00000000001053c0     memory.c.o
- 0001:00004410       _addToFreeList             0000000000105410     memory.c.o
- 0001:00004420       _removeFromFreeList        0000000000105420     memory.c.o
- 0001:00004430       _getNext                   0000000000105430     memory.c.o
- 0001:00004480       _getPrev                   0000000000105480     memory.c.o
- 0001:000044d0       _pci_scan_for_device       00000000001054d0     pci.c.o
- 0001:000045d0       _pci_read                  00000000001055d0     pci.c.o
- 0001:00004630       _pci_read_addr             0000000000105630     pci.c.o
- 0001:00004680       _pci_write_addr            0000000000105680     pci.c.o
- 0001:000046d0       _serial_init               00000000001056d0     serial.c.o
- 0001:000046e0       _serial_putc               00000000001056e0     serial.c.o
- 0001:00004710       _sweet                     0000000000105710     testsuite.c.o
- 0001:00004780       _outb                      0000000000105780     utils.c.o
- 0001:000047a0       _inb                       00000000001057a0     utils.c.o
- 0001:000047c0       _kmemcpy                   00000000001057c0     utils.c.o
- 0001:00004810       _inw                       0000000000105810     utils.c.o
- 0001:00004830       _outw                      0000000000105830     utils.c.o
- 0001:00004850       _inl                       0000000000105850     utils.c.o
- 0001:00004870       _outl                      0000000000105870     utils.c.o
- 0001:00004890       _halt                      0000000000105890     utils.c.o
+ 0001:00000c40       _register_interrupt_handler 0000000000101c40     interrupt.c.o
+ 0001:00000ce0       _divideByZero              0000000000101ce0     interrupt.c.o
+ 0001:00000d00       _illegalOpcode             0000000000101d00     interrupt.c.o
+ 0001:00000d20       _generalFault              0000000000101d20     interrupt.c.o
+ 0001:00000d40       _ackPic1                   0000000000101d40     interrupt.c.o
+ 0001:00000d70       _ackPic2                   0000000000101d70     interrupt.c.o
+ 0001:00000db0       _interrupt_enable          0000000000101db0     interrupt.c.o
+ 0001:00000dc0       _gdt_init                  0000000000101dc0     interrupt.c.o
+ 0001:00000e90       _timer_init                0000000000101e90     interrupt.c.o
+ 0001:00000f50       _highlevel_handler         0000000000101f50     interrupt.c.o
+ 0001:00000ff0       _panic2                    0000000000101ff0     interrupt.c.o
+ 0001:00001020       _timer0Handler             0000000000102020     interrupt.c.o
+ 0001:00001050       _rtcHandler                0000000000102050     interrupt.c.o
+ 0001:00001080       _start                     0000000000102080     kmain.c.o
+ 0001:00001090       _kmain                     0000000000102090     kmain.c.o
+ 0001:00001130       _va_end                    0000000000102130     kprintf.c.o
+ 0001:00001140       _stbsp_set_separators      0000000000102140     kprintf.c.o
+ 0001:00001160       _stbsp_vsprintfcb          0000000000102160     kprintf.c.o
+ 0001:000039b0       _stbsp_sprintf             00000000001049b0     kprintf.c.o
+ 0001:00003a40       _stbsp_vsnprintf           0000000000104a40     kprintf.c.o
+ 0001:00003c70       _stbsp_snprintf            0000000000104c70     kprintf.c.o
+ 0001:00003ce0       _stbsp_vsprintf            0000000000104ce0     kprintf.c.o
+ 0001:00003d30       _kprintf                   0000000000104d30     kprintf.c.o
+ 0001:00003de0       _ksprintf                  0000000000104de0     kprintf.c.o
+ 0001:00003e40       _ksnprintf                 0000000000104e40     kprintf.c.o
+ 0001:00003eb0       _memory_init               0000000000104eb0     memory.c.o
+ 0001:00003fe0       _initHeader                0000000000104fe0     memory.c.o
+ 0001:00004030       _kmalloc                   0000000000105030     memory.c.o
+ 0001:00004140       _bisect                    0000000000105140     memory.c.o
+ 0001:000041c0       _removeFirstNode           00000000001051c0     memory.c.o
+ 0001:00004220       _kfree                     0000000000105220     memory.c.o
+ 0001:000042e0       _prependNode               00000000001052e0     memory.c.o
+ 0001:00004360       _getBuddy                  0000000000105360     memory.c.o
+ 0001:000043b0       _removeNode                00000000001053b0     memory.c.o
+ 0001:00004440       _setPrev                   0000000000105440     memory.c.o
+ 0001:00004490       _setNext                   0000000000105490     memory.c.o
+ 0001:000044e0       _addToFreeList             00000000001054e0     memory.c.o
+ 0001:000044f0       _removeFromFreeList        00000000001054f0     memory.c.o
+ 0001:00004500       _getNext                   0000000000105500     memory.c.o
+ 0001:00004550       _getPrev                   0000000000105550     memory.c.o
+ 0001:000045a0       _pci_scan_for_device       00000000001055a0     pci.c.o
+ 0001:000046a0       _pci_read                  00000000001056a0     pci.c.o
+ 0001:00004700       _pci_read_addr             0000000000105700     pci.c.o
+ 0001:00004750       _pci_write_addr            0000000000105750     pci.c.o
+ 0001:000047a0       _serial_init               00000000001057a0     serial.c.o
+ 0001:000047b0       _serial_putc               00000000001057b0     serial.c.o
+ 0001:000047e0       _sweet                     00000000001057e0     testsuite.c.o
+ 0001:00004850       _outb                      0000000000105850     utils.c.o
+ 0001:00004870       _inb                       0000000000105870     utils.c.o
+ 0001:00004890       _kmemcpy                   0000000000105890     utils.c.o
+ 0001:000048e0       _inw                       00000000001058e0     utils.c.o
+ 0001:00004900       _outw                      0000000000105900     utils.c.o
+ 0001:00004920       _inl                       0000000000105920     utils.c.o
+ 0001:00004940       _outl                      0000000000105940     utils.c.o
+ 0001:00004960       _halt                      0000000000105960     utils.c.o
  0002:000052fc       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010b2fc     kprintf.c.o
  0002:00005305       ??_C@_04MLLLIHIP@null?$AA@ 000000000010b305     kprintf.c.o
  0002:0000530a       ??_C@_08NKCLJDKG@Reserved?$AA@ 000000000010b30a     memory.c.o
@@ -147,25 +147,25 @@
  0003:00000720       __fltused                  000000000010c720     kprintf.c.o
  0003:00000724       _freeList                  000000000010c724     memory.c.o
 
- entry point at         0001:00000fb0
+ entry point at         0001:00001080
 
  Static symbols
 
  0001:000008e0       _getNativeResources        00000000001018e0     disk.c.o
  0001:00000950       _enable_busmaster          0000000000101950     disk.c.o
  0001:000009c0       _getLegacyResources        00000000001019c0     disk.c.o
- 0001:00000db1       reset_cs                   0000000000101db1     interrupt.c.o
- 0001:000033d0       _real_va_arg               00000000001043d0     kprintf.c.o
- 0001:00003400       _stbsp__strlen_limited     0000000000104400     kprintf.c.o
- 0001:00003520       _mod64                     0000000000104520     kprintf.c.o
- 0001:00003610       _div64                     0000000000104610     kprintf.c.o
- 0001:00003730       _mod                       0000000000104730     kprintf.c.o
- 0001:000037c0       _div                       00000000001047c0     kprintf.c.o
- 0001:00003860       _stbsp__lead_sign          0000000000104860     kprintf.c.o
- 0001:00003950       _real_va_start             0000000000104950     kprintf.c.o
- 0001:00003a70       _stbsp__count_clamp_callback 0000000000104a70     kprintf.c.o
- 0001:00003aa0       _stbsp__clamp_callback     0000000000104aa0     kprintf.c.o
- 0001:00003cc0       _callback                  0000000000104cc0     kprintf.c.o
+ 0001:00000e81       reset_cs                   0000000000101e81     interrupt.c.o
+ 0001:000034a0       _real_va_arg               00000000001044a0     kprintf.c.o
+ 0001:000034d0       _stbsp__strlen_limited     00000000001044d0     kprintf.c.o
+ 0001:000035f0       _mod64                     00000000001045f0     kprintf.c.o
+ 0001:000036e0       _div64                     00000000001046e0     kprintf.c.o
+ 0001:00003800       _mod                       0000000000104800     kprintf.c.o
+ 0001:00003890       _div                       0000000000104890     kprintf.c.o
+ 0001:00003930       _stbsp__lead_sign          0000000000104930     kprintf.c.o
+ 0001:00003a20       _real_va_start             0000000000104a20     kprintf.c.o
+ 0001:00003b40       _stbsp__count_clamp_callback 0000000000104b40     kprintf.c.o
+ 0001:00003b70       _stbsp__clamp_callback     0000000000104b70     kprintf.c.o
+ 0001:00003d90       _callback                  0000000000104d90     kprintf.c.o
  0002:00000054       _font_data                 0000000000106054     console.c.o
  0003:000000c4       _backgroundColor           000000000010c0c4     console.c.o
  0003:000000c6       _foregroundColor           000000000010c0c6     console.c.o

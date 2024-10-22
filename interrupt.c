@@ -28,17 +28,28 @@ void interrupt_init()
     }
 
     // register the handlers for our interrupts
-    for(int i=32;i<40;++i)
-        register_interrupt_handler(i,ackPic1);
-    for(int i=40;i<48;++i)
-        register_interrupt_handler(i,ackPic2);
-
     register_interrupt_handler(0, divideByZero);
     register_interrupt_handler(6, illegalOpcode);
     register_interrupt_handler(13, generalFault);
 
-    //register_interrupt_handler(32, timer0Handler);
-    //register_interrupt_handler(32, rtcHandler);
+    // set up the primary pic?
+    outb(0x20, 0x11);
+    outb(0x21, 32);
+    outb(0x21, 4);
+    outb(0x21, 1);
+    outb(0x21, 0);
+    // and the secondary one
+    outb(0xa0, 0x11);
+    outb(0xa1, 40);
+    outb(0xa1, 2);
+    outb(0xa1, 1);
+    outb(0xa1, 0);
+
+    // then do the acknowledge handlers for them
+    for(int i=32;i<40;++i)
+        register_interrupt_handler(i,ackPic1);
+    for(int i=40;i<48;++i)
+        register_interrupt_handler(i,ackPic2);
 }
 void interrupt_enable() { asm volatile ("sti"); }
 
