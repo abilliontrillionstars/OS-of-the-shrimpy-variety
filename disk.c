@@ -6,6 +6,9 @@
 
 #define PCI_DISK_CLASS 1
 #define PCI_DISK_SUBCLASS 1
+static u32 portBase;        //First IO port to use
+static u32 statusBase;      //IO port for getting status
+static u32 interruptNumber;
 
 void disk_init()
 {
@@ -17,17 +20,13 @@ void disk_init()
     else
         getLegacyResources();
     enable_busmaster(addr);
-    register_interrupt_handler(8+32, disk_interrupt);
+    register_interrupt_handler(interruptNumber+32, disk_interrupt);
 }
 
 void disk_interrupt(struct InterruptContext* ctx)
 {
     kprintf("HEY! I\"M DISKIN' HERE!!");
 }
-
-static u32 portBase;        //First IO port to use
-static u32 statusBase;      //IO port for getting status
-static u32 interruptNumber;
 
 static void getNativeResources(u32 addr)
 {

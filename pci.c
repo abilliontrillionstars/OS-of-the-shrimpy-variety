@@ -1,7 +1,8 @@
 #include "utils.h"
 #include "pci.h"
 
-u32 pci_scan_for_device(unsigned class, unsigned subclass){
+u32 pci_scan_for_device(unsigned class, unsigned subclass)
+{
     for(int bus=0;bus<256;++bus)
         for(int dev=0;dev<32;++dev)
             for(int func=0;func<8;++func)
@@ -29,7 +30,6 @@ void pci_write_addr(u32 addr, u32 reg, u32 val)
     outl(0xcf8,addr);   //select PCI location to write
     outl(0xcfc,val);    //write it
 }
-
 
 //convenience function if we have bus/dev/func separately
 u32 pci_read(u32 bus, u32 dev, u32 func, u32 reg)

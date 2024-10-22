@@ -5,7 +5,8 @@
 #include "font-default.h"
 #include "memory.h"
 #include "interrupt.h"
-
+#include "disk.h"
+#include "pci.h"
 
 __asm__(
     ".global _start\n"
@@ -30,6 +31,8 @@ void kmain(struct MultibootInfo* mbi)
     gdt_init();
     interrupt_init();
     timer_init();
+
+    disk_init();
 
     interrupt_enable();
     // now do the things
