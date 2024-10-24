@@ -31,13 +31,12 @@ void kmain(struct MultibootInfo* mbi)
     gdt_init();
     interrupt_init();
     timer_init();
-
     disk_init();
 
     interrupt_enable();
     // now do the things
     //kprintf("Everyone's programmed differently.\n");
-    //sweet();
+    sweet();
 
     const char* string = "\nDONE\n";
     for(int i=0; string[i]; i++)

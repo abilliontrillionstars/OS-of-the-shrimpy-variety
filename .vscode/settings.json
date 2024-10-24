@@ -7,6 +7,7 @@
         "pci.h": "c",
         "disk.h": "c",
         "font-default.h": "c",
-        "kprintf.h": "c"
+        "kprintf.h": "c",
+        "errno.h": "c"
     }
 }
