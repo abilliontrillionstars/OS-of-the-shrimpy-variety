@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 6717111f (Mon Oct 21 22:42:39 2024)
+ Timestamp is 67198ff4 (Wed Oct 23 20:08:20 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 000049b6H .text                   CODE
+ 0001:00000000 00004be6H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001c4H .data                   DATA
  0003:000001c4 000005b0H .bss                    DATA
@@ -123,14 +123,16 @@
  0001:000047f0       _serial_init               00000000001057f0     serial.c.o
  0001:00004800       _serial_putc               0000000000105800     serial.c.o
  0001:00004830       _sweet                     0000000000105830     testsuite.c.o
- 0001:000048a0       _outb                      00000000001058a0     utils.c.o
- 0001:000048c0       _inb                       00000000001058c0     utils.c.o
- 0001:000048e0       _kmemcpy                   00000000001058e0     utils.c.o
- 0001:00004930       _inw                       0000000000105930     utils.c.o
- 0001:00004950       _outw                      0000000000105950     utils.c.o
- 0001:00004970       _inl                       0000000000105970     utils.c.o
- 0001:00004990       _outl                      0000000000105990     utils.c.o
- 0001:000049b0       _halt                      00000000001059b0     utils.c.o
+ 0001:000048a0       _queue_put                 00000000001058a0     utils.c.o
+ 0001:000049d0       _queue_get                 00000000001059d0     utils.c.o
+ 0001:00004ad0       _kmemcpy                   0000000000105ad0     utils.c.o
+ 0001:00004b20       _inb                       0000000000105b20     utils.c.o
+ 0001:00004b40       _outb                      0000000000105b40     utils.c.o
+ 0001:00004b60       _inw                       0000000000105b60     utils.c.o
+ 0001:00004b80       _outw                      0000000000105b80     utils.c.o
+ 0001:00004ba0       _inl                       0000000000105ba0     utils.c.o
+ 0001:00004bc0       _outl                      0000000000105bc0     utils.c.o
+ 0001:00004be0       _halt                      0000000000105be0     utils.c.o
  0002:000052fc       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010b2fc     kprintf.c.o
  0002:00005305       ??_C@_04MLLLIHIP@null?$AA@ 000000000010b305     kprintf.c.o
  0002:0000530a       ??_C@_08NKCLJDKG@Reserved?$AA@ 000000000010b30a     memory.c.o

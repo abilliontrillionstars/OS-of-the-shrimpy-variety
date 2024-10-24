@@ -5,6 +5,7 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 
 #define NULL ((void*)0)
+void halt();
 
 void outb(u16 port, u8 value);
 u8 inb(u16 port);
@@ -14,7 +15,10 @@ void outw(u16 port, u16 value);
 u32 inl(u16 port);
 void outl(u16 port, u32 value);
 
-void halt();
+struct Queue { struct QueueNode* head; struct QueueNode* tail; };
+struct QueueNode { struct QueueNode* next; void* data; };
+int queue_put(struct Queue* q, void* data);
+void* queue_get(struct Queue* q);
 
 #pragma pack(push,1)
 
