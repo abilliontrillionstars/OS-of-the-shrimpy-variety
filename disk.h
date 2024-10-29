@@ -21,6 +21,7 @@
 #define COMMAND_FLUSH (0xe7)
 
 typedef void (*disk_callback_t)(int, void*, void*);
+typedef void (*disk_metadata_callback_t)(void);
 struct Request
 {
     unsigned sector;
@@ -43,9 +44,10 @@ void disk_init();
 void disk_interrupt(struct InterruptContext* ctx);
 void disk_read_sectors(unsigned firstSector, unsigned numSectors, 
                     disk_callback_t callback, void* callback_data);
+void disk_read_metadata(disk_metadata_callback_t kmain_callback);
+
 void dispatch_request(struct Request* req);
 
 void getNativeResources(u32 addr);
 void getLegacyResources();
-
 void enable_busmaster(u32 addr);

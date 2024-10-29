@@ -5,6 +5,7 @@
 #include "interrupt.h"
 #include "errno.h"
 #include "memory.h"
+#include "filesys.h"
 
 #define PCI_DISK_CLASS 1
 #define PCI_DISK_SUBCLASS 1

@@ -20,6 +20,11 @@ void sweet();
 
 static struct MultibootInfo bootInfo;
 
+void kmain2()
+{
+    
+}
+
 void kmain(struct MultibootInfo* mbi)
 {
     // set up the things
