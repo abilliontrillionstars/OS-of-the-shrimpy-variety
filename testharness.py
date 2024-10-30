@@ -6,7 +6,7 @@ import asyncio.subprocess
 import time
 import os
 
-TIMEOUT = 30
+TIMEOUT = 3
 
 P=None
 
@@ -14,6 +14,12 @@ async def getLine(timeLeft):
     line = ""
 
     while True:
+
+        if timeLeft <= 0:
+            if len(line) == 0:
+                return None
+            else:
+                return line
 
         try:
             c = await asyncio.wait_for(P.stdout.read(1), timeLeft)
@@ -37,7 +43,7 @@ async def getLine(timeLeft):
 
 async def terminate():
     if P and P.returncode == None:
-        P.stdin.write(b"`cquit\n")
+        P.stdin.write(b"`"); time.sleep(0.1); P.stdin.write(b"cquit\n")
         await asyncio.wait_for(P.wait(), 1)
         if P.returncode == None:
             P.terminate()
@@ -66,18 +72,18 @@ async def screencap(filename):
 
     # ~ NAME = "debug"
     try:
-        P.stdin.write(b"`c")
+        P.stdin.write(b"`"); time.sleep(0.1); P.stdin.write(b"c")
         await qprompt()
         P.stdin.write(f"screendump {NAME}\n".encode())
         await qprompt()
-        P.stdin.write(b"`c")
+        P.stdin.write(b"`"); time.sleep(0.1); P.stdin.write(b"c")
         w,h,pix = bmputils.loadppm(tf.name)
         bmputils.savebmp(filename,w,h,pix,True)
     finally:
         os.unlink(tf.name)
 
 
-async def testIt(expected,TEST):
+async def main():
     global P
 
     P = await asyncio.create_subprocess_exec(
@@ -91,90 +97,51 @@ async def testIt(expected,TEST):
         deadline = time.time() + TIMEOUT
 
         while True:
-
             timeLeft = deadline - time.time()
-            try:
-                c = await asyncio.wait_for(P.stdout.read(1), timeLeft)
-            except TimeoutError:
-                return False,"Time exceeded"
+            line = await getLine(timeLeft)
+            if line == None:
+                print("Timed out")
+                return
+            line=line.strip()
+            if line == "START":
+                break
 
-            c = c.decode(errors="ignore")
-            sys.stdout.write(c)
-            sys.stdout.flush()
-            data = data + c
-            data = data[-500:]
+        data = []
 
-            found = [
-                0,
-                1 if expected[1] in data else 0,
-                1 if expected[2] in data else 0,
-                1 if expected[3] in data else 0
-            ]
+        while True:
+            timeLeft = deadline - time.time()
+            line = await getLine(timeLeft)
+            if line == None:
+                print("Timed out")
+                return
+            line=line.strip()
+            if line == "DONE":
+                break
+            data.append(line)
 
-            total = sum(found)
-            if total == 0:
-                #none of them found; try again
-                continue
+        await terminate()
 
-            if total == 1:
-                #exactly one found; make sure it's the right one
-                if found[TEST]:
-                    return True,f"{expected[TEST]} OK!"
-                else:
-                    tmp = f"Expected {expected[TEST]} but got "
-                    for i in range(4):
-                        if found[i]:
-                            tmp += expected[i]+" "
-                    return False,tmp
+        data = "".join(data)
 
-            if total >  1:
-                tmp = f"Expected {expected[TEST]} but got "
-                for i in range(4):
-                    if found[i]:
-                        tmp += expected[i]+" "
-                return False,tmp
+        lookFor = [
+            "KERNEL  EXE",
+            "ARTICLE1TXT",
+            "ARTICLE2TXT",
+            "ARTICLE3TXT",
+            "ARTICLE4TXT",
+            "ARTICLE5TXT",
+            "ARTICLE6TXT"
+        ]
+        for x in lookFor:
+            if x not in lookFor:
+                print("Failed to find what we were looking for:",x)
+
+        print("OK")
+
     finally:
         await terminate()
 
 
 
-async def main():
-    global P
-
-
-    expected=[
-        "xx",
-        "Divide by zero",
-        "Undefined opcode",
-        "General fault"
-    ]
-
-    with open("testsuite.c","r") as fp:
-        testsuite = fp.read()
-
-    try:
-        for TEST in [1,2,3]:
-
-            print("\n\nTesting",expected[TEST],"...\n\n")
-
-            idx = testsuite.find("///MAGIC GOES HERE")
-            assert idx != -1
-
-            data = testsuite[:idx]+f"TEST={TEST};"+testsuite[idx:]
-
-            with open("testsuite.c","w") as fp:
-                fp.write(data)
-
-            ok,message = await testIt(expected,TEST)
-            if not ok:
-                print("\n\n")
-                print(message)
-                return
-
-        print("\n\nAll OK!")
-
-    finally:
-        with open("testsuite.c","w") as fp:
-            fp.write(testsuite)
 
 asyncio.run(main())

@@ -40,6 +40,7 @@ void disk_read_metadata(disk_metadata_callback_t kmain_callback)
 
 unsigned clusterNumberToSectorNumber(unsigned clnum) 
 {
+    // vbr.sectorsPerCluster
     return 0;
 }
 

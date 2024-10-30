@@ -37,15 +37,23 @@ void kmain(struct MultibootInfo* mbi)
     interrupt_init();
     timer_init();
     disk_init();
-
+    
     interrupt_enable();
+    disk_read_metadata(kmain2);
     // now do the things
-    //kprintf("Everyone's programmed differently.\n");
-    sweet();
 
-    const char* string = "\nDONE\n";
+
+    const char* string = "\nSTART\n";
     for(int i=0; string[i]; i++)
         serial_putc(string[i]);
+
+    //kprintf("Everyone's programmed differently.\n");
+    
+    sweet();
+
+    const char* string2 = "\nDONE\n";
+    for(int i=0; string2[i]; i++)
+        serial_putc(string2[i]);
 
     // and stop there
     while(1) __asm__("hlt");
