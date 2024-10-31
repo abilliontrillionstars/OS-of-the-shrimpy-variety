@@ -7,6 +7,7 @@
 #include "interrupt.h"
 #include "disk.h"
 #include "pci.h"
+#include "filesys.h"
 
 __asm__(
     ".global _start\n"
@@ -50,6 +51,7 @@ void kmain(struct MultibootInfo* mbi)
     //kprintf("Everyone's programmed differently.\n");
     
     sweet();
+    clusterNumberToSectorNumber(1);
 
     const char* string2 = "\nDONE\n";
     for(int i=0; string2[i]; i++)

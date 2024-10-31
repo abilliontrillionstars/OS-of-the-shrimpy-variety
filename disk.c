@@ -16,7 +16,6 @@ static u32 dmaBase;
 
 static struct Queue requestQueue;
 static struct Request* currentRequest;
-
 static struct PhysicalRegionDescriptor* physicalRegionDescriptor; 
 
 void disk_init()
@@ -40,8 +39,6 @@ void disk_init()
 }
 void disk_interrupt(struct InterruptContext* ctx)  
 { 
-    kprintf("HEY! I\"M DISKIN' HERE!!");
-
     int status = inb(dmaBase+2);
     int dmaError = status & 2;
     if(!(status&4))
@@ -91,7 +88,6 @@ void disk_read_sectors(unsigned firstSector, unsigned numSectors, disk_callback_
         queue_put(&requestQueue, req);
     else
         dispatch_request(req);
-    
 }
 
 static void dispatch_request(struct Request* req)

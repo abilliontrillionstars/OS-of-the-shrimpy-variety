@@ -41,6 +41,10 @@ void disk_read_metadata(disk_metadata_callback_t kmain_callback)
 unsigned clusterNumberToSectorNumber(unsigned clnum) 
 {
     // vbr.sectorsPerCluster
-    return 0;
+    if(!vbr.checksum) // no vbr?
+        return (unsigned) kprintf("VBR not yet initialized, doesn't exist, or has invalid checksum. returning...\n"); // code golf!
+    
+    //kprintf("sectors per cluster is %d.\n", vbr.sectors_per_cluster);
+    return clnum/vbr.sectors_per_cluster;
 }
 

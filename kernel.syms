@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 6721ae06 (Tue Oct 29 23:54:46 2024)
+ Timestamp is 6723d382 (Thu Oct 31 14:59:14 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 0000534cH .text                   CODE
+ 0001:00000000 0000539cH .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001f0H .data                   DATA
  0003:000001f0 000007c0H .bss                    DATA
@@ -72,28 +72,28 @@
  0001:00000960       _getNativeResources        0000000000101960     disk.c.o
  0001:000009d0       _enable_busmaster          00000000001019d0     disk.c.o
  0001:00000a40       _disk_interrupt            0000000000101a40     disk.c.o
- 0001:00000b80       _dispatch_request          0000000000101b80     disk.c.o
- 0001:00000e30       _disk_read_sectors         0000000000101e30     disk.c.o
- 0001:00000f30       _getLegacyResources        0000000000101f30     disk.c.o
- 0001:00000f60       _midlevel_handler          0000000000101f60     interrupt.c.o
- 0001:00000f7c       _panic                     0000000000101f7c     interrupt.c.o
- 0001:00000f90       _interrupt_init            0000000000101f90     interrupt.c.o
- 0001:000011b0       _register_interrupt_handler 00000000001021b0     interrupt.c.o
- 0001:00001250       _divideByZero              0000000000102250     interrupt.c.o
- 0001:00001270       _illegalOpcode             0000000000102270     interrupt.c.o
- 0001:00001290       _generalFault              0000000000102290     interrupt.c.o
- 0001:000012b0       _ackPic1                   00000000001022b0     interrupt.c.o
- 0001:000012e0       _ackPic2                   00000000001022e0     interrupt.c.o
- 0001:00001320       _interrupt_enable          0000000000102320     interrupt.c.o
- 0001:00001330       _gdt_init                  0000000000102330     interrupt.c.o
- 0001:00001400       _timer_init                0000000000102400     interrupt.c.o
- 0001:000014c0       _highlevel_handler         00000000001024c0     interrupt.c.o
- 0001:00001560       _panic2                    0000000000102560     interrupt.c.o
- 0001:00001590       _timer0Handler             0000000000102590     interrupt.c.o
- 0001:000015c0       _rtcHandler                00000000001025c0     interrupt.c.o
- 0001:000015f0       _start                     00000000001025f0     kmain.c.o
- 0001:00001600       _kmain2                    0000000000102600     kmain.c.o
- 0001:00001610       _kmain                     0000000000102610     kmain.c.o
+ 0001:00000b70       _dispatch_request          0000000000101b70     disk.c.o
+ 0001:00000e20       _disk_read_sectors         0000000000101e20     disk.c.o
+ 0001:00000f20       _getLegacyResources        0000000000101f20     disk.c.o
+ 0001:00000f50       _midlevel_handler          0000000000101f50     interrupt.c.o
+ 0001:00000f6c       _panic                     0000000000101f6c     interrupt.c.o
+ 0001:00000f80       _interrupt_init            0000000000101f80     interrupt.c.o
+ 0001:000011a0       _register_interrupt_handler 00000000001021a0     interrupt.c.o
+ 0001:00001240       _divideByZero              0000000000102240     interrupt.c.o
+ 0001:00001260       _illegalOpcode             0000000000102260     interrupt.c.o
+ 0001:00001280       _generalFault              0000000000102280     interrupt.c.o
+ 0001:000012a0       _ackPic1                   00000000001022a0     interrupt.c.o
+ 0001:000012d0       _ackPic2                   00000000001022d0     interrupt.c.o
+ 0001:00001310       _interrupt_enable          0000000000102310     interrupt.c.o
+ 0001:00001320       _gdt_init                  0000000000102320     interrupt.c.o
+ 0001:000013f0       _timer_init                00000000001023f0     interrupt.c.o
+ 0001:000014b0       _highlevel_handler         00000000001024b0     interrupt.c.o
+ 0001:00001550       _panic2                    0000000000102550     interrupt.c.o
+ 0001:00001580       _timer0Handler             0000000000102580     interrupt.c.o
+ 0001:000015b0       _rtcHandler                00000000001025b0     interrupt.c.o
+ 0001:000015e0       _start                     00000000001025e0     kmain.c.o
+ 0001:000015f0       _kmain2                    00000000001025f0     kmain.c.o
+ 0001:00001600       _kmain                     0000000000102600     kmain.c.o
  0001:00001710       _va_end                    0000000000102710     kprintf.c.o
  0001:00001720       _stbsp_set_separators      0000000000102720     kprintf.c.o
  0001:00001740       _stbsp_vsprintfcb          0000000000102740     kprintf.c.o
@@ -148,29 +148,30 @@
  0002:00005362       ??_C@_03ILDADBHF@RAM?$AA@  000000000010c362     memory.c.o
  0002:00005366       ??_C@_0BE@COCNKOPF@No?5current?5request?$DP?$AA@ 000000000010c366     disk.c.o
  0002:0000537a       ??_C@_0CP@POOGFCKN@kmalloc?5gave?5address?5that?5is?5not@ 000000000010c37a     disk.c.o
- 0002:000053a9       ??_C@_0BI@GBBJANIP@HEY?$CB?5I?$CCM?5DISKIN?8?5HERE?$CB?$CB?$AA@ 000000000010c3a9     disk.c.o
- 0002:000053c1       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3c1     testsuite.c.o
- 0002:000053d4       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c3d4     interrupt.c.o
- 0002:000053e3       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c3e3     testsuite.c.o
- 0002:0000540b       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c40b     memory.c.o
- 0002:0000543f       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c43f     interrupt.c.o
- 0002:0000545c       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c45c     interrupt.c.o
- 0002:00005472       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c472     interrupt.c.o
- 0002:00005482       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c482     disk.c.o
- 0002:000054ab       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c4ab     disk.c.o
- 0002:000054df       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c4df     interrupt.c.o
- 0002:000054f2       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c4f2     interrupt.c.o
- 0002:00005514       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c514     memory.c.o
- 0002:00005525       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c525     filesys.c.o
- 0002:00005546       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c546     testsuite.c.o
- 0002:00005551       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c551     filesys.c.o
- 0002:00005566       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c566     kmain.c.o
- 0002:0000556e       ??_C@_06HPPMHAIC@?6DONE?6?$AA@ 000000000010c56e     kmain.c.o
- 0002:00005575       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c575     testsuite.c.o
- 0002:00005581       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c581     testsuite.c.o
- 0002:0000558e       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c58e     disk.c.o
- 0002:000055a0       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c5a0     interrupt.c.o
- 0002:000055b2       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c5b2     testsuite.c.o
+ 0002:000053a9       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3a9     testsuite.c.o
+ 0002:000053bc       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c3bc     interrupt.c.o
+ 0002:000053cb       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c3cb     testsuite.c.o
+ 0002:000053f3       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c3f3     memory.c.o
+ 0002:00005427       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c427     interrupt.c.o
+ 0002:00005444       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c444     interrupt.c.o
+ 0002:0000545a       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c45a     interrupt.c.o
+ 0002:0000546a       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c46a     disk.c.o
+ 0002:00005493       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c493     disk.c.o
+ 0002:000054c7       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c4c7     interrupt.c.o
+ 0002:000054da       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c4da     interrupt.c.o
+ 0002:000054fc       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c4fc     memory.c.o
+ 0002:0000550d       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c50d     filesys.c.o
+ 0002:0000552e       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c52e     testsuite.c.o
+ 0002:00005539       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c539     filesys.c.o
+ 0002:0000554e       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c54e     kmain.c.o
+ 0002:00005556       ??_C@_06HPPMHAIC@?6DONE?6?$AA@ 000000000010c556     kmain.c.o
+ 0002:0000555d       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c55d     testsuite.c.o
+ 0002:00005569       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c569     testsuite.c.o
+ 0002:00005576       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c576     disk.c.o
+ 0002:00005588       ??_C@_0BM@LIMCHAIO@sectors?5per?5cluster?5is?5?$CFd?4?6?$AA@ 000000000010c588     filesys.c.o
+ 0002:000055a4       ??_C@_0EP@OHAICOBD@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c5a4     filesys.c.o
+ 0002:000055f3       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c5f3     interrupt.c.o
+ 0002:00005605       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c605     testsuite.c.o
  0003:00000000       _lowlevel_addresses        000000000010d000     asmstubs.c.o
  0003:000001c0       _efiBootGUID               000000000010d1c0     filesys.c.o
  0003:000001d0       _windowsDataGUID           000000000010d1d0     filesys.c.o
@@ -180,11 +181,11 @@
  0003:00000760       _freeList                  000000000010d760     memory.c.o
  0003:000007b0       _vbr                       000000000010d7b0     filesys.c.o
 
- entry point at         0001:000015f0
+ entry point at         0001:000015e0
 
  Static symbols
 
- 0001:000013f1       reset_cs                   00000000001023f1     interrupt.c.o
+ 0001:000013e1       reset_cs                   00000000001023e1     interrupt.c.o
  0001:00003a80       _real_va_arg               0000000000104a80     kprintf.c.o
  0001:00003ab0       _stbsp__strlen_limited     0000000000104ab0     kprintf.c.o
  0001:00003bd0       _mod64                     0000000000104bd0     kprintf.c.o
@@ -198,7 +199,7 @@
  0001:00004370       _callback                  0000000000105370     kprintf.c.o
  0001:00005160       _callback                  0000000000106160     testsuite.c.o
  0001:00005260       _read_partition_table_callback 0000000000106260     filesys.c.o
- 0001:000052e0       _read_vbr_callback         00000000001062e0     filesys.c.o
+ 0001:00005330       _read_vbr_callback         0000000000106330     filesys.c.o
  0002:00000054       _font_data                 0000000000107054     console.c.o
  0003:000000c4       _backgroundColor           000000000010d0c4     console.c.o
  0003:000000c6       _foregroundColor           000000000010d0c6     console.c.o
