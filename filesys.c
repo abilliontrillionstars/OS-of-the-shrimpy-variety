@@ -42,7 +42,7 @@ unsigned clusterNumberToSectorNumber(unsigned clnum)
 {
     // vbr.sectorsPerCluster
     if(!vbr.checksum) // no vbr?
-        return (unsigned) kprintf("VBR not yet initialized, doesn't exist, or has invalid checksum. returning...\n"); // code golf!
+        return (unsigned) kprintf("VBR not yet initialized, doesn't exist, or has otherwise invalid checksum. returning...\n"); // code golf!
     
     //kprintf("sectors per cluster is %d.\n", vbr.sectors_per_cluster);
     return clnum/vbr.sectors_per_cluster;

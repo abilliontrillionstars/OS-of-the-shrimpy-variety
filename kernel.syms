@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 6723d382 (Thu Oct 31 14:59:14 2024)
+ Timestamp is 67250210 (Fri Nov  1 12:30:08 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 0000539cH .text                   CODE
+ 0001:00000000 0000543cH .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001f0H .data                   DATA
  0003:000001f0 000007c0H .bss                    DATA
@@ -92,52 +92,53 @@
  0001:00001580       _timer0Handler             0000000000102580     interrupt.c.o
  0001:000015b0       _rtcHandler                00000000001025b0     interrupt.c.o
  0001:000015e0       _start                     00000000001025e0     kmain.c.o
- 0001:000015f0       _kmain2                    00000000001025f0     kmain.c.o
- 0001:00001600       _kmain                     0000000000102600     kmain.c.o
- 0001:00001710       _va_end                    0000000000102710     kprintf.c.o
- 0001:00001720       _stbsp_set_separators      0000000000102720     kprintf.c.o
- 0001:00001740       _stbsp_vsprintfcb          0000000000102740     kprintf.c.o
- 0001:00003f90       _stbsp_sprintf             0000000000104f90     kprintf.c.o
- 0001:00004020       _stbsp_vsnprintf           0000000000105020     kprintf.c.o
- 0001:00004250       _stbsp_snprintf            0000000000105250     kprintf.c.o
- 0001:000042c0       _stbsp_vsprintf            00000000001052c0     kprintf.c.o
- 0001:00004310       _kprintf                   0000000000105310     kprintf.c.o
- 0001:000043c0       _ksprintf                  00000000001053c0     kprintf.c.o
- 0001:00004420       _ksnprintf                 0000000000105420     kprintf.c.o
- 0001:00004490       _memory_init               0000000000105490     memory.c.o
- 0001:000045c0       _initHeader                00000000001055c0     memory.c.o
- 0001:00004610       _kmalloc                   0000000000105610     memory.c.o
- 0001:00004720       _bisect                    0000000000105720     memory.c.o
- 0001:000047a0       _removeFirstNode           00000000001057a0     memory.c.o
- 0001:00004800       _kfree                     0000000000105800     memory.c.o
- 0001:000048c0       _prependNode               00000000001058c0     memory.c.o
- 0001:00004940       _getBuddy                  0000000000105940     memory.c.o
- 0001:00004990       _removeNode                0000000000105990     memory.c.o
- 0001:00004a20       _setPrev                   0000000000105a20     memory.c.o
- 0001:00004a70       _setNext                   0000000000105a70     memory.c.o
- 0001:00004ac0       _addToFreeList             0000000000105ac0     memory.c.o
- 0001:00004ad0       _removeFromFreeList        0000000000105ad0     memory.c.o
- 0001:00004ae0       _getNext                   0000000000105ae0     memory.c.o
- 0001:00004b30       _getPrev                   0000000000105b30     memory.c.o
- 0001:00004b80       _pci_scan_for_device       0000000000105b80     pci.c.o
- 0001:00004c80       _pci_read                  0000000000105c80     pci.c.o
- 0001:00004ce0       _pci_read_addr             0000000000105ce0     pci.c.o
- 0001:00004d30       _pci_write_addr            0000000000105d30     pci.c.o
- 0001:00004d80       _serial_init               0000000000105d80     serial.c.o
- 0001:00004d90       _serial_putc               0000000000105d90     serial.c.o
- 0001:00004dc0       _queue_put                 0000000000105dc0     utils.c.o
- 0001:00004ef0       _queue_get                 0000000000105ef0     utils.c.o
- 0001:00004ff0       _kmemcpy                   0000000000105ff0     utils.c.o
- 0001:00005040       _inb                       0000000000106040     utils.c.o
- 0001:00005060       _outb                      0000000000106060     utils.c.o
- 0001:00005080       _inw                       0000000000106080     utils.c.o
- 0001:000050a0       _outw                      00000000001060a0     utils.c.o
- 0001:000050c0       _inl                       00000000001060c0     utils.c.o
- 0001:000050e0       _outl                      00000000001060e0     utils.c.o
- 0001:00005100       _halt                      0000000000106100     utils.c.o
- 0001:00005110       _sweet                     0000000000106110     testsuite.c.o
- 0001:00005220       _disk_read_metadata        0000000000106220     filesys.c.o
- 0001:000052d0       _clusterNumberToSectorNumber 00000000001062d0     filesys.c.o
+ 0001:000015f0       _printClusterCallback      00000000001025f0     kmain.c.o
+ 0001:000016c0       _kmain2                    00000000001026c0     kmain.c.o
+ 0001:00001750       _kmain                     0000000000102750     kmain.c.o
+ 0001:000017c0       _va_end                    00000000001027c0     kprintf.c.o
+ 0001:000017d0       _stbsp_set_separators      00000000001027d0     kprintf.c.o
+ 0001:000017f0       _stbsp_vsprintfcb          00000000001027f0     kprintf.c.o
+ 0001:00004040       _stbsp_sprintf             0000000000105040     kprintf.c.o
+ 0001:000040d0       _stbsp_vsnprintf           00000000001050d0     kprintf.c.o
+ 0001:00004300       _stbsp_snprintf            0000000000105300     kprintf.c.o
+ 0001:00004370       _stbsp_vsprintf            0000000000105370     kprintf.c.o
+ 0001:000043c0       _kprintf                   00000000001053c0     kprintf.c.o
+ 0001:00004470       _ksprintf                  0000000000105470     kprintf.c.o
+ 0001:000044d0       _ksnprintf                 00000000001054d0     kprintf.c.o
+ 0001:00004540       _memory_init               0000000000105540     memory.c.o
+ 0001:00004670       _initHeader                0000000000105670     memory.c.o
+ 0001:000046c0       _kmalloc                   00000000001056c0     memory.c.o
+ 0001:000047d0       _bisect                    00000000001057d0     memory.c.o
+ 0001:00004850       _removeFirstNode           0000000000105850     memory.c.o
+ 0001:000048b0       _kfree                     00000000001058b0     memory.c.o
+ 0001:00004970       _prependNode               0000000000105970     memory.c.o
+ 0001:000049f0       _getBuddy                  00000000001059f0     memory.c.o
+ 0001:00004a40       _removeNode                0000000000105a40     memory.c.o
+ 0001:00004ad0       _setPrev                   0000000000105ad0     memory.c.o
+ 0001:00004b20       _setNext                   0000000000105b20     memory.c.o
+ 0001:00004b70       _addToFreeList             0000000000105b70     memory.c.o
+ 0001:00004b80       _removeFromFreeList        0000000000105b80     memory.c.o
+ 0001:00004b90       _getNext                   0000000000105b90     memory.c.o
+ 0001:00004be0       _getPrev                   0000000000105be0     memory.c.o
+ 0001:00004c30       _pci_scan_for_device       0000000000105c30     pci.c.o
+ 0001:00004d30       _pci_read                  0000000000105d30     pci.c.o
+ 0001:00004d90       _pci_read_addr             0000000000105d90     pci.c.o
+ 0001:00004de0       _pci_write_addr            0000000000105de0     pci.c.o
+ 0001:00004e30       _serial_init               0000000000105e30     serial.c.o
+ 0001:00004e40       _serial_putc               0000000000105e40     serial.c.o
+ 0001:00004e70       _queue_put                 0000000000105e70     utils.c.o
+ 0001:00004fa0       _queue_get                 0000000000105fa0     utils.c.o
+ 0001:000050a0       _kmemcpy                   00000000001060a0     utils.c.o
+ 0001:000050f0       _inb                       00000000001060f0     utils.c.o
+ 0001:00005110       _outb                      0000000000106110     utils.c.o
+ 0001:00005130       _inw                       0000000000106130     utils.c.o
+ 0001:00005150       _outw                      0000000000106150     utils.c.o
+ 0001:00005170       _inl                       0000000000106170     utils.c.o
+ 0001:00005190       _outl                      0000000000106190     utils.c.o
+ 0001:000051b0       _halt                      00000000001061b0     utils.c.o
+ 0001:000051c0       _sweet                     00000000001061c0     testsuite.c.o
+ 0001:000052d0       _disk_read_metadata        00000000001062d0     filesys.c.o
+ 0001:00005380       _clusterNumberToSectorNumber 0000000000106380     filesys.c.o
  0002:000052fc       ??_C@_0DA@NEPCPDPJ@Physical?5reion?5descriptor?5crosse@ 000000000010c2fc     disk.c.o
  0002:0000532c       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010c32c     kprintf.c.o
  0002:00005335       ??_C@_04MLLLIHIP@null?$AA@ 000000000010c335     kprintf.c.o
@@ -148,30 +149,32 @@
  0002:00005362       ??_C@_03ILDADBHF@RAM?$AA@  000000000010c362     memory.c.o
  0002:00005366       ??_C@_0BE@COCNKOPF@No?5current?5request?$DP?$AA@ 000000000010c366     disk.c.o
  0002:0000537a       ??_C@_0CP@POOGFCKN@kmalloc?5gave?5address?5that?5is?5not@ 000000000010c37a     disk.c.o
- 0002:000053a9       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3a9     testsuite.c.o
- 0002:000053bc       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c3bc     interrupt.c.o
- 0002:000053cb       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c3cb     testsuite.c.o
- 0002:000053f3       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c3f3     memory.c.o
- 0002:00005427       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c427     interrupt.c.o
- 0002:00005444       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c444     interrupt.c.o
- 0002:0000545a       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c45a     interrupt.c.o
- 0002:0000546a       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c46a     disk.c.o
- 0002:00005493       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c493     disk.c.o
- 0002:000054c7       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c4c7     interrupt.c.o
- 0002:000054da       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c4da     interrupt.c.o
- 0002:000054fc       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c4fc     memory.c.o
- 0002:0000550d       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c50d     filesys.c.o
- 0002:0000552e       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c52e     testsuite.c.o
- 0002:00005539       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c539     filesys.c.o
- 0002:0000554e       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c54e     kmain.c.o
- 0002:00005556       ??_C@_06HPPMHAIC@?6DONE?6?$AA@ 000000000010c556     kmain.c.o
- 0002:0000555d       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c55d     testsuite.c.o
- 0002:00005569       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c569     testsuite.c.o
- 0002:00005576       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c576     disk.c.o
- 0002:00005588       ??_C@_0BM@LIMCHAIO@sectors?5per?5cluster?5is?5?$CFd?4?6?$AA@ 000000000010c588     filesys.c.o
- 0002:000055a4       ??_C@_0EP@OHAICOBD@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c5a4     filesys.c.o
- 0002:000055f3       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c5f3     interrupt.c.o
- 0002:00005605       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c605     testsuite.c.o
+ 0002:000053a9       ??_C@_0EF@CPMDOBLP@woah?$CB?5callback?5worked?$DP?$DP?5errno?$DN?$CFd@ 000000000010c3a9     kmain.c.o
+ 0002:000053ee       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3ee     testsuite.c.o
+ 0002:00005401       ??_C@_0BG@OPOGHMPI@root?5directory?5data?3?5?$AA@ 000000000010c401     kmain.c.o
+ 0002:00005417       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c417     interrupt.c.o
+ 0002:00005426       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c426     testsuite.c.o
+ 0002:0000544e       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c44e     memory.c.o
+ 0002:00005482       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c482     interrupt.c.o
+ 0002:0000549f       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c49f     interrupt.c.o
+ 0002:000054b5       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c4b5     interrupt.c.o
+ 0002:000054c5       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c4c5     disk.c.o
+ 0002:000054ee       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c4ee     disk.c.o
+ 0002:00005522       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c522     interrupt.c.o
+ 0002:00005535       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c535     interrupt.c.o
+ 0002:00005557       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c557     memory.c.o
+ 0002:00005568       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c568     filesys.c.o
+ 0002:00005589       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c589     testsuite.c.o
+ 0002:00005594       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c594     filesys.c.o
+ 0002:000055a9       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c5a9     kmain.c.o
+ 0002:000055b1       ??_C@_07BGHCGMFN@?6?6DONE?6?$AA@ 000000000010c5b1     kmain.c.o
+ 0002:000055b9       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c5b9     testsuite.c.o
+ 0002:000055c5       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c5c5     testsuite.c.o
+ 0002:000055d2       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c5d2     disk.c.o
+ 0002:000055e4       ??_C@_0CE@JMDHCBGK@Everyone?8s?5programmed?5differentl@ 000000000010c5e4     kmain.c.o
+ 0002:00005608       ??_C@_0FJ@OLOIAECF@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c608     filesys.c.o
+ 0002:00005661       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c661     interrupt.c.o
+ 0002:00005673       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c673     testsuite.c.o
  0003:00000000       _lowlevel_addresses        000000000010d000     asmstubs.c.o
  0003:000001c0       _efiBootGUID               000000000010d1c0     filesys.c.o
  0003:000001d0       _windowsDataGUID           000000000010d1d0     filesys.c.o
@@ -186,20 +189,20 @@
  Static symbols
 
  0001:000013e1       reset_cs                   00000000001023e1     interrupt.c.o
- 0001:00003a80       _real_va_arg               0000000000104a80     kprintf.c.o
- 0001:00003ab0       _stbsp__strlen_limited     0000000000104ab0     kprintf.c.o
- 0001:00003bd0       _mod64                     0000000000104bd0     kprintf.c.o
- 0001:00003cc0       _div64                     0000000000104cc0     kprintf.c.o
- 0001:00003de0       _mod                       0000000000104de0     kprintf.c.o
- 0001:00003e70       _div                       0000000000104e70     kprintf.c.o
- 0001:00003f10       _stbsp__lead_sign          0000000000104f10     kprintf.c.o
- 0001:00004000       _real_va_start             0000000000105000     kprintf.c.o
- 0001:00004120       _stbsp__count_clamp_callback 0000000000105120     kprintf.c.o
- 0001:00004150       _stbsp__clamp_callback     0000000000105150     kprintf.c.o
- 0001:00004370       _callback                  0000000000105370     kprintf.c.o
- 0001:00005160       _callback                  0000000000106160     testsuite.c.o
- 0001:00005260       _read_partition_table_callback 0000000000106260     filesys.c.o
- 0001:00005330       _read_vbr_callback         0000000000106330     filesys.c.o
+ 0001:00003b30       _real_va_arg               0000000000104b30     kprintf.c.o
+ 0001:00003b60       _stbsp__strlen_limited     0000000000104b60     kprintf.c.o
+ 0001:00003c80       _mod64                     0000000000104c80     kprintf.c.o
+ 0001:00003d70       _div64                     0000000000104d70     kprintf.c.o
+ 0001:00003e90       _mod                       0000000000104e90     kprintf.c.o
+ 0001:00003f20       _div                       0000000000104f20     kprintf.c.o
+ 0001:00003fc0       _stbsp__lead_sign          0000000000104fc0     kprintf.c.o
+ 0001:000040b0       _real_va_start             00000000001050b0     kprintf.c.o
+ 0001:000041d0       _stbsp__count_clamp_callback 00000000001051d0     kprintf.c.o
+ 0001:00004200       _stbsp__clamp_callback     0000000000105200     kprintf.c.o
+ 0001:00004420       _callback                  0000000000105420     kprintf.c.o
+ 0001:00005210       _callback                  0000000000106210     testsuite.c.o
+ 0001:00005310       _read_partition_table_callback 0000000000106310     filesys.c.o
+ 0001:000053d0       _read_vbr_callback         00000000001063d0     filesys.c.o
  0002:00000054       _font_data                 0000000000107054     console.c.o
  0003:000000c4       _backgroundColor           000000000010d0c4     console.c.o
  0003:000000c6       _foregroundColor           000000000010d0c6     console.c.o

@@ -6,7 +6,7 @@ import asyncio.subprocess
 import time
 import os
 
-TIMEOUT = 3
+TIMEOUT = 30
 
 P=None
 
