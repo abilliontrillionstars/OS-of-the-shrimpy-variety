@@ -8,6 +8,7 @@
         "disk.h": "c",
         "font-default.h": "c",
         "kprintf.h": "c",
-        "errno.h": "c"
+        "errno.h": "c",
+        "filesys.h": "c"
     }
 }

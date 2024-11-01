@@ -34,16 +34,15 @@ static void read_partition_table_callback(int errorcode, void* sectorData, void*
 
 void disk_read_metadata(disk_metadata_callback_t kmain_callback)
 {
-    disk_read_sectors(2, 1, read_partition_table_callback, kmain_callback);
+    //vbr.first_sector + vbr.reserved_sectors + (vbr.num_fats * vbr.sectors_per_fat)
+    disk_read_sectors(clusterNumberToSectorNumber(vbr.first_sector + vbr.reserved_sectors + (vbr.num_fats * vbr.sectors_per_fat)), 1, read_partition_table_callback, kmain_callback);
 }
-
 
 unsigned clusterNumberToSectorNumber(unsigned clnum) 
 {
-    // vbr.sectorsPerCluster
     if(!vbr.checksum) // no vbr?
         return (unsigned) kprintf("VBR not yet initialized, doesn't exist, or has otherwise invalid checksum. returning...\n"); // code golf!
-    
+
     //kprintf("sectors per cluster is %d.\n", vbr.sectors_per_cluster);
     return clnum/vbr.sectors_per_cluster;
 }

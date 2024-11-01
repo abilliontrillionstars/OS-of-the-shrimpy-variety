@@ -54,6 +54,32 @@ struct VBR
     char code[420];
     u16 checksum;
 };
+struct DirEntry
+{
+    char base[8];
+    char ext[3];
+    u8 attributes;
+    u8 reserved;
+    u16 creationTime;
+    u16 creationDate;
+    u16 lastAccessDate;
+    u16 clusterHigh;
+    u16 lastModifiedTime;
+    u16 lastModifiedDate;
+    u16 clusterLow;
+    u32 size;
+};
+struct LFNEntry
+{
+    unsigned char sequenceNumber;
+    char name0[10];
+    char attribute;
+    char zero;
+    char checksum;
+    char name1[12];
+    unsigned short alsoZero;
+    char name2[4];
+};
 #pragma pack(pop)
 
 unsigned clusterNumberToSectorNumber(unsigned clnum);

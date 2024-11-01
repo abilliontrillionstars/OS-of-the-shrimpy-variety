@@ -36,13 +36,14 @@ void kmain2()
 {
     const char* string = "\nSTART\n";    
     for(int i=0; string[i]; i++) serial_putc(string[i]);
-    kprintf("Everyone's programmed differently.\n");
-    
+
     disk_read_sectors(clusterNumberToSectorNumber(2), 1, printClusterCallback, NULL);
 }
 
 void kmain(struct MultibootInfo* mbi)
 {
+    kprintf("Everyone's programmed differently.\n");
+
     // set up the things
     kmemcpy(&bootInfo, mbi, sizeof(bootInfo));
 
@@ -55,7 +56,8 @@ void kmain(struct MultibootInfo* mbi)
     disk_init();
     
     interrupt_enable();
+    // grab disk metadata & defer the rest to kmain2
     disk_read_metadata(kmain2);
     // and stop there
-    while(1) __asm__("hlt");
+    while(1) halt();
 }
