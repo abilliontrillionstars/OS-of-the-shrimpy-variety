@@ -83,3 +83,4 @@ struct LFNEntry
 #pragma pack(pop)
 
 unsigned clusterNumberToSectorNumber(unsigned clnum);
+struct VBR* getVbr();

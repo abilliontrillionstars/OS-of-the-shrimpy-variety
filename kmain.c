@@ -23,10 +23,12 @@ static struct MultibootInfo bootInfo;
 
 void printClusterCallback(int errno, void* buffer, void* callback_data) 
 {
-    kprintf("woah! callback worked?? errno=%d, buffer at %p, callback_data at %p.", errno, buffer, callback_data);
-    kprintf("root directory data: ");
-    for(int i=0; i<512; i++) // one cluster   
-        kprintf("%c", ((char*)buffer)[i]);
+    //kprintf("woah! callback worked?? errno=%d, buffer at %p, callback_data at %p.\n", errno, buffer, callback_data);
+    kprintf("root directory data: \n");
+    struct DirEntry* dir;
+    while(0)
+        ;
+        
 
     const char* string2 = "\n\nDONE\n";
     for(int i=0; string2[i]; i++) serial_putc(string2[i]);
@@ -37,7 +39,8 @@ void kmain2()
     const char* string = "\nSTART\n";    
     for(int i=0; string[i]; i++) serial_putc(string[i]);
 
-    disk_read_sectors(clusterNumberToSectorNumber(2), 1, printClusterCallback, NULL);
+    struct VBR* vbr = (struct VBR*) getVbr();
+    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), 1, printClusterCallback, NULL);
 }
 
 void kmain(struct MultibootInfo* mbi)
