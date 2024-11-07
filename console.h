@@ -13,8 +13,10 @@ static unsigned pitch;
 //PITCH is the amount of bytes needed to get to the next row
 static unsigned width;
 static unsigned height;
-static u16 foregroundColor = 0b1010110101010101;
-static u16 backgroundColor = 0b010101;
+// 233 255 47, 93 116 20
+// 156 198 27, 70 81 22
+static u16 foregroundColor = 0b1001111000100011;//0b0111011111100101;
+static u16 backgroundColor = 0b0101101110100010;
 
 
 void console_init(struct MultibootInfo* mbi);

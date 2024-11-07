@@ -48,25 +48,41 @@ void printClusterCallback(int errno, void* buffer, void* callback_data)
             unsigned i=0;
             while((lfn + i)->attribute == 15) 
                 i++;
-            kprintf("consecutive LFN's: %d\n", i);
-
-            for(int i=0; i<10; i+=2)
-                if(!lfn->name0[i])
-                    break;
-                else 
-                    kprintf("%c", lfn->name0[i]);
-            for(int i=0; i<12; i+=2)
-                if(!lfn->name1[i])
-                    break;
-                else 
-                    kprintf("%c", lfn->name1[i]);
-            for(int i=0; i<4; i+=2)
-                if(!lfn->name2[i] || lfn->name2[i] == -1)
-                    break;
-                else
-                    kprintf("%c", lfn->name2[i]);
+            //kprintf("consecutive LFN's: %d\n", i);
+            while(i)
+            {
+                i--;
+                struct LFNEntry* entry = (lfn + i);
+                // print the segment of the LFN
+                for(int i=0; i<10; i+=2)
+                    if(!entry->name0[i] || entry->name0[i] == -1)
+                        break;
+                    else 
+                        kprintf("%c", entry->name0[i]);
+                for(int i=0; i<12; i+=2)
+                    if(!entry->name1[i] || entry->name1[i] == -1)
+                        break;
+                    else 
+                        kprintf("%c", entry->name1[i]);
+                for(int i=0; i<4; i+=2)
+                    if(!entry->name2[i] || entry->name2[i] == -1)
+                        break;
+                    else
+                        kprintf("%c", entry->name2[i]);
+                // step over this entry so we're past them once we get out of the while loop
+                // this also lets us see non-LFN files instead of just ignoring them
+                dir++;
+            } 
+            // now we should be on our base DirEntry
         }
-        kprintf("\t attr: %d", dir->attributes);
+        // print the creation time
+        kprintf("\tcreated on: ");
+        u16 cd = dir->creationDate; // YYYY-MM-DD
+        kprintf("%d-%02d-%02d ", (cd>>9)+1980, (cd>>5)&0xf, cd&0x1f);
+        u16 ct = dir->creationTime; // HH:MM:SS
+        //if(dir->creationTimeCentiseconds >= 100) ct++;
+        kprintf("%0.2d:%0.2d:%0.2d", (ct>>11)&0x1f, (ct>>5)&0x2f, ct&0x1f);
+
         console_putc('\n');
         dir++;
     }        
