@@ -25,10 +25,26 @@ void printClusterCallback(int errno, void* buffer, void* callback_data)
 {
     //kprintf("woah! callback worked?? errno=%d, buffer at %p, callback_data at %p.\n", errno, buffer, callback_data);
     kprintf("root directory data: \n");
-    struct DirEntry* dir;
-    while(0)
-        ;
-        
+    struct VBR* vbr = getVbr();
+    for(int i=0; i<(vbr->bytes_per_sector); i++) //* vbr->sectors_per_cluster
+        kprintf("%c", ((char*)buffer)[i]);
+    
+    kprintf("\nroot DirEntries: \n");
+    struct DirEntry* dir = (struct DirEntry*)buffer;
+    while(dir->base[0] || dir->attributes != 15)
+    {
+        for(int i=0; i<8; i++)
+            if(dir->base[i] != ' ')
+                kprintf("%c", dir->base[i]);
+        console_putc('.');
+        for(int i=0; i<3; i++)
+            if(dir->base[i] != ' ')
+                kprintf("%c", dir->ext[i]);
+        kprintf("\t%d", dir->attributes);
+
+        console_putc('\n');
+        dir++;
+    }        
 
     const char* string2 = "\n\nDONE\n";
     for(int i=0; string2[i]; i++) serial_putc(string2[i]);

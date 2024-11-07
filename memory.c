@@ -11,14 +11,14 @@ void memory_init(struct MultibootInfo* info)
 {
     //number of regions
     u32 nr = info->map.length / sizeof(struct MB_MemInfo);
-    kprintf("Num regions: %d\n", nr);
+    kprintf("num regions: %d\n", nr);
 
     struct MB_MemInfo* M = info->map.addr;
 
     for(int i=0; i<nr; ++i)
     {
         u32 end = M[i].addr + M[i].length;
-        kprintf("Region %d: addr=0x%08x...0x%08x length%dKB type=%s\n",
+        kprintf("region %d: addr=0x%08x...0x%08x length%dKB type=%s\n",
             i, M[i].addr, end-1, M[i].length/1024, (M[i].type==1) ? "RAM":"Reserved");
     }
 

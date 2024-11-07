@@ -61,6 +61,8 @@ run( [
     python, "fool.pyz", "hd.img",
     "create","64",
     "cp","kernel.exe","KERNEL.EXE",
+
+    #"cp", "article1.txt", "ARTICLE1.TXT",
 ])
 testsuite.copy(python, "hd.img")
 

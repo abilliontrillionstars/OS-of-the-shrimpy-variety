@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 672a3aab (Tue Nov  5 10:32:59 2024)
+ Timestamp is 672c1e3c (Wed Nov  6 20:56:12 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 0000543cH .text                   CODE
+ 0001:00000000 0000557cH .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001f0H .data                   DATA
  0003:000001f0 000007c0H .bss                    DATA
@@ -135,46 +135,48 @@
  0001:00004fe0       _sweet                     0000000000105fe0     testsuite.c.o
  0001:000050f0       _start                     00000000001060f0     kmain.c.o
  0001:00005100       _printClusterCallback      0000000000106100     kmain.c.o
- 0001:000051a0       _kmain2                    00000000001061a0     kmain.c.o
- 0001:00005240       _kmain                     0000000000106240     kmain.c.o
- 0001:000052c0       _disk_read_metadata        00000000001062c0     filesys.c.o
- 0001:00005370       _clusterNumberToSectorNumber 0000000000106370     filesys.c.o
- 0001:000053c0       _getVbr                    00000000001063c0     filesys.c.o
+ 0001:000052e0       _kmain2                    00000000001062e0     kmain.c.o
+ 0001:00005380       _kmain                     0000000000106380     kmain.c.o
+ 0001:00005400       _disk_read_metadata        0000000000106400     filesys.c.o
+ 0001:000054b0       _clusterNumberToSectorNumber 00000000001064b0     filesys.c.o
+ 0001:00005500       _getVbr                    0000000000106500     filesys.c.o
  0002:000052fc       ??_C@_0DA@NEPCPDPJ@Physical?5reion?5descriptor?5crosse@ 000000000010c2fc     disk.c.o
  0002:0000532c       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010c32c     kprintf.c.o
  0002:00005335       ??_C@_04MLLLIHIP@null?$AA@ 000000000010c335     kprintf.c.o
  0002:0000533a       ??_C@_0BA@CFHAGCHK@Cannot?5continue?$AA@ 000000000010c33a     filesys.c.o
  0002:0000534a       ??_C@_08NKCLJDKG@Reserved?$AA@ 000000000010c34a     memory.c.o
- 0002:00005353       ??_C@_02HAOIJKIC@?$CFc?$AA@ 000000000010c353     console.c.o
- 0002:00005356       ??_C@_0M@ELNEMMDP@No?5disk?5IRQ?$AA@ 000000000010c356     disk.c.o
- 0002:00005362       ??_C@_03ILDADBHF@RAM?$AA@  000000000010c362     memory.c.o
- 0002:00005366       ??_C@_0BE@COCNKOPF@No?5current?5request?$DP?$AA@ 000000000010c366     disk.c.o
- 0002:0000537a       ??_C@_0CP@POOGFCKN@kmalloc?5gave?5address?5that?5is?5not@ 000000000010c37a     disk.c.o
- 0002:000053a9       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3a9     testsuite.c.o
- 0002:000053bc       ??_C@_0BG@OPOGHMPI@root?5directory?5data?3?5?$AA@ 000000000010c3bc     kmain.c.o
- 0002:000053d2       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c3d2     interrupt.c.o
- 0002:000053e1       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c3e1     testsuite.c.o
- 0002:00005409       ??_C@_0DE@HPOIGHJM@Region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c409     memory.c.o
- 0002:0000543d       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c43d     interrupt.c.o
- 0002:0000545a       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c45a     interrupt.c.o
- 0002:00005470       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c470     interrupt.c.o
- 0002:00005480       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c480     disk.c.o
- 0002:000054a9       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c4a9     disk.c.o
- 0002:000054dd       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c4dd     interrupt.c.o
- 0002:000054f0       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c4f0     interrupt.c.o
- 0002:00005512       ??_C@_0BB@BPJLCFDB@Num?5regions?3?5?$CFd?6?$AA@ 000000000010c512     memory.c.o
- 0002:00005523       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c523     filesys.c.o
- 0002:00005544       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c544     testsuite.c.o
- 0002:0000554f       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c54f     filesys.c.o
- 0002:00005564       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c564     kmain.c.o
- 0002:0000556c       ??_C@_07BGHCGMFN@?6?6DONE?6?$AA@ 000000000010c56c     kmain.c.o
- 0002:00005574       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c574     testsuite.c.o
- 0002:00005580       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c580     testsuite.c.o
- 0002:0000558d       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c58d     disk.c.o
- 0002:0000559f       ??_C@_0CE@JMDHCBGK@Everyone?8s?5programmed?5differentl@ 000000000010c59f     kmain.c.o
- 0002:000055c3       ??_C@_0FJ@OLOIAECF@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c5c3     filesys.c.o
- 0002:0000561c       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c61c     interrupt.c.o
- 0002:0000562e       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c62e     testsuite.c.o
+ 0002:00005353       ??_C@_03JMKEEFMB@?7?$CFd?$AA@ 000000000010c353     kmain.c.o
+ 0002:00005357       ??_C@_02HAOIJKIC@?$CFc?$AA@ 000000000010c357     console.c.o
+ 0002:0000535a       ??_C@_0M@ELNEMMDP@No?5disk?5IRQ?$AA@ 000000000010c35a     disk.c.o
+ 0002:00005366       ??_C@_03ILDADBHF@RAM?$AA@  000000000010c366     memory.c.o
+ 0002:0000536a       ??_C@_0BE@COCNKOPF@No?5current?5request?$DP?$AA@ 000000000010c36a     disk.c.o
+ 0002:0000537e       ??_C@_0CP@POOGFCKN@kmalloc?5gave?5address?5that?5is?5not@ 000000000010c37e     disk.c.o
+ 0002:000053ad       ??_C@_0BD@IPGPHEDA@Partition?50?5name?3?5?$AA@ 000000000010c3ad     testsuite.c.o
+ 0002:000053c0       ??_C@_0P@CMBNJKHF@General?5fault?6?$AA@ 000000000010c3c0     interrupt.c.o
+ 0002:000053cf       ??_C@_0CI@OEHIIMEF@Signature?5?$CIshould?5be?5?8EFI?5PART?8?$CJ@ 000000000010c3cf     testsuite.c.o
+ 0002:000053f7       ??_C@_0DE@CLBNNILG@region?5?$CFd?3?5addr?$DN0x?$CF08x?4?4?40x?$CF08x?5@ 000000000010c3f7     memory.c.o
+ 0002:0000542b       ??_C@_0BN@FLKBADPP@Kernel?5panic?3?5At?5eip?$DN?$CFp?3?5?$CFs?6?$AA@ 000000000010c42b     interrupt.c.o
+ 0002:00005448       ??_C@_0BG@DMELMCDE@Bad?5interrupt?5number?6?$AA@ 000000000010c448     interrupt.c.o
+ 0002:0000545e       ??_C@_0BA@IOAINKNM@Divide?5by?5zero?6?$AA@ 000000000010c45e     interrupt.c.o
+ 0002:0000546e       ??_C@_0CJ@DGFCJGDO@BUG?3?5disk_read_sectors?5with?5no?5c@ 000000000010c46e     disk.c.o
+ 0002:00005497       ??_C@_0DE@NBPFEMAA@BUG?3?5Cannot?5dispatch?5when?5a?5requ@ 000000000010c497     disk.c.o
+ 0002:000054cb       ??_C@_0BD@GOECJEPC@Undefinded?5opcode?6?$AA@ 000000000010c4cb     interrupt.c.o
+ 0002:000054de       ??_C@_0CC@LPPGPMAO@Warning?3?5Unhandled?5interrupt?3?5?$CFd@ 000000000010c4de     interrupt.c.o
+ 0002:00005500       ??_C@_0BB@DBDIBHML@num?5regions?3?5?$CFd?6?$AA@ 000000000010c500     memory.c.o
+ 0002:00005511       ??_C@_0CB@HMGHNKGJ@Cannot?5read?5partition?5table?3?5?$CFd?6@ 000000000010c511     filesys.c.o
+ 0002:00005532       ??_C@_0L@NACIDDFB@ERROR?3?5?$CFd?6?$AA@ 000000000010c532     testsuite.c.o
+ 0002:0000553d       ??_C@_0BF@NALIMPHK@Cannot?5read?5VBR?3?5?$CFd?6?$AA@ 000000000010c53d     filesys.c.o
+ 0002:00005552       ??_C@_07BLPCFNKD@?6START?6?$AA@ 000000000010c552     kmain.c.o
+ 0002:0000555a       ??_C@_07BGHCGMFN@?6?6DONE?6?$AA@ 000000000010c55a     kmain.c.o
+ 0002:00005562       ??_C@_0M@JCNEDAPF@AFTER?5READ?6?$AA@ 000000000010c562     testsuite.c.o
+ 0002:0000556e       ??_C@_0N@FJDDMCBC@BEFORE?5READ?6?$AA@ 000000000010c56e     testsuite.c.o
+ 0002:0000557b       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c57b     disk.c.o
+ 0002:0000558d       ??_C@_0CE@JMDHCBGK@Everyone?8s?5programmed?5differentl@ 000000000010c58d     kmain.c.o
+ 0002:000055b1       ??_C@_0FJ@OLOIAECF@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c5b1     filesys.c.o
+ 0002:0000560a       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c60a     interrupt.c.o
+ 0002:0000561e       ??_C@_0BE@BLFMCDGK@?6root?5DirEntries?3?5?6?$AA@ 000000000010c61e     kmain.c.o
+ 0002:00005632       ??_C@_0BH@EJGGHENI@root?5directory?5data?3?5?6?$AA@ 000000000010c632     kmain.c.o
+ 0002:00005647       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c647     testsuite.c.o
  0003:00000000       _lowlevel_addresses        000000000010d000     asmstubs.c.o
  0003:000001c0       _efiBootGUID               000000000010d1c0     filesys.c.o
  0003:000001d0       _windowsDataGUID           000000000010d1d0     filesys.c.o
@@ -201,8 +203,8 @@
  0001:00004020       _stbsp__clamp_callback     0000000000105020     kprintf.c.o
  0001:00004240       _callback                  0000000000105240     kprintf.c.o
  0001:00005030       _callback                  0000000000106030     testsuite.c.o
- 0001:00005300       _read_partition_table_callback 0000000000106300     filesys.c.o
- 0001:000053d0       _read_vbr_callback         00000000001063d0     filesys.c.o
+ 0001:00005440       _read_partition_table_callback 0000000000106440     filesys.c.o
+ 0001:00005510       _read_vbr_callback         0000000000106510     filesys.c.o
  0002:00000054       _font_data                 0000000000107054     console.c.o
  0003:000000c4       _backgroundColor           000000000010d0c4     console.c.o
  0003:000000c6       _foregroundColor           000000000010d0c6     console.c.o
