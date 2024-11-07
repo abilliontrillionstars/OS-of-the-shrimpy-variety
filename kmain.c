@@ -23,25 +23,50 @@ static struct MultibootInfo bootInfo;
 
 void printClusterCallback(int errno, void* buffer, void* callback_data) 
 {
-    //kprintf("woah! callback worked?? errno=%d, buffer at %p, callback_data at %p.\n", errno, buffer, callback_data);
-    kprintf("root directory data: \n");
-    struct VBR* vbr = getVbr();
-    for(int i=0; i<(vbr->bytes_per_sector); i++) //* vbr->sectors_per_cluster
-        kprintf("%c", ((char*)buffer)[i]);
+    //kprintf("root directory data:  ");
+    //struct VBR* vbr = getVbr();
+    //for(int i=0; i<(vbr->bytes_per_sector* vbr->sectors_per_cluster); i++) //* vbr->sectors_per_cluster
+    //    kprintf("%c", ((char*)buffer)[i]);
     
-    kprintf("\nroot DirEntries: \n");
+    kprintf("\nroot directory DirEntries: \n");
     struct DirEntry* dir = (struct DirEntry*)buffer;
-    while(dir->base[0] || dir->attributes != 15)
+    while(dir->base[0] || dir->attributes == 15)
     {
-        for(int i=0; i<8; i++)
-            if(dir->base[i] != ' ')
-                kprintf("%c", dir->base[i]);
-        console_putc('.');
-        for(int i=0; i<3; i++)
-            if(dir->base[i] != ' ')
-                kprintf("%c", dir->ext[i]);
-        kprintf("\t%d", dir->attributes);
+        if(dir->attributes != 15 && dir->base[0] != (char)0xe5) // regular DirEntry
+        {
+            for(int i=0; i<8; i++)
+                if(dir->base[i] != ' ')
+                    kprintf("%c", dir->base[i]);
+            console_putc('.');
+            for(int i=0; i<3; i++)
+                if(dir->base[i] != ' ')
+                    kprintf("%c", dir->ext[i]);
+        }
+        else // LFNEntry
+        {
+            struct LFNEntry* lfn = (struct LFNEntry*)dir;
+            unsigned i=0;
+            while((lfn + i)->attribute == 15) 
+                i++;
+            kprintf("consecutive LFN's: %d\n", i);
 
+            for(int i=0; i<10; i+=2)
+                if(!lfn->name0[i])
+                    break;
+                else 
+                    kprintf("%c", lfn->name0[i]);
+            for(int i=0; i<12; i+=2)
+                if(!lfn->name1[i])
+                    break;
+                else 
+                    kprintf("%c", lfn->name1[i]);
+            for(int i=0; i<4; i+=2)
+                if(!lfn->name2[i] || lfn->name2[i] == -1)
+                    break;
+                else
+                    kprintf("%c", lfn->name2[i]);
+        }
+        kprintf("\t attr: %d", dir->attributes);
         console_putc('\n');
         dir++;
     }        
@@ -56,7 +81,7 @@ void kmain2()
     for(int i=0; string[i]; i++) serial_putc(string[i]);
 
     struct VBR* vbr = (struct VBR*) getVbr();
-    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), 1, printClusterCallback, NULL);
+    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
 }
 
 void kmain(struct MultibootInfo* mbi)

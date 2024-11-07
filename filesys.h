@@ -54,12 +54,13 @@ struct VBR
     char code[420];
     u16 checksum;
 };
-struct DirEntry
+struct DirEntry 
 {
     char base[8];
     char ext[3];
     u8 attributes;
     u8 reserved;
+    u8 creationTimeCentiseconds;
     u16 creationTime;
     u16 creationDate;
     u16 lastAccessDate;
@@ -69,16 +70,16 @@ struct DirEntry
     u16 clusterLow;
     u32 size;
 };
-struct LFNEntry
+struct LFNEntry 
 {
     unsigned char sequenceNumber;
-    char name0[10];
-    char attribute;
-    char zero;
+    char name0[10];             //5 characters
+    char attribute;             //always 15
+    char zero;                  //always zero
     char checksum;
-    char name1[12];
-    unsigned short alsoZero;
-    char name2[4];
+    char name1[12];             //6 characters
+    unsigned short alsozero;    //always zero
+    char name2[4];              //2 characters
 };
 #pragma pack(pop)
 
