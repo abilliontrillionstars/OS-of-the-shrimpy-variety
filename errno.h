@@ -5,3 +5,5 @@
 #define EINVAL -2
 #define EIO -3
 
+#define ENOENT -4
+
