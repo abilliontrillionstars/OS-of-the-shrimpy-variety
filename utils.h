@@ -10,6 +10,8 @@ void halt();
 void outb(u16 port, u8 value);
 u8 inb(u16 port);
 void kmemcpy(void* dest, const void* start, unsigned length);
+int kstrlen(const char* str);
+void kstrcpy(char* dest, const char* src);
 u16 inw(u16 port);
 void outw(u16 port, u16 value);
 u32 inl(u16 port);
@@ -55,10 +57,7 @@ struct MB_Drives
     u32 length;
     u32 addr;
 };
-struct MB_Config
-{
-    void* ptr;
-};
+struct MB_Config { void* ptr; };
 struct MB_Loader { char* name; };
 struct MB_AdvancedPowerManagement { void* ptr; };
 struct MB_VideoBiosExtensions
@@ -103,7 +102,6 @@ struct MultibootInfo
     struct MB_VideoBiosExtensions vbe;
     struct MB_Framebuffer fb;
 };
-
 #pragma pack(pop)
 
 

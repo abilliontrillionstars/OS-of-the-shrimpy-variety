@@ -9,6 +9,7 @@
         "font-default.h": "c",
         "kprintf.h": "c",
         "errno.h": "c",
-        "filesys.h": "c"
+        "filesys.h": "c",
+        "file.h": "c"
     }
 }

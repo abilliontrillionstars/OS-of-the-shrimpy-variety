@@ -1,14 +1,14 @@
  kernel
 
- Timestamp is 672d195b (Thu Nov  7 14:47:39 2024)
+ Timestamp is 6732ca66 (Mon Nov 11 22:24:22 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 0000576cH .text                   CODE
+ 0001:00000000 00005ba0H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 000001f0H .data                   DATA
- 0003:000001f0 000007c0H .bss                    DATA
+ 0003:000001f0 00000c80H .bss                    DATA
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
@@ -125,21 +125,26 @@
  0001:00004c90       _queue_put                 0000000000105c90     utils.c.o
  0001:00004dc0       _queue_get                 0000000000105dc0     utils.c.o
  0001:00004ec0       _kmemcpy                   0000000000105ec0     utils.c.o
- 0001:00004f10       _inb                       0000000000105f10     utils.c.o
- 0001:00004f30       _outb                      0000000000105f30     utils.c.o
- 0001:00004f50       _inw                       0000000000105f50     utils.c.o
- 0001:00004f70       _outw                      0000000000105f70     utils.c.o
- 0001:00004f90       _inl                       0000000000105f90     utils.c.o
- 0001:00004fb0       _outl                      0000000000105fb0     utils.c.o
- 0001:00004fd0       _halt                      0000000000105fd0     utils.c.o
- 0001:00004fe0       _sweet                     0000000000105fe0     testsuite.c.o
- 0001:000050f0       _start                     00000000001060f0     kmain.c.o
- 0001:00005100       _printClusterCallback      0000000000106100     kmain.c.o
- 0001:000054d0       _kmain2                    00000000001064d0     kmain.c.o
- 0001:00005570       _kmain                     0000000000106570     kmain.c.o
- 0001:000055f0       _disk_read_metadata        00000000001065f0     filesys.c.o
- 0001:000056a0       _clusterNumberToSectorNumber 00000000001066a0     filesys.c.o
- 0001:000056f0       _getVbr                    00000000001066f0     filesys.c.o
+ 0001:00004f10       _kstrlen                   0000000000105f10     utils.c.o
+ 0001:00004f50       _kstrcpy                   0000000000105f50     utils.c.o
+ 0001:00004fe0       _inb                       0000000000105fe0     utils.c.o
+ 0001:00005000       _outb                      0000000000106000     utils.c.o
+ 0001:00005020       _inw                       0000000000106020     utils.c.o
+ 0001:00005040       _outw                      0000000000106040     utils.c.o
+ 0001:00005060       _inl                       0000000000106060     utils.c.o
+ 0001:00005080       _outl                      0000000000106080     utils.c.o
+ 0001:000050a0       _halt                      00000000001060a0     utils.c.o
+ 0001:000050b0       _sweet                     00000000001060b0     testsuite.c.o
+ 0001:000051c0       _start                     00000000001061c0     kmain.c.o
+ 0001:000051d0       _printClusterCallback      00000000001061d0     kmain.c.o
+ 0001:000055a0       _kmain2                    00000000001065a0     kmain.c.o
+ 0001:00005640       _kmain                     0000000000106640     kmain.c.o
+ 0001:000056c0       _disk_read_metadata        00000000001066c0     filesys.c.o
+ 0001:00005770       _clusterNumberToSectorNumber 0000000000106770     filesys.c.o
+ 0001:000057c0       _getVbr                    00000000001067c0     filesys.c.o
+ 0001:00005840       _file_open_part_2          0000000000106840     file.c.o
+ 0001:00005990       _file_open                 0000000000106990     file.c.o
+ 0001:00005b10       _file_close                0000000000106b10     file.c.o
  0002:000052fc       ??_C@_0DA@NEPCPDPJ@Physical?5reion?5descriptor?5crosse@ 000000000010c2fc     disk.c.o
  0002:0000532c       ??_C@_08CKLMDEPE@No?5float?$AA@ 000000000010c32c     kprintf.c.o
  0002:00005335       ??_C@_04MLLLIHIP@null?$AA@ 000000000010c335     kprintf.c.o
@@ -175,9 +180,10 @@
  0002:000055a5       ??_C@_0BC@GCLOHLND@No?5disk?5devices?$DP?6?$AA@ 000000000010c5a5     disk.c.o
  0002:000055b7       ??_C@_0CE@JMDHCBGK@Everyone?8s?5programmed?5differentl@ 000000000010c5b7     kmain.c.o
  0002:000055db       ??_C@_0FJ@OLOIAECF@VBR?5not?5yet?5initialized?0?5doesn?8t@ 000000000010c5db     filesys.c.o
- 0002:00005634       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c634     interrupt.c.o
- 0002:00005648       ??_C@_0BO@NDGEBAFN@?6root?5directory?5DirEntries?3?5?6?$AA@ 000000000010c648     kmain.c.o
- 0002:00005664       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c664     testsuite.c.o
+ 0002:00005634       ??_C@_0BF@IKKOEBDE@checking?5file?3?5?$CC?$CFs?$CC?6?$AA@ 000000000010c634     file.c.o
+ 0002:00005649       ??_C@_0BE@OMMANMHM@Too?5many?5handlers?$CB?6?$AA@ 000000000010c649     interrupt.c.o
+ 0002:0000565d       ??_C@_0BO@NDGEBAFN@?6root?5directory?5DirEntries?3?5?6?$AA@ 000000000010c65d     kmain.c.o
+ 0002:00005679       ??_C@_01EEMJAFIK@?6?$AA@   000000000010c679     testsuite.c.o
  0003:00000000       _lowlevel_addresses        000000000010d000     asmstubs.c.o
  0003:000001c0       _efiBootGUID               000000000010d1c0     filesys.c.o
  0003:000001d0       _windowsDataGUID           000000000010d1d0     filesys.c.o
@@ -186,8 +192,9 @@
  0003:000006e0       __fltused                  000000000010d6e0     kprintf.c.o
  0003:000006e4       _freeList                  000000000010d6e4     memory.c.o
  0003:000007b0       _vbr                       000000000010d7b0     filesys.c.o
+ 0003:000009b0       _file_table                000000000010d9b0     file.c.o
 
- entry point at         0001:000050f0
+ entry point at         0001:000051c0
 
  Static symbols
 
@@ -203,9 +210,9 @@
  0001:00003ff0       _stbsp__count_clamp_callback 0000000000104ff0     kprintf.c.o
  0001:00004020       _stbsp__clamp_callback     0000000000105020     kprintf.c.o
  0001:00004240       _callback                  0000000000105240     kprintf.c.o
- 0001:00005030       _callback                  0000000000106030     testsuite.c.o
- 0001:00005630       _read_partition_table_callback 0000000000106630     filesys.c.o
- 0001:00005700       _read_vbr_callback         0000000000106700     filesys.c.o
+ 0001:00005100       _callback                  0000000000106100     testsuite.c.o
+ 0001:00005700       _read_partition_table_callback 0000000000106700     filesys.c.o
+ 0001:000057d0       _read_vbr_callback         00000000001067d0     filesys.c.o
  0002:00000054       _font_data                 0000000000107054     console.c.o
  0003:000000c4       _backgroundColor           000000000010d0c4     console.c.o
  0003:000000c6       _foregroundColor           000000000010d0c6     console.c.o

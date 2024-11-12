@@ -87,6 +87,23 @@ void kmemcpy(void* dest, const void* start, unsigned length)
         ((char*)dest)[i] = ((char*)start)[i];
 }
 
+int kstrlen(const char* str)
+{
+    int len=0;
+    while(str[len]) len++;
+    return len;
+}
+void kstrcpy(char* dest, const char* src)
+{
+    int len;
+    if(kstrlen(dest) > kstrlen(src))
+        len=kstrlen(dest);
+    else
+        len=kstrlen(src);
+    for(int i=0; i<len; i++)
+        dest[i] = src[i];
+}
+
 u8 inb(u16 port)
 {
     u32 tmp;

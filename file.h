@@ -29,7 +29,7 @@ struct FileOpenCallbackData
     void* callback_data;
 };
 
-int file_open(const char* filename, int flags, file_open_callback_t callback, void* callback_data);
+void file_open(const char* filename, int flags, file_open_callback_t callback, void* callback_data);
 void file_open_part_2(int errorcode, void* data, void* pfocd);
 void file_close(int fd, file_close_callback_t callback, void* callback_data);
 
