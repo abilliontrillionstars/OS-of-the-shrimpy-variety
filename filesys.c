@@ -3,10 +3,9 @@
 #include "errno.h"
 #include "disk.h"
 #include "kprintf.h"
+#include "console.h"
+#include "file.h"
 
-struct GUID efiBootGUID = {0xc12a7328, 0xf81f, 0x11d2, 0xba4b, {0x00, 0xa0, 0xc9, 0x3e, 0xc9, 0x3b}};
-struct GUID windowsDataGUID = {0xebd0a0a2, 0xb9e5, 0x4433, 0x87c0, {0x68, 0xb6, 0xb7, 0x26, 0x99, 0xc7}};
-struct GUID linuxGUID = {0x0fc63daf, 0x8483, 0x4772, 0x8e79, {0x3d, 0x69,0xd8, 0x47, 0x7d, 0xe4}};
 struct VBR vbr;
 
 static void read_vbr_callback(int errorcode, void* sectorData, void* kmain_callback)
@@ -35,6 +34,46 @@ static void read_partition_table_callback(int errorcode, void* sectorData, void*
 void disk_read_metadata(disk_metadata_callback_t kmain_callback)
 {
     disk_read_sectors(2, 1, read_partition_table_callback, kmain_callback);
+}
+
+int getFromRootDirByName(struct DirEntry* root, char* name) 
+{
+    //kprintf("\nfile to search for: %s\n", name);
+    // format the target's filename to the rootdir 8.3 (maybe)
+    for(int i=0; name[i]; i++)
+        name[i] = toUpper(name[i]);
+    int dot_i = kstrstr_index(name, ".");
+    if(dot_i == -1)
+    {
+        //kprintf("\ntripwire hook! filename didn't have a dot in it, so it can't be valid.\n");
+        return -1;
+    }
+    if(dot_i+4 < kstrlen(name))
+    {
+        //kprintf("\ntripwire hook! extension is longer than 3 characters.\n");
+        return -1;
+    }
+    if(kstrstr_index(name, " ") != -1)
+        // spaces aren't allowed!
+        return -1;
+
+    int index;
+    for(index=0; (root+index)->base[0] || (root+index)->attributes == 15; index++)
+    {
+        //concat the filename
+        char buffer[13];
+        for(int i=0; i<8; i++)
+            buffer[i] = (root+index)->base[i];
+        buffer[8] = '.';
+        for(int i=0; i<3; i++)
+            buffer[i+9] = (root+index)->ext[i];
+        
+        //kprintf("\nchecking %s against file: %s", name, buffer);
+
+        if(kstrequals(buffer, name))
+            return index;
+    }
+    return -1;
 }
 
 unsigned clusterNumberToSectorNumber(unsigned clnum) 

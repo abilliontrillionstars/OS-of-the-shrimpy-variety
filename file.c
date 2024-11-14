@@ -6,6 +6,7 @@
 #include "disk.h"
 #include "memory.h"
 
+struct File file_table[MAX_FILES];
 
 void file_open_part_2(int errorcode, void* data, void* pfocd)
 {
@@ -17,29 +18,26 @@ void file_open_part_2(int errorcode, void* data, void* pfocd)
         kfree(focd);
         return;
     }
-
+      
     //find the file in the root directory
     struct DirEntry* dir = (struct DirEntry*)data;
-    char fname[13];
-    while(dir->base[0] || dir->attributes == 15)
-    {
-        //grab the filename from the DirEntry
-        kstrcpy(fname, dir->base);
-        fname[8] = '.';
-        kstrcpy(fname+9, dir->ext);
-        fname[12] = '\0';
-        kprintf("checking file: \"%s\"\n", fname);
+    int find = getFromRootDirByName(dir, file_table[focd->fd].filename);
 
-        dir++;
-    }
-    if(fname[0])
+
+
+    if(find != -1) 
+    {
         focd->callback(focd->fd, focd->callback_data);
+        file_table[focd->fd].in_use = 1;
+    }
     else
     {
         file_table[focd->fd].in_use = 0;
         focd->callback(ENOENT, focd->callback_data);
     }
+    int waugh = file_table[focd->fd].in_use;
     kfree(focd);
+    kprintf("wuagh: %d", waugh);
 }
 
 void file_open(const char* filename, int flags, file_open_callback_t callback, void* callback_data)
@@ -53,7 +51,7 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
     // get index of the File in the table. that is, find an empty slot in the table to use
     int fd; 
     for(fd=0; fd<=MAX_FILES; fd++)
-        if(!(file_table[fd].in_use))
+        if(file_table[fd].in_use == 0)
             break;
     if(fd==MAX_FILES)
     {

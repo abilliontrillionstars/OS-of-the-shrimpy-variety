@@ -8,6 +8,7 @@
 #include "disk.h"
 #include "pci.h"
 #include "filesys.h"
+#include "file.h"
 
 __asm__(
     ".global _start\n"
@@ -70,11 +71,11 @@ void printClusterCallback(int errno, void* buffer, void* callback_data)
                     else
                         kprintf("%c", entry->name2[i]);
                 // step over this entry so we're past them once we get out of the while loop
-                // this also lets us see non-LFN files instead of just ignoring them
+                // this also lets us see non-LFN entries instead of just ignoring them
                 dir++;
             } 
             // now we should be on our base DirEntry
-        }
+        }   
         // print the creation time
         kprintf("\tcreated on: ");
         u16 cd = dir->creationDate; // YYYY-MM-DD
@@ -82,13 +83,13 @@ void printClusterCallback(int errno, void* buffer, void* callback_data)
         u16 ct = dir->creationTime; // HH:MM:SS
         //if(dir->creationTimeCentiseconds >= 100) ct++;
         kprintf("%0.2d:%0.2d:%0.2d", (ct>>11)&0x1f, (ct>>5)&0x2f, ct&0x1f);
-
         console_putc('\n');
         dir++;
     }        
 
     const char* string2 = "\n\nDONE\n";
     for(int i=0; string2[i]; i++) serial_putc(string2[i]);
+
 }
 
 void kmain2()
@@ -96,8 +97,15 @@ void kmain2()
     const char* string = "\nSTART\n";    
     for(int i=0; string[i]; i++) serial_putc(string[i]);
 
-    struct VBR* vbr = (struct VBR*) getVbr();
-    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
+    //const char* src = "wahagayoogahaga";
+    //const char* sub = "yooga";
+    //kprintf("string: %s. substring: %s. found the latter in the former at %d.\n", src, sub, kstrstr_index(src, sub));
+
+    sweet();
+
+    //struct VBR* vbr = (struct VBR*) getVbr();
+    //disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
+
 }
 
 void kmain(struct MultibootInfo* mbi)

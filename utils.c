@@ -102,7 +102,45 @@ void kstrcpy(char* dest, const char* src)
         len=kstrlen(src);
     for(int i=0; i<len; i++)
         dest[i] = src[i];
+    dest[len] = '\0';
 }
+// stdlib kstrstr but returns the first index of the thing, or -1. 
+int kstrstr_index(const char* src, const char* sub)
+{
+    int match=0;
+    int len = kstrlen(sub);
+    for(int i=0; src[i]; i++)
+    {
+        if(match == len) return i - len;
+
+        if(src[i] == sub[match])
+            match++;
+        else
+            match=0;
+    }
+    return -1;
+}
+int kstrequals(const char* str1, const char* str2)
+{
+    for(int i=0; str1[i]; i++)
+        if(str1[i] != str2[i])
+            return 0;
+    return 1;
+}
+
+char toUpper(char c)
+{
+    if(c>='a' && c<='z')
+        return c-32;
+    return c;
+}
+char toLower(char c)
+{
+    if(c>='A' && c<='Z')
+        return c+32;
+    return c;
+}
+
 
 u8 inb(u16 port)
 {

@@ -83,5 +83,9 @@ struct LFNEntry
 };
 #pragma pack(pop)
 
+void printDirEntry(struct DirEntry* dir);
+int getFromRootDirByName(struct DirEntry* root, char* name);
+
+
 unsigned clusterNumberToSectorNumber(unsigned clnum);
 struct VBR* getVbr();

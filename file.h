@@ -18,9 +18,7 @@ struct File
     int in_use;
     int flags;
     char filename[MAX_PATH+1]; // null term
-
 };
-struct File file_table[MAX_FILES];
 
 struct FileOpenCallbackData
 {

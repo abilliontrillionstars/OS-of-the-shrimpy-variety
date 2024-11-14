@@ -11,7 +11,7 @@ void memory_init(struct MultibootInfo* info)
 {
     //number of regions
     u32 nr = info->map.length / sizeof(struct MB_MemInfo);
-    kprintf("num regions: %d\n", nr);
+    kprintf("number of memory regions: %d\n", nr);
 
     struct MB_MemInfo* M = info->map.addr;
 
@@ -19,7 +19,7 @@ void memory_init(struct MultibootInfo* info)
     {
         u32 end = M[i].addr + M[i].length;
         kprintf("region %d: addr=0x%08x...0x%08x length%dKB type=%s\n",
-            i, M[i].addr, end-1, M[i].length/1024, (M[i].type==1) ? "RAM":"Reserved");
+            i, M[i].addr, end-1, M[i].length/1024, (M[i].type==1) ? "ram":"reserved");
     }
 
     for(unsigned i=0; i<HEAP_ORDER; ++i)
@@ -58,7 +58,6 @@ void* kmalloc(u32 size)
     char* c = (char*) h;
     return c + sizeof(Header);
 }
-
 void kfree(void* v)
 {
     char* c = (char*) v;
@@ -82,6 +81,7 @@ void kfree(void* v)
             return;
     }
 }
+
 // header-helper functions (why is it always hamburger help her why is it never hamburger help me)
 static void initHeader(Header* h, unsigned order)
 {
