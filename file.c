@@ -23,23 +23,15 @@ void file_open_part_2(int errorcode, void* data, void* pfocd)
     struct DirEntry* dir = (struct DirEntry*)data;
     int find = getFromRootDirByName(dir, file_table[focd->fd].filename);
 
-
-
     if(find != -1) 
-    {
         focd->callback(focd->fd, focd->callback_data);
-        file_table[focd->fd].in_use = 1;
-    }
     else
     {
         file_table[focd->fd].in_use = 0;
         focd->callback(ENOENT, focd->callback_data);
     }
-    int waugh = file_table[focd->fd].in_use;
     kfree(focd);
-    kprintf("wuagh: %d", waugh);
 }
-
 void file_open(const char* filename, int flags, file_open_callback_t callback, void* callback_data)
 {
     if(kstrlen(filename) >= MAX_PATH)
@@ -50,7 +42,7 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
 
     // get index of the File in the table. that is, find an empty slot in the table to use
     int fd; 
-    for(fd=0; fd<=MAX_FILES; fd++)
+    for(fd=0; fd<MAX_FILES; fd++)
         if(file_table[fd].in_use == 0)
             break;
     if(fd==MAX_FILES)
@@ -59,6 +51,7 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
         return;
     }
     file_table[fd].in_use = 1;
+    
 
     //we've validated filename won't overflow file_table.filename
     kstrcpy(file_table[fd].filename, filename);
@@ -78,12 +71,13 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
     // defer to part two. next time on shrimp OS...
     disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, file_open_part_2, focd);
 }
-
 void file_close(int fd, file_close_callback_t callback, void* callback_data)
 {
     if(fd<0 || fd>=MAX_FILES || !(file_table[fd].in_use))
+    {
         if(callback) callback(EINVAL, callback_data);
-
+        return;
+    }
     file_table[fd].in_use = 0;
     if(callback) callback(SUCCESS, callback_data);
 }

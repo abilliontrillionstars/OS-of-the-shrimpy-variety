@@ -90,19 +90,13 @@ void kmemcpy(void* dest, const void* start, unsigned length)
 int kstrlen(const char* str)
 {
     int len=0;
-    while(str[len]) len++;
+    while(*str++) len++;
     return len;
 }
 void kstrcpy(char* dest, const char* src)
 {
-    int len;
-    if(kstrlen(dest) > kstrlen(src))
-        len=kstrlen(dest);
-    else
-        len=kstrlen(src);
-    for(int i=0; i<len; i++)
-        dest[i] = src[i];
-    dest[len] = '\0';
+    while((*dest++ = *src++))
+        ;
 }
 // stdlib kstrstr but returns the first index of the thing, or -1. 
 int kstrstr_index(const char* src, const char* sub)
@@ -122,7 +116,7 @@ int kstrstr_index(const char* src, const char* sub)
 }
 int kstrequals(const char* str1, const char* str2)
 {
-    for(int i=0; str1[i]; i++)
+    for(int i=0; str1[i] || str2[i]; i++)
         if(str1[i] != str2[i])
             return 0;
     return 1;

@@ -102,7 +102,7 @@ void kmain2()
     //kprintf("string: %s. substring: %s. found the latter in the former at %d.\n", src, sub, kstrstr_index(src, sub));
 
     sweet();
-
+    
     //struct VBR* vbr = (struct VBR*) getVbr();
     //disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
 
