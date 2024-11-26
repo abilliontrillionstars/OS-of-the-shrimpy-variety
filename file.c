@@ -23,8 +23,12 @@ void file_open_part_2(int errorcode, void* data, void* pfocd)
     struct DirEntry* dir = (struct DirEntry*)data;
     int find = getFromRootDirByName(dir, file_table[focd->fd].filename);
 
-    if(find != -1) 
+    if(find != -1)
+    {
+        // set the firstCluster field
+        file_table[focd->fd].firstCluster = dir[find].clusterHigh<<16 | dir[find].clusterLow;
         focd->callback(focd->fd, focd->callback_data);
+    }
     else
     {
         file_table[focd->fd].in_use = 0;
@@ -51,6 +55,8 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
         return;
     }
     file_table[fd].in_use = 1;
+    file_table[fd].offset = 0;
+    file_table[fd].size = 0x1000; // 4KB
     
 
     //we've validated filename won't overflow file_table.filename
@@ -82,3 +88,104 @@ void file_close(int fd, file_close_callback_t callback, void* callback_data)
     if(callback) callback(SUCCESS, callback_data);
 }
 
+void file_read_part_2(int errorcode, void* sector_data, void* callback_data)
+{
+    struct ReadInfo* ri = (struct ReadInfo*) callback_data;
+    if(errorcode)
+        ri->callback(errorcode, ri->buffer, 0, ri->callback_data);
+    else 
+    {
+        kmemcpy(ri->buffer, sector_data+file_table[ri->fd].offset %4096, ri->num_requested);
+        ri->callback(SUCCESS, ri->buffer, file_table[ri->fd].offset %4096, ri->callback_data);
+    }
+    kfree(ri);
+    return;
+}
+void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,void* callback_data)
+{
+    // verify fd
+    // TODO: check the flags for read perms
+    if(fd>=0 && fd<MAX_FILES)
+    {
+        callback(EINVAL, buf, 0, callback_data);
+        return;
+    }
+    if(!count)
+    {
+        callback(SUCCESS, buf, 0, callback_data);
+        return;
+    }
+    if(file_table[fd].offset >= file_table[fd].size && file_table[fd].in_use)
+    {
+        callback(EINVAL, buf, 0, callback_data);
+        return;
+    }
+
+    struct ReadInfo* ri = kmalloc(sizeof(struct ReadInfo));
+    if(!ri){
+        callback(ENOMEM, buf, 0, callback_data);
+        return;
+    }
+
+    ri->fd = fd;
+    ri->buffer = buf;
+    ri->num_requested=count;
+    ri->callback=callback;
+    ri->callback_data=callback_data;
+    unsigned secnum = clusterNumberToSectorNumber(file_table[fd].firstCluster);
+    disk_read_sectors(secnum, getVbr()->sectors_per_cluster, file_read_part_2, ri);
+}
+
+
+int file_seek(int fd, int delta, int whence)
+{
+
+    if( fd < 0 || fd >= MAX_FILES || file_table[fd].in_use == 0 || whence < 0 || whence > 2)
+        return EINVAL;
+
+    if(whence == SEEK_SET)
+    {
+        if( delta < 0 )
+            return EINVAL;
+        file_table[fd].offset = delta;
+        return SUCCESS;
+    }
+
+    if( whence == SEEK_CUR )
+    {
+        unsigned newOffset = file_table[fd].offset + delta;
+        if( delta < 0 )
+            if(newOffset >= file_table[fd].offset)
+                return EINVAL;
+        if( delta > 0 ){
+            if( newOffset <= file_table[fd].offset )
+                return EINVAL;
+        }
+        file_table[fd].offset = newOffset;
+        return SUCCESS;
+    }
+
+    if( whence == SEEK_END ){
+        unsigned newOffset = file_table[fd].size + delta;
+        if( delta < 0 ){
+            if( newOffset >= file_table[fd].size )
+                return EINVAL;
+        }
+        if( delta > 0 ){
+            if( newOffset <= file_table[fd].size )
+                return EINVAL;
+        }
+        file_table[fd].offset = newOffset;
+        return SUCCESS;
+    }
+    return EINVAL;
+}
+int file_tell(int fd, unsigned* offset)
+{
+    if( fd < 0 || fd >= MAX_FILES || file_table[fd].in_use == 0 )
+        return EINVAL;
+    if( !offset )
+        return EINVAL;
+    *offset = file_table[fd].offset;
+    return SUCCESS;
+}

@@ -10,19 +10,12 @@
 #include "filesys.h"
 #include "file.h"
 
-__asm__(
-    ".global _start\n"
-    "_start:\n"
-    "mov $0x10000,%esp\n"
-    "push %ebx\n"
-    "call _kmain"
-);
-
+__asm__(".global _start\n""_start:\n""mov $0x10000,%esp\n""push %ebx\n""call _kmain");
 void sweet();
 static struct MultibootInfo bootInfo;
 
 
-void printClusterCallback(int errno, void* buffer, void* callback_data) 
+void printClusterCallback(int errno, void* buffer, void* callback_data)
 {
     //kprintf("root directory data:  ");
     //struct VBR* vbr = getVbr();
@@ -97,17 +90,9 @@ void kmain2()
     const char* string = "\nSTART\n";    
     for(int i=0; string[i]; i++) serial_putc(string[i]);
 
-    //const char* src = "wahagayoogahaga";
-    //const char* sub = "yooga";
-    //kprintf("string: %s. substring: %s. found the latter in the former at %d.\n", src, sub, kstrstr_index(src, sub));
-
-    sweet();
-    
-    //struct VBR* vbr = (struct VBR*) getVbr();
-    //disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
-
+    struct VBR* vbr = (struct VBR*) getVbr();
+    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
 }
-
 void kmain(struct MultibootInfo* mbi)
 {
     kprintf("Everyone's programmed differently.\n");

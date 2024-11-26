@@ -1,14 +1,14 @@
  kernel
 
- Timestamp is 673622aa (Thu Nov 14 11:17:46 2024)
+ Timestamp is 673f4d35 (Thu Nov 21 10:09:41 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00006b25H .text                   CODE
+ 0001:00000000 00006c05H .text                   CODE
  0002:00000000 000052fcH .rdata                  DATA
  0003:00000000 00000264H .data                   DATA
- 0003:00000264 000057c8H .bss                    DATA
+ 0003:00000264 00006c40H .bss                    DATA
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
@@ -96,61 +96,62 @@
  0001:00003cc0       _ksnprintf                 0000000000104cc0     kprintf.c.o
  0001:00003d30       _memory_init               0000000000104d30     memory.c.o
  0001:00003e60       _initHeader                0000000000104e60     memory.c.o
- 0001:00003eb0       _kmalloc                   0000000000104eb0     memory.c.o
- 0001:00003fc0       _bisect                    0000000000104fc0     memory.c.o
- 0001:00004040       _removeFirstNode           0000000000105040     memory.c.o
- 0001:000040a0       _kfree                     00000000001050a0     memory.c.o
- 0001:00004160       _prependNode               0000000000105160     memory.c.o
- 0001:000041e0       _getBuddy                  00000000001051e0     memory.c.o
- 0001:00004230       _removeNode                0000000000105230     memory.c.o
- 0001:000042c0       _setPrev                   00000000001052c0     memory.c.o
- 0001:00004310       _setNext                   0000000000105310     memory.c.o
- 0001:00004360       _addToFreeList             0000000000105360     memory.c.o
- 0001:00004370       _removeFromFreeList        0000000000105370     memory.c.o
- 0001:00004380       _getNext                   0000000000105380     memory.c.o
- 0001:000043d0       _getPrev                   00000000001053d0     memory.c.o
- 0001:00004420       _pci_scan_for_device       0000000000105420     pci.c.o
- 0001:00004520       _pci_read                  0000000000105520     pci.c.o
- 0001:00004580       _pci_read_addr             0000000000105580     pci.c.o
- 0001:000045d0       _pci_write_addr            00000000001055d0     pci.c.o
- 0001:00004620       _serial_init               0000000000105620     serial.c.o
- 0001:00004630       _serial_putc               0000000000105630     serial.c.o
- 0001:00004660       _queue_put                 0000000000105660     utils.c.o
- 0001:00004790       _queue_get                 0000000000105790     utils.c.o
- 0001:00004890       _kmemcpy                   0000000000105890     utils.c.o
- 0001:000048e0       _kstrlen                   00000000001058e0     utils.c.o
- 0001:00004920       _kstrcpy                   0000000000105920     utils.c.o
- 0001:00004960       _kstrstr_index             0000000000105960     utils.c.o
- 0001:00004a10       _kstrequals                0000000000105a10     utils.c.o
- 0001:00004ab0       _toUpper                   0000000000105ab0     utils.c.o
- 0001:00004af0       _toLower                   0000000000105af0     utils.c.o
- 0001:00004b30       _inb                       0000000000105b30     utils.c.o
- 0001:00004b50       _outb                      0000000000105b50     utils.c.o
- 0001:00004b70       _inw                       0000000000105b70     utils.c.o
- 0001:00004b90       _outw                      0000000000105b90     utils.c.o
- 0001:00004bb0       _inl                       0000000000105bb0     utils.c.o
- 0001:00004bd0       _outl                      0000000000105bd0     utils.c.o
- 0001:00004bf0       _halt                      0000000000105bf0     utils.c.o
- 0001:00004c00       _start                     0000000000105c00     kmain.c.o
- 0001:00004c10       _printClusterCallback      0000000000105c10     kmain.c.o
- 0001:00004fe0       _kmain2                    0000000000105fe0     kmain.c.o
- 0001:00005030       _kmain                     0000000000106030     kmain.c.o
- 0001:000050b0       _disk_read_metadata        00000000001060b0     filesys.c.o
- 0001:00005160       _getFromRootDirByName      0000000000106160     filesys.c.o
- 0001:000053a0       _clusterNumberToSectorNumber 00000000001063a0     filesys.c.o
- 0001:000053f0       _getVbr                    00000000001063f0     filesys.c.o
- 0001:00005470       _file_open_part_2          0000000000106470     file.c.o
- 0001:00005560       _file_open                 0000000000106560     file.c.o
- 0001:000056e0       _file_close                00000000001066e0     file.c.o
- 0001:00005770       _getesp                    0000000000106770     testsuite.c.o
- 0001:00005790       _sweet                     0000000000106790     testsuite.c.o
- 0001:00006500       _console_init              0000000000107500     console.c.o
- 0001:00006550       _console_putc              0000000000107550     console.c.o
- 0001:000068a0       _draw_character            00000000001078a0     console.c.o
- 0001:00006990       _clear_screen              0000000000107990     console.c.o
- 0001:00006a10       _set_pixel                 0000000000107a10     console.c.o
- 0001:00006a70       _console_invert_pixel      0000000000107a70     console.c.o
- 0001:00006ab0       _scroll                    0000000000107ab0     console.c.o
+ 0001:00003eb0       _paging_init               0000000000104eb0     memory.c.o
+ 0001:00003f40       _kmalloc                   0000000000104f40     memory.c.o
+ 0001:00004050       _bisect                    0000000000105050     memory.c.o
+ 0001:000040d0       _removeFirstNode           00000000001050d0     memory.c.o
+ 0001:00004130       _kfree                     0000000000105130     memory.c.o
+ 0001:000041f0       _prependNode               00000000001051f0     memory.c.o
+ 0001:00004270       _getBuddy                  0000000000105270     memory.c.o
+ 0001:000042c0       _removeNode                00000000001052c0     memory.c.o
+ 0001:00004350       _setPrev                   0000000000105350     memory.c.o
+ 0001:000043a0       _setNext                   00000000001053a0     memory.c.o
+ 0001:000043f0       _addToFreeList             00000000001053f0     memory.c.o
+ 0001:00004400       _removeFromFreeList        0000000000105400     memory.c.o
+ 0001:00004410       _getNext                   0000000000105410     memory.c.o
+ 0001:00004460       _getPrev                   0000000000105460     memory.c.o
+ 0001:000044b0       _pci_scan_for_device       00000000001054b0     pci.c.o
+ 0001:000045b0       _pci_read                  00000000001055b0     pci.c.o
+ 0001:00004610       _pci_read_addr             0000000000105610     pci.c.o
+ 0001:00004660       _pci_write_addr            0000000000105660     pci.c.o
+ 0001:000046b0       _serial_init               00000000001056b0     serial.c.o
+ 0001:000046c0       _serial_putc               00000000001056c0     serial.c.o
+ 0001:000046f0       _queue_put                 00000000001056f0     utils.c.o
+ 0001:00004820       _queue_get                 0000000000105820     utils.c.o
+ 0001:00004920       _kmemcpy                   0000000000105920     utils.c.o
+ 0001:00004970       _kstrlen                   0000000000105970     utils.c.o
+ 0001:000049b0       _kstrcpy                   00000000001059b0     utils.c.o
+ 0001:000049f0       _kstrstr_index             00000000001059f0     utils.c.o
+ 0001:00004aa0       _kstrequals                0000000000105aa0     utils.c.o
+ 0001:00004b40       _toUpper                   0000000000105b40     utils.c.o
+ 0001:00004b80       _toLower                   0000000000105b80     utils.c.o
+ 0001:00004bc0       _inb                       0000000000105bc0     utils.c.o
+ 0001:00004be0       _outb                      0000000000105be0     utils.c.o
+ 0001:00004c00       _inw                       0000000000105c00     utils.c.o
+ 0001:00004c20       _outw                      0000000000105c20     utils.c.o
+ 0001:00004c40       _inl                       0000000000105c40     utils.c.o
+ 0001:00004c60       _outl                      0000000000105c60     utils.c.o
+ 0001:00004c80       _halt                      0000000000105c80     utils.c.o
+ 0001:00004c90       _start                     0000000000105c90     kmain.c.o
+ 0001:00004ca0       _printClusterCallback      0000000000105ca0     kmain.c.o
+ 0001:00005070       _kmain2                    0000000000106070     kmain.c.o
+ 0001:00005110       _kmain                     0000000000106110     kmain.c.o
+ 0001:00005190       _disk_read_metadata        0000000000106190     filesys.c.o
+ 0001:00005240       _getFromRootDirByName      0000000000106240     filesys.c.o
+ 0001:00005480       _clusterNumberToSectorNumber 0000000000106480     filesys.c.o
+ 0001:000054d0       _getVbr                    00000000001064d0     filesys.c.o
+ 0001:00005550       _file_open_part_2          0000000000106550     file.c.o
+ 0001:00005640       _file_open                 0000000000106640     file.c.o
+ 0001:000057c0       _file_close                00000000001067c0     file.c.o
+ 0001:00005850       _getesp                    0000000000106850     testsuite.c.o
+ 0001:00005870       _sweet                     0000000000106870     testsuite.c.o
+ 0001:000065e0       _console_init              00000000001075e0     console.c.o
+ 0001:00006630       _console_putc              0000000000107630     console.c.o
+ 0001:00006980       _draw_character            0000000000107980     console.c.o
+ 0001:00006a70       _clear_screen              0000000000107a70     console.c.o
+ 0001:00006af0       _set_pixel                 0000000000107af0     console.c.o
+ 0001:00006b50       _console_invert_pixel      0000000000107b50     console.c.o
+ 0001:00006b90       _scroll                    0000000000107b90     console.c.o
  0002:000052fc       ??_C@_06JLHAALLO@bill?4z?$AA@ 000000000010d2fc     testsuite.c.o
  0002:00005303       ??_C@_0DA@NEPCPDPJ@Physical?5reion?5descriptor?5crosse@ 000000000010d303     disk.c.o
  0002:00005333       ??_C@_01FJMABOPO@x?$AA@    000000000010d333     testsuite.c.o
@@ -259,13 +260,14 @@
  0002:00005ad8       ??_C@_00CNPNBAHC@?$AA@     000000000010dad8     testsuite.c.o
  0003:00000000       _lowlevel_addresses        000000000010e000     asmstubs.c.o
  0003:00000734       __fltused                  000000000010e734     kprintf.c.o
- 0003:00000738       _freeList                  000000000010e738     memory.c.o
- 0003:00000804       _vbr                       000000000010e804     filesys.c.o
- 0003:00000a04       _file_table                000000000010ea04     file.c.o
- 0003:00000ec8       _used                      000000000010eec8     testsuite.c.o
- 0003:00005a0c       _currentState              0000000000113a0c     console.c.o
+ 0003:00000800       _freeList                  000000000010e800     memory.c.o
+ 0003:00000c00       _kernel_page_table         000000000010ec00     memory.c.o
+ 0003:00001c7c       _vbr                       000000000010fc7c     filesys.c.o
+ 0003:00001e7c       _file_table                000000000010fe7c     file.c.o
+ 0003:00002340       _used                      0000000000110340     testsuite.c.o
+ 0003:00006e84       _currentState              0000000000114e84     console.c.o
 
- entry point at         0001:00004c00
+ entry point at         0001:00004c90
 
  Static symbols
 
@@ -281,17 +283,17 @@
  0001:000039c0       _stbsp__count_clamp_callback 00000000001049c0     kprintf.c.o
  0001:000039f0       _stbsp__clamp_callback     00000000001049f0     kprintf.c.o
  0001:00003c10       _callback                  0000000000104c10     kprintf.c.o
- 0001:000050f0       _read_partition_table_callback 00000000001060f0     filesys.c.o
- 0001:00005400       _read_vbr_callback         0000000000106400     filesys.c.o
- 0001:00005d20       _scopy                     0000000000106d20     testsuite.c.o
- 0001:00005d60       _scmp                      0000000000106d60     testsuite.c.o
- 0001:00005e20       _closeFileIfOpen           0000000000106e20     testsuite.c.o
- 0001:00005ee0       _exhaustionTest            0000000000106ee0     testsuite.c.o
- 0001:00005f50       _up                        0000000000106f50     testsuite.c.o
- 0001:00005f90       _dispatchNextTest          0000000000106f90     testsuite.c.o
- 0001:00005fc0       _dispatchCurrentTest       0000000000106fc0     testsuite.c.o
- 0001:00006260       _openCallback              0000000000107260     testsuite.c.o
- 0001:000063d0       _closeCallback             00000000001073d0     testsuite.c.o
+ 0001:000051d0       _read_partition_table_callback 00000000001061d0     filesys.c.o
+ 0001:000054e0       _read_vbr_callback         00000000001064e0     filesys.c.o
+ 0001:00005e00       _scopy                     0000000000106e00     testsuite.c.o
+ 0001:00005e40       _scmp                      0000000000106e40     testsuite.c.o
+ 0001:00005f00       _closeFileIfOpen           0000000000106f00     testsuite.c.o
+ 0001:00005fc0       _exhaustionTest            0000000000106fc0     testsuite.c.o
+ 0001:00006030       _up                        0000000000107030     testsuite.c.o
+ 0001:00006070       _dispatchNextTest          0000000000107070     testsuite.c.o
+ 0001:000060a0       _dispatchCurrentTest       00000000001070a0     testsuite.c.o
+ 0001:00006340       _openCallback              0000000000107340     testsuite.c.o
+ 0001:000064b0       _closeCallback             00000000001074b0     testsuite.c.o
  0002:000002fc       _font_data                 00000000001082fc     console.c.o
  0003:000000c4       _stbsp__period             000000000010e0c4     kprintf.c.o
  0003:000000c5       _stbsp__comma              000000000010e0c5     kprintf.c.o
@@ -313,14 +315,14 @@
  0003:00000284       _idt                       000000000010e284     interrupt.c.o
  0003:0000040c       _gdt                       000000000010e40c     interrupt.c.o
  0003:00000424       _handlers                  000000000010e424     interrupt.c.o
- 0003:00000788       _bootInfo                  000000000010e788     kmain.c.o
- 0003:00000ec4       _currentTest               000000000010eec4     testsuite.c.o
- 0003:00000f08       _tests                     000000000010ef08     testsuite.c.o
- 0003:00005a08       _numTests                  0000000000113a08     testsuite.c.o
- 0003:00005a10       _framebuffer               0000000000113a10     console.c.o
- 0003:00005a14       _width                     0000000000113a14     console.c.o
- 0003:00005a18       _height                    0000000000113a18     console.c.o
- 0003:00005a1c       _pitch                     0000000000113a1c     console.c.o
- 0003:00005a20       _cursorRow                 0000000000113a20     console.c.o
- 0003:00005a24       _cursorColumn              0000000000113a24     console.c.o
- 0003:00005a28       _escCharBuf                0000000000113a28     console.c.o
+ 0003:00001c00       _bootInfo                  000000000010fc00     kmain.c.o
+ 0003:0000233c       _currentTest               000000000011033c     testsuite.c.o
+ 0003:00002380       _tests                     0000000000110380     testsuite.c.o
+ 0003:00006e80       _numTests                  0000000000114e80     testsuite.c.o
+ 0003:00006e88       _framebuffer               0000000000114e88     console.c.o
+ 0003:00006e8c       _width                     0000000000114e8c     console.c.o
+ 0003:00006e90       _height                    0000000000114e90     console.c.o
+ 0003:00006e94       _pitch                     0000000000114e94     console.c.o
+ 0003:00006e98       _cursorRow                 0000000000114e98     console.c.o
+ 0003:00006e9c       _cursorColumn              0000000000114e9c     console.c.o
+ 0003:00006ea0       _escCharBuf                0000000000114ea0     console.c.o

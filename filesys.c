@@ -93,8 +93,8 @@ unsigned clusterNumberToSectorNumber(unsigned clnum)
     if(!vbr.checksum) // no vbr?
         return (unsigned) kprintf("VBR not yet initialized, doesn't exist, or has otherwise invalid checksum. returning...\n"); // code golf!
 
-    //kprintf("sectors per cluster is %d.\n", vbr.sectors_per_cluster);
-    return clnum/vbr.sectors_per_cluster;
+    unsigned dataArea = vbr.first_sector + vbr.reserved_sectors + vbr.num_fats*vbr.sectors_per_fat;
+    return dataArea + (clnum-2) * vbr.sectors_per_cluster;
 }
 
 struct VBR* getVbr()  { return &vbr; }

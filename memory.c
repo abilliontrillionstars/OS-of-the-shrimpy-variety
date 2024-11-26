@@ -10,22 +10,6 @@ static char* heap = (char*) 0x10000;
 #define HEAP_ORDER 19
 Header* freeList[HEAP_ORDER+1];
 
-/*
-    for(int i=0; i<1024; i++)
-    {
-        unsigned e = PAGE_MUST_BE_ONE;
-        unsigned addr = i*4*1024*1024;
-        if(addr >= 128*1024*1024 && addr < 2*1024*1024*1024)
-            ;
-        else
-            e |= PAGE_PRESENT;
-        // set other bits
-        e |= (i<<22); // set the page# bits
-
-        kernel_page_table.table[i] = e;
-    }
-*/
-
 void memory_init(struct MultibootInfo* info) 
 {
     //number of regions
@@ -46,6 +30,24 @@ void memory_init(struct MultibootInfo* info)
         freeList[i] = NULL;
         freeList[HEAP_ORDER] = (Header*)heap;
         initHeader(freeList[HEAP_ORDER], HEAP_ORDER);
+    }
+}
+void paging_init()
+{
+    for(int i=0; i<1024; i++)
+    {
+        u32 e = PAGE_MUST_BE_ONE;
+        u32 addr = i*4*1024*1024;
+        if(addr >= 128*1024*1024 && addr < (u32)2*1024*1024*1024)
+            ;
+        else
+            e |= PAGE_PRESENT;
+        
+        // set other bits
+
+        e |= (i<<22); // set the page# bits
+
+        kernel_page_table.table[i] = e;
     }
 }
 
