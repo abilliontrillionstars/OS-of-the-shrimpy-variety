@@ -135,6 +135,11 @@ char toLower(char c)
     return c;
 }
 
+unsigned min(unsigned a, unsigned b)
+{
+    if(a<b) return a;
+    else return b;
+}
 
 u8 inb(u16 port)
 {

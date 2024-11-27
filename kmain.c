@@ -90,8 +90,9 @@ void kmain2()
     const char* string = "\nSTART\n";    
     for(int i=0; string[i]; i++) serial_putc(string[i]);
 
-    struct VBR* vbr = (struct VBR*) getVbr();
-    disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
+    sweet();
+    //struct VBR* vbr = (struct VBR*) getVbr();
+    //disk_read_sectors(vbr->first_sector + vbr->reserved_sectors + (vbr->num_fats * vbr->sectors_per_fat), vbr->sectors_per_cluster, printClusterCallback, NULL);
 }
 void kmain(struct MultibootInfo* mbi)
 {

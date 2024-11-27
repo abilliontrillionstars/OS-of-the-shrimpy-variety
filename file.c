@@ -26,7 +26,8 @@ void file_open_part_2(int errorcode, void* data, void* pfocd)
     if(find != -1)
     {
         // set the firstCluster field
-        file_table[focd->fd].firstCluster = dir[find].clusterHigh<<16 | dir[find].clusterLow;
+        file_table[focd->fd].firstCluster = (dir[find].clusterHigh<<16) | dir[find].clusterLow;
+        file_table[focd->fd].size = dir[find].size;
         focd->callback(focd->fd, focd->callback_data);
     }
     else
@@ -56,7 +57,6 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
     }
     file_table[fd].in_use = 1;
     file_table[fd].offset = 0;
-    file_table[fd].size = 0x1000; // 4KB
     
 
     //we've validated filename won't overflow file_table.filename
@@ -90,13 +90,24 @@ void file_close(int fd, file_close_callback_t callback, void* callback_data)
 
 void file_read_part_2(int errorcode, void* sector_data, void* callback_data)
 {
+    kprintf("1");
     struct ReadInfo* ri = (struct ReadInfo*) callback_data;
     if(errorcode)
         ri->callback(errorcode, ri->buffer, 0, ri->callback_data);
     else 
     {
-        kmemcpy(ri->buffer, sector_data+file_table[ri->fd].offset %4096, ri->num_requested);
-        ri->callback(SUCCESS, ri->buffer, file_table[ri->fd].offset %4096, ri->callback_data);
+        int fd = ri->fd;
+        //We assume cluster is always 4KB for this class
+        unsigned offsetInBuffer = file_table[fd].offset % 4096;
+        unsigned bytesLeftInBuffer = 4096-offsetInBuffer;
+        unsigned bytesLeftInFile = file_table[fd].size - file_table[fd].offset;
+        unsigned numToCopy = min(ri->num_requested, min( bytesLeftInBuffer,bytesLeftInFile));
+
+        kprintf("2");
+        kmemcpy(ri->buffer, sector_data + offsetInBuffer, numToCopy);
+        file_table[fd].offset += numToCopy;
+        kprintf("3");
+        ri->callback(SUCCESS, ri->buffer, numToCopy, ri->callback_data);
     }
     kfree(ri);
     return;
@@ -105,7 +116,7 @@ void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,
 {
     // verify fd
     // TODO: check the flags for read perms
-    if(fd>=0 && fd<MAX_FILES)
+    if(fd<0 || fd>=MAX_FILES || !file_table[fd].in_use)
     {
         callback(EINVAL, buf, 0, callback_data);
         return;
@@ -115,14 +126,10 @@ void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,
         callback(SUCCESS, buf, 0, callback_data);
         return;
     }
-    if(file_table[fd].offset >= file_table[fd].size && file_table[fd].in_use)
-    {
-        callback(EINVAL, buf, 0, callback_data);
-        return;
-    }
 
     struct ReadInfo* ri = kmalloc(sizeof(struct ReadInfo));
-    if(!ri){
+    if(!ri)
+    {
         callback(ENOMEM, buf, 0, callback_data);
         return;
     }
@@ -134,8 +141,8 @@ void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,
     ri->callback_data=callback_data;
     unsigned secnum = clusterNumberToSectorNumber(file_table[fd].firstCluster);
     disk_read_sectors(secnum, getVbr()->sectors_per_cluster, file_read_part_2, ri);
+    kprintf("next time on shrimp OS...\n");
 }
-
 
 int file_seek(int fd, int delta, int whence)
 {

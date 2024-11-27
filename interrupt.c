@@ -184,7 +184,7 @@ void ackPic2(struct InterruptContext* ctx)  { outb(0x20, 32); outb(0xa0, 32); }
 
 void divideByZero(struct InterruptContext* ctx)  { kprintf("Divide by zero\n"); }
 void illegalOpcode(struct InterruptContext* ctx)  { kprintf("Undefinded opcode\n"); }
-void generalFault(struct InterruptContext* ctx)  { kprintf("General fault\n"); }
+void generalFault(struct InterruptContext* ctx)  { kprintf("General fault\n"); while(1) halt();}
 
 void timer0Handler(struct InterruptContext* ctx)  { console_invert_pixel(400,300); }
 void rtcHandler(struct InterruptContext* ctx)  { outb(0x70, 0xc); inb(0x71); }

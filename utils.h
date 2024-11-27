@@ -17,6 +17,8 @@ int kstrequals(const char* str1, const char* str2);
 char toLower(char c);
 char toUpper(char c);
 
+unsigned min(unsigned a, unsigned b);
+
 void outb(u16 port, u8 value);
 u8 inb(u16 port);
 u16 inw(u16 port);

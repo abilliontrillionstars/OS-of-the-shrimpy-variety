@@ -25,7 +25,7 @@ struct File
     char filename[MAX_PATH+1]; // null term
     unsigned offset; // position in the file
     unsigned size;
-    unsigned firstCluster;
+    u32 firstCluster;
 };
 struct FileOpenCallbackData
 {
@@ -46,6 +46,9 @@ void file_open(const char* filename, int flags, file_open_callback_t callback, v
 void file_open_part_2(int errorcode, void* data, void* pfocd);
 void file_close(int fd, file_close_callback_t callback, void* callback_data);
 
-void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,void* callback_data);
+void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback, void* callback_data);
+void file_read_part_2(int errorcode, void* sector_data, void* callback_data);
 
+int file_seek(int fd, int delta, int whence);
+int file_tell(int fd, unsigned* offset);
 
