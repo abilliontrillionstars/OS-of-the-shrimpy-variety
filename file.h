@@ -20,12 +20,12 @@ typedef void (*file_read_callback_t)(int errorcode, void* buf, unsigned numread,
 
 struct File 
 {
-    int in_use;
+    int in_use; 
     int flags;
     char filename[MAX_PATH+1]; // null term
     unsigned offset; // position in the file
     unsigned size;
-    u32 firstCluster;
+    unsigned firstCluster;
 };
 struct FileOpenCallbackData
 {

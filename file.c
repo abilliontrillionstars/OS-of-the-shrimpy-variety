@@ -90,60 +90,74 @@ void file_close(int fd, file_close_callback_t callback, void* callback_data)
 
 void file_read_part_2(int errorcode, void* sector_data, void* callback_data)
 {
-    kprintf("1");
+
     struct ReadInfo* ri = (struct ReadInfo*) callback_data;
-    if(errorcode)
-        ri->callback(errorcode, ri->buffer, 0, ri->callback_data);
-    else 
-    {
+    if( errorcode ){
+        ri->callback( errorcode, ri->buffer, 0, ri->callback_data );
+    } else {
         int fd = ri->fd;
         //We assume cluster is always 4KB for this class
         unsigned offsetInBuffer = file_table[fd].offset % 4096;
         unsigned bytesLeftInBuffer = 4096-offsetInBuffer;
         unsigned bytesLeftInFile = file_table[fd].size - file_table[fd].offset;
-        unsigned numToCopy = min(ri->num_requested, min( bytesLeftInBuffer,bytesLeftInFile));
+        unsigned numToCopy = min( ri->num_requested, min( bytesLeftInBuffer,bytesLeftInFile));
 
-        kprintf("2");
-        kmemcpy(ri->buffer, sector_data + offsetInBuffer, numToCopy);
+        kmemcpy(
+            ri->buffer,
+            sector_data + offsetInBuffer,
+            numToCopy
+        );
         file_table[fd].offset += numToCopy;
-        kprintf("3");
-        ri->callback(SUCCESS, ri->buffer, numToCopy, ri->callback_data);
+        ri->callback(
+            SUCCESS,
+            ri->buffer,
+            numToCopy,
+            ri->callback_data
+        );
     }
-    kfree(ri);
+    kfree(ri);      //important!
+    //sector_data be freed by disk_read_sectors
     return;
 }
-void file_read(int fd, void* buf, unsigned count, file_read_callback_t callback,void* callback_data)
+
+
+void file_read( int fd, void* buf, unsigned count, file_read_callback_t callback, void* callback_data)
 {
-    // verify fd
-    // TODO: check the flags for read perms
-    if(fd<0 || fd>=MAX_FILES || !file_table[fd].in_use)
-    {
-        callback(EINVAL, buf, 0, callback_data);
+    if(fd < 0 || fd >= MAX_FILES || file_table[fd].in_use == 0 ){
+        callback(EINVAL,buf,0,callback_data);
         return;
     }
-    if(!count)
-    {
-        callback(SUCCESS, buf, 0, callback_data);
+    if( count == 0 ){
+        callback(SUCCESS,buf,0,callback_data);
         return;
     }
 
-    struct ReadInfo* ri = kmalloc(sizeof(struct ReadInfo));
-    if(!ri)
-    {
+    if( file_table[fd].offset >= file_table[fd].size ){
+        callback(SUCCESS,buf,0,callback_data);
+        return;
+    }
+
+    struct ReadInfo* ri = kmalloc( sizeof(struct ReadInfo) );
+    if(!ri){
         callback(ENOMEM, buf, 0, callback_data);
         return;
     }
-
     ri->fd = fd;
     ri->buffer = buf;
     ri->num_requested=count;
     ri->callback=callback;
     ri->callback_data=callback_data;
-    unsigned secnum = clusterNumberToSectorNumber(file_table[fd].firstCluster);
-    disk_read_sectors(secnum, getVbr()->sectors_per_cluster, file_read_part_2, ri);
-    kprintf("next time on shrimp OS...\n");
-}
 
+    u32* fat = getFat();
+    unsigned c = file_table[fd].firstCluster;
+    unsigned clustersToSkip = file_table[fd].offset / 4096;
+    while(clustersToSkip > 0 ){
+        c = fat[c];
+        --clustersToSkip;
+    }
+    unsigned secnum = clusterNumberToSectorNumber(c);
+    disk_read_sectors( secnum, getVbr()->sectors_per_cluster, file_read_part_2, ri );
+}
 int file_seek(int fd, int delta, int whence)
 {
 

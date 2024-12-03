@@ -89,3 +89,4 @@ int getFromRootDirByName(struct DirEntry* root, char* name);
 
 unsigned clusterNumberToSectorNumber(unsigned clnum);
 struct VBR* getVbr();
+u32* getFat();
