@@ -1,40 +1,13 @@
 #pragma once
 
+
+#define NULL ((void*)0)
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-#define NULL ((void*)0)
-void halt();
-
-void kmemcpy(void* dest, const void* start, unsigned length);
-int kstrlen(const char* str);
-void kstrcpy(char* dest, const char* src);
-// stdlib kstrstr but returns the first index of the thing, or -1. 
-int kstrstr_index(const char* src, const char* sub);
-int kstrequals(const char* str1, const char* str2);
-
-char toLower(char c);
-char toUpper(char c);
-
-unsigned min(unsigned a, unsigned b);
-
-void outb(u16 port, u8 value);
-u8 inb(u16 port);
-u16 inw(u16 port);
-void outw(u16 port, u16 value);
-u32 inl(u16 port);
-void outl(u16 port, u32 value);
-
-struct Queue { struct QueueNode* head; struct QueueNode* tail; };
-struct QueueNode { struct QueueNode* next; void* data; };
-int queue_put(struct Queue* q, void* data);
-void* queue_get(struct Queue* q);
-
 #pragma pack(push,1)
-
-struct MB_MemInfo
-{
+struct MB_MemInfo{
     u32 size;
     u32 addr;
     u32 padding;
@@ -43,34 +16,41 @@ struct MB_MemInfo
     u32 type;
     u32 attributes;
 };
-struct MB_MemoryMapping
-{
+struct MB_BootDevice{
+    u32 device;
+};
+struct MB_CommandLine{
+    char* cmdline;
+};
+struct MB_MemoryMapping{
     u32 length;
     struct MB_MemInfo* addr;
 };
-struct MB_MemorySizes
-{
+struct MB_MemorySizes{
     u32 lower;
     u32 upper;
 };
-struct MB_BootDevice { u32 device; };
-struct MB_CommandLine { char* cmdline; };
-struct MB_Modules
-{
+struct MB_Modules{
     u32 count;
     u32 addr;
 };
-struct MB_Symbols { u32 syms[4]; };
-struct MB_Drives
-{
+struct MB_Symbols{
+    u32 syms[4];
+};
+  struct MB_Drives{
     u32 length;
     u32 addr;
 };
-struct MB_Config { void* ptr; };
-struct MB_Loader { char* name; };
-struct MB_AdvancedPowerManagement { void* ptr; };
-struct MB_VideoBiosExtensions
-{
+struct MB_Config{
+    void* ptr;
+};
+struct MB_Loader{
+    char* name;
+};
+struct MB_AdvancedPowerManagement{
+    void* ptr;
+};
+ struct MB_VideoBiosExtensions{
     u32 control;
     u32 mode_info;
     u32 mode;
@@ -78,8 +58,7 @@ struct MB_VideoBiosExtensions
     u32 offset;
     u32 length;
 };
-struct MB_Framebuffer 
-{
+struct MB_Framebuffer{
     u32 addr;
     u32 addr64;
     u32 pitch;
@@ -94,9 +73,7 @@ struct MB_Framebuffer
     u8 bluePos;
     u8 blueMask;
 };
-
-struct MultibootInfo
-{
+struct MultibootInfo{
     unsigned flags;
     struct MB_MemorySizes mem;
     struct MB_BootDevice bootDev;
@@ -114,4 +91,32 @@ struct MultibootInfo
 #pragma pack(pop)
 
 
+struct QueueNode{
+    struct QueueNode* next;
+    void* item;
+};
 
+struct Queue{
+    struct QueueNode* head;
+    struct QueueNode* tail;
+};
+
+int queue_put(struct Queue* Q, void* data);
+void* queue_get(struct Queue* Q);
+
+u8 inb(u16 port);
+u16 inw(u16 port);
+u32 inl(u16 port);
+void outb(u16 port, u8 value);
+void outw(u16 port, u16 value);
+void outl(u16 port, u32 value);
+
+void kmemcpy(void* dest, void* src, unsigned n);
+int kmemcmp(void* p1, void* p2, unsigned count);
+void kstrcpy(char* dest, const char* src);
+unsigned kstrlen(const char* s);
+char toupper(char c);
+void panic(const char* msg);
+void halt();
+
+unsigned min(unsigned a, unsigned b);

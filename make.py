@@ -1,11 +1,8 @@
+
 import configparser
 import subprocess
 import os
 import sys
-
-import testsuite
-
-print(sys.platform)
 
 inifile=configparser.ConfigParser(interpolation=None)
 inifile.read("config.ini")
@@ -17,6 +14,10 @@ qemu=conf["qemu"]
 python=conf["python"]
 userlinker=conf["userlinker"]
 ar=conf["ar"]
+
+def run(*args):
+    print(args)
+    subprocess.check_call(*args)
 
 cflags=[
     "-target", "i686-pc-win32", #target platform=Windows 32 bit
@@ -43,9 +44,14 @@ linkflags=[
     "/map:kernel.syms"      #kernel symbols
 ]
 
-def run(*args):
-    print(args)
-    subprocess.check_call(*args)
+userlinkflags=[
+    "/base:0x400000",       #where file gets loaded
+    "/machine:x86",         #32 bit
+    "/nodefaultlib",        #no standard libraries
+    "/subsystem:console",   #console app
+    "/fixed",               #not relocatable
+    "/entry:main",          #function to be called on startup
+]
 
 objectfiles=[]
 for filename in os.listdir("."):
@@ -57,16 +63,38 @@ for filename in os.listdir("."):
         objectfiles.append(obj)
 run( [link] + linkflags + objectfiles )
 
+libfiles=[]
+for filename in os.listdir( os.path.join("user","libc")):
+    if filename.endswith(".c"):
+        filename = os.path.join("user","libc",filename)
+        obj=filename+".o"
+        run( [cc] + cflags + ["-o", obj, filename] )
+        libfiles.append(obj)
+
+libc = os.path.join("user","libc.lib")
+run( [ link , "/lib" , "/out:"+libc ] + libfiles )
+
+for filename in os.listdir("user"):
+    if filename.endswith(".c"):
+        filename = os.path.join("user",filename)
+        obj=filename+".o"
+        exe=filename.replace(".c",".exe")
+        run( [cc] + cflags + ["-o", obj, filename ] )
+        run( [link] + userlinkflags + [
+              "/out:"+exe, 
+              obj,
+              libc
+        ])
+    
 run( [
     python, "fool.pyz", "hd.img",
-    "create","64",
-    "cp","kernel.exe","KERNEL.EXE",
-
-    #"cp", "article1.txt", "ARTICLE1.TXT",
+        "create", "64",
+        "cp", "kernel.exe", "KERNEL.EXE",
+        "cp", "user/hello.exe", "HELLO.EXE"
 ])
-testsuite.copy(python, "hd.img")
 
-run([ qemu,
+run( [ qemu,
+
     #virtual hard drive
     "-drive","format=raw,media=disk,file=hd.img,id=disk0",
 
@@ -76,4 +104,3 @@ run([ qemu,
     #escape character for controlling qemu
     "-echr","96"
 ])
-
