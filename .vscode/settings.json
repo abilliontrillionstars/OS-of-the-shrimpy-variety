@@ -10,6 +10,7 @@
         "kprintf.h": "c",
         "errno.h": "c",
         "filesys.h": "c",
-        "file.h": "c"
+        "file.h": "c",
+        "interrupt.h": "c"
     }
 }

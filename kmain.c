@@ -35,6 +35,8 @@ void kmain(struct MultibootInfo* mbi){
     timer_init();
     disk_init();
     interrupt_enable();
-    disk_read_metadata(kmain2);
+    paging_init();
+    disk_read_metadata(kmain2);    
+
     while(1)  { halt(); }
 }

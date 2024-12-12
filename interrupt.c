@@ -3,6 +3,7 @@
 #include "interrupt.h"
 #include "console.h"
 #include "syscall.h"
+#include "memory.h"
 
 asm (
     ".global _midlevel_handler\n"
@@ -68,7 +69,21 @@ void generalFault(struct InterruptContext* ctx){
     kprintf("General fault\n");
 }
 
-
+void page_fault_handler( struct InterruptContext* ctx ){
+    kprintf("\nPage fault eip=0x%x addr=0x%x code=%x (%s %s %s %s %s)\n",
+        ctx->eip,
+        get_faulting_address(),
+        ctx->errorcode,
+        (ctx->errorcode & 1) ? "present":"absent",
+        (ctx->errorcode & 2) ? "write":"read",
+        (ctx->errorcode & 4) ? "user":"kernel",
+        (ctx->errorcode & 8) ? "invalid":"valid",
+        (ctx->errorcode & 16) ? "instruction":"data"
+    );
+    while(1){
+        asm volatile("hlt");
+    }
+}
 
 void ackPic1(struct InterruptContext* ctx){
     outb( 0x20, 32 );
@@ -106,6 +121,7 @@ void interrupt_init(){
     register_interrupt_handler(0, divideByZero);
     register_interrupt_handler(6, illegalOpcode);
     register_interrupt_handler(13, generalFault);
+    register_interrupt_handler(14, page_fault_handler);
 
     //set up primary pic
     outb(0x20,0x11);
