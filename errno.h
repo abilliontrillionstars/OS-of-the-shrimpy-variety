@@ -10,3 +10,4 @@
 #define ENOEXEC -7
 #define EFAULT  -8
 #define ENOSYS  -9
+#define EAGAIN  -10

@@ -11,6 +11,7 @@
         "errno.h": "c",
         "filesys.h": "c",
         "file.h": "c",
-        "interrupt.h": "c"
+        "interrupt.h": "c",
+        "exec.h": "c"
     }
 }

@@ -122,6 +122,11 @@ int kmemcmp(void* p1, void* p2, unsigned count)
     return 0;
 }
 
+void kmemset(void* dest, int value, unsigned count) {
+    for(int i=0; i<count; i++)
+        ((char*)dest)[i] = value;
+}
+
 void kstrcpy(char* dest, const char* src)
 {
     while( (*dest++ = *src++) ){

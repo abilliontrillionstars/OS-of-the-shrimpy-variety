@@ -1,5 +1,7 @@
 #pragma once
 
+#define EXE_STACK 0x800000
+
 #include "utils.h"
 
 typedef void (*exec_callback_t)(int errorcode, unsigned entryPoint, void* callback_data);

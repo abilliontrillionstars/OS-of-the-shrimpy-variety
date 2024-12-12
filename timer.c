@@ -2,6 +2,7 @@
 #include "timer.h"
 #include "utils.h"
 #include "kprintf.h"
+#include "sched.h"
 
 static volatile unsigned jiffies=0;
 
@@ -10,6 +11,8 @@ void rtcHandler(struct InterruptContext* ctx){
     outb( 0x70, 0xc);
     inb( 0x71 );
     jiffies++;
+    
+    schedule(ctx);
 }
 
 unsigned get_uptime(){

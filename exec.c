@@ -131,7 +131,6 @@ struct ExecInfo{
     struct PEHeader peHeader;
 };
 
-#define EXE_STACK 0x800000
 
 
 void exec_transfer_control(int errorcode, unsigned entryPoint, void* callback_data)

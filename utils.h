@@ -113,6 +113,8 @@ void outl(u16 port, u32 value);
 
 void kmemcpy(void* dest, void* src, unsigned n);
 int kmemcmp(void* p1, void* p2, unsigned count);
+void kmemset(void* dest, int value, unsigned count);
+
 void kstrcpy(char* dest, const char* src);
 unsigned kstrlen(const char* s);
 char toupper(char c);
