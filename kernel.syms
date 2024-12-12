@@ -1,11 +1,11 @@
  kernel
 
- Timestamp is 675acdbc (Thu Dec 12 06:49:16 2024)
+ Timestamp is 675add86 (Thu Dec 12 07:56:38 2024)
 
  Preferred load address is 0000000000100000
 
  Start         Length     Name                   Class
- 0001:00000000 00007b64H .text                   CODE
+ 0001:00000000 00007d2eH .text                   CODE
  0002:00000000 000052b8H .rdata                  DATA
  0003:00000000 00000238H .data                   DATA
  0003:00000238 00034dc8H .bss                    DATA
@@ -139,36 +139,38 @@
  0001:00006d00       _serial_init               0000000000107d00     serial.c.o
  0001:00006d10       _serial_putc               0000000000107d10     serial.c.o
  0001:00006d60       _syscall_handler           0000000000107d60     syscall.c.o
- 0001:00006e90       _rtcHandler                0000000000107e90     timer.c.o
- 0001:00006ee0       _get_uptime                0000000000107ee0     timer.c.o
- 0001:00006f00       _timer_init                0000000000107f00     timer.c.o
- 0001:00006fd0       _panic                     0000000000107fd0     utils.c.o
- 0001:00006fe0       _outb                      0000000000107fe0     utils.c.o
- 0001:00007000       _inb                       0000000000108000     utils.c.o
- 0001:00007020       _inw                       0000000000108020     utils.c.o
- 0001:00007040       _outw                      0000000000108040     utils.c.o
- 0001:00007060       _inl                       0000000000108060     utils.c.o
- 0001:00007080       _outl                      0000000000108080     utils.c.o
- 0001:000070a0       _kmemcpy                   00000000001080a0     utils.c.o
- 0001:00007100       _panic2                    0000000000108100     utils.c.o
- 0001:00007130       _halt                      0000000000108130     utils.c.o
- 0001:00007140       _queue_put                 0000000000108140     utils.c.o
- 0001:000071d0       _queue_get                 00000000001081d0     utils.c.o
- 0001:00007240       _kmemcmp                   0000000000108240     utils.c.o
- 0001:000072e0       _kmemset                   00000000001082e0     utils.c.o
- 0001:00007330       _kstrcpy                   0000000000108330     utils.c.o
- 0001:00007370       _kstrlen                   0000000000108370     utils.c.o
- 0001:000073b0       _toupper                   00000000001083b0     utils.c.o
- 0001:000073f0       _min                       00000000001083f0     utils.c.o
- 0001:00007420       _sched_init                0000000000108420     sched.c.o
- 0001:00007470       _sched_enable              0000000000108470     sched.c.o
- 0001:00007480       _spawn                     0000000000108480     sched.c.o
- 0001:000075c0       _spawn2                    00000000001085c0     sched.c.o
- 0001:00007740       _initialize_process_page_table 0000000000108740     sched.c.o
- 0001:00007820       _sched_select_process      0000000000108820     sched.c.o
- 0001:000078d0       _sched_save_process_status 00000000001088d0     sched.c.o
- 0001:000079b0       _sched_restore_process_state 00000000001089b0     sched.c.o
- 0001:00007af0       _schedule                  0000000000108af0     sched.c.o
+ 0001:00006ee0       _rtcHandler                0000000000107ee0     timer.c.o
+ 0001:00006f30       _get_uptime                0000000000107f30     timer.c.o
+ 0001:00006f50       _timer_init                0000000000107f50     timer.c.o
+ 0001:00007020       _panic                     0000000000108020     utils.c.o
+ 0001:00007030       _outb                      0000000000108030     utils.c.o
+ 0001:00007050       _inb                       0000000000108050     utils.c.o
+ 0001:00007070       _inw                       0000000000108070     utils.c.o
+ 0001:00007090       _outw                      0000000000108090     utils.c.o
+ 0001:000070b0       _inl                       00000000001080b0     utils.c.o
+ 0001:000070d0       _outl                      00000000001080d0     utils.c.o
+ 0001:000070f0       _kmemcpy                   00000000001080f0     utils.c.o
+ 0001:00007150       _panic2                    0000000000108150     utils.c.o
+ 0001:00007180       _halt                      0000000000108180     utils.c.o
+ 0001:00007190       _queue_put                 0000000000108190     utils.c.o
+ 0001:00007220       _queue_get                 0000000000108220     utils.c.o
+ 0001:00007290       _kmemcmp                   0000000000108290     utils.c.o
+ 0001:00007330       _kmemset                   0000000000108330     utils.c.o
+ 0001:00007380       _kstrcpy                   0000000000108380     utils.c.o
+ 0001:000073c0       _kstrlen                   00000000001083c0     utils.c.o
+ 0001:00007400       _toupper                   0000000000108400     utils.c.o
+ 0001:00007440       _min                       0000000000108440     utils.c.o
+ 0001:00007480       _sched_init                0000000000108480     sched.c.o
+ 0001:00007510       _sched_enable              0000000000108510     sched.c.o
+ 0001:00007520       _spawn                     0000000000108520     sched.c.o
+ 0001:00007660       _spawn2                    0000000000108660     sched.c.o
+ 0001:000077f0       _initialize_process_page_table 00000000001087f0     sched.c.o
+ 0001:000078d0       _sched_select_process      00000000001088d0     sched.c.o
+ 0001:00007980       _sched_save_process_status 0000000000108980     sched.c.o
+ 0001:00007a60       _sched_restore_process_state 0000000000108a60     sched.c.o
+ 0001:00007ba0       _schedule                  0000000000108ba0     sched.c.o
+ 0001:00007c20       _sched_put_to_sleep_for_duration 0000000000108c20     sched.c.o
+ 0001:00007c90       _sched_check_wakeup        0000000000108c90     sched.c.o
  0002:000052b8       ??_C@_0DB@GKEJKEGE@Physical?5region?5descriptor?5cross@ 000000000010e2b8     disk.c.o
  0002:000052e9       ??_C@_07KONDCJBL@present?$AA@ 000000000010e2e9     interrupt.c.o
  0002:000052f1       ??_C@_06LBPOAOHH@absent?$AA@ 000000000010e2f1     interrupt.c.o
@@ -258,6 +260,7 @@
  0001:000065d0       _setPrev                   00000000001075d0     memory.c.o
  0001:000066d0       _getPrev                   00000000001076d0     memory.c.o
  0001:00006720       _setNext                   0000000000107720     memory.c.o
+ 0001:00007470       _idleTask                  0000000000108470     sched.c.o
  0002:00000010       _font_data                 0000000000109010     console.c.o
  0003:000000c4       _console_putc.escapeMode   000000000010f0c4     console.c.o
  0003:000000c8       _color_low                 000000000010f0c8     console.c.o
@@ -295,4 +298,4 @@
  0003:00020bb8       _handlers                  000000000012fbb8     interrupt.c.o
  0003:00020ec8       _bootInfo                  000000000012fec8     kmain.c.o
  0003:00023000       _jiffies                   0000000000132000     timer.c.o
- 0003:00024380       _can_schedule              0000000000133380     sched.c.o
+ 0003:00024400       _can_schedule              0000000000133400     sched.c.o

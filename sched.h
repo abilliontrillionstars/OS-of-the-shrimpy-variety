@@ -2,6 +2,8 @@
 #include "interrupt.h"
 #pragma once
 
+
+enum WaitingFor  { NOTHING, TIME };
 enum ProcessState { VACANT, READY, RUNNING, SLEEPING, STARTING };
 struct PCB 
 {
@@ -12,6 +14,10 @@ struct PCB
     u32 eip;
     u32 eflags;
     struct PageTable* page_table;
+    enum WaitingFor waitingFor;
+    union WD {
+        unsigned waitTime;      //time when process will wake up
+    } waitData;
 };
 
 typedef void(*spawn_callback_t)(int errorcode, int pid, void* callback_data);
@@ -32,5 +38,8 @@ int sched_select_process();
 void sched_save_process_status(int pid, struct InterruptContext* ctx, enum ProcessState newState);
 void sched_restore_process_state(int pid, struct InterruptContext* ctx, enum ProcessState newState);
 void schedule(struct InterruptContext* ctx);
+
+void sched_put_to_sleep_for_duration(unsigned howLong, struct InterruptContext* ctx);
+void sched_check_wakeup();
 
 

@@ -13,6 +13,7 @@ void rtcHandler(struct InterruptContext* ctx){
     jiffies++;
     
     schedule(ctx);
+    sched_check_wakeup();
 }
 
 unsigned get_uptime(){

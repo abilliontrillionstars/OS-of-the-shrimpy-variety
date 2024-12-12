@@ -4,6 +4,7 @@
 #include "exec.h"
 #include "memory.h"
 #include "interrupt.h"
+#include "timer.h"
 
 #define MAX_PROC 16
 struct PCB process_table[MAX_PROC];
@@ -11,12 +12,20 @@ int current_pid = -1;
 struct PageTable page_tables[MAX_PROC];
 static volatile int can_schedule=0;
 
+extern void idleTask();
+
 void sched_init(){
     //Set all state fields to VACANT
     for(int i=0; i<MAX_PROC; i++)
         process_table[i].state = VACANT;
     //Except process_table[0]...set that to STARTING
-    process_table[0].state = STARTING;
+    process_table[0].state = READY;
+    process_table[0].eip = (u32)idleTask;
+    process_table[0].cs = 8;
+    process_table[0].ss = 16;
+    process_table[0].esp = 0x10000;
+    process_table[0].page_table = get_page_table();
+    process_table[0].eflags = 0x202;
 }
 void sched_enable()  { can_schedule=1; }
 
@@ -164,3 +173,29 @@ void schedule(struct InterruptContext* ctx)
     sched_save_process_status(current_pid,ctx,READY);
     sched_restore_process_state(new_pid,ctx,RUNNING);
 }
+void sched_put_to_sleep_for_duration(unsigned howLong, struct InterruptContext* ctx)
+{
+    sched_save_process_status(current_pid, ctx, SLEEPING);
+    struct PCB* pcb = &process_table[current_pid];
+    pcb->waitingFor = TIME;
+    pcb->waitData.waitTime = get_uptime() + howLong;
+    current_pid = -1;
+}
+
+void sched_check_wakeup() 
+{
+    unsigned now = get_uptime();
+    for(int i=0; i<MAX_PROC; i++)
+        if(process_table[i].state == SLEEPING)
+            if(process_table[i].waitingFor == TIME)
+                if(now >= process_table[i].waitData.waitTime)
+                    process_table[i].state = READY;
+}
+
+
+__asm__(
+    "_idleTask:\n"
+    "   sti\n"
+    "   hlt\n"
+    "   jmp _idleTask\n"
+);

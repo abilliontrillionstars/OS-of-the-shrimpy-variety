@@ -12,6 +12,7 @@
         "filesys.h": "c",
         "file.h": "c",
         "interrupt.h": "c",
-        "exec.h": "c"
+        "exec.h": "c",
+        "syscalldefs.h": "c"
     }
 }
